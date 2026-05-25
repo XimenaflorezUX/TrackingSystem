@@ -1,0 +1,6 @@
+'use strict';
+
+var styles = {"magneto-ui-user-menu-analyst-option__object":"mg_user_menu_analyst_option_magneto-ui-user-menu-analyst-option_object_jswqx","magneto-ui-user-menu-analyst-option__dropdown-title":"mg_user_menu_analyst_option_magneto-ui-user-menu-analyst-option_dropdown-title_jswqx","magneto-ui-user-menu-analyst-option__dropdown":"mg_user_menu_analyst_option_magneto-ui-user-menu-analyst-option_dropdown_jswqx","magneto-ui-user-menu-analyst-option__dropdown-list":"mg_user_menu_analyst_option_magneto-ui-user-menu-analyst-option_dropdown-list_jswqx","magneto-ui-user-menu-analyst-option__empty-text":"mg_user_menu_analyst_option_magneto-ui-user-menu-analyst-option_empty-text_jswqx","magneto-ui-user-menu-analyst-option__arrow":"mg_user_menu_analyst_option_magneto-ui-user-menu-analyst-option_arrow_jswqx"};
+
+module.exports = styles;
+//# sourceMappingURL=UserMenuAnalystOption.module.scss.js.map

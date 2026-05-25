@@ -1,0 +1,113 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+@use "tokens/radius" as radius;
+@use "../../vacancies-font" as vac-font;
+
+// Molécula: cabecera institucional (barra superior oscura).
+
+.vd-shell-header {
+  @include vac-font.vacancies-font-family;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
+  padding: scale.$scale-px-sm-2 scale.$scale-px-xl;
+  background-color: color.$color-blue-dark-500;
+  flex-shrink: 0;
+  z-index: 100;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm-2;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+  }
+
+  &__logo-mark {
+    flex-shrink: 0;
+    display: block;
+    height: 28px;
+    width: auto;
+    max-width: min(160px, 42vw);
+    object-fit: contain;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm-2;
+  }
+
+  &__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: scale.$scale-px-xl;
+    height: scale.$scale-px-xl;
+    padding: 0;
+    border: none;
+    border-radius: radius.$radius-xs;
+    background: transparent;
+    color: color.$color-grey-50;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm-2;
+    padding: scale.$scale-px-xs scale.$scale-px-sm;
+    border-radius: radius.$radius-xs;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+    color: color.$color-grey-50;
+    max-width: min(100%, 360px);
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: color.$color-blue-light-300;
+  }
+
+  &__user-text {
+    text-align: left;
+    min-width: 0;
+  }
+
+  &__user-line {
+    font-size: 14px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    strong {
+      font-size: 14px;
+    }
+  }
+
+  &__chevron {
+    flex-shrink: 0;
+    color: color.$color-blue-light-300;
+    display: flex;
+  }
+}

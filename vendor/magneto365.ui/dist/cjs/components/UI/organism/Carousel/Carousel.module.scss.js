@@ -1,0 +1,6 @@
+'use strict';
+
+var styles = {"carousel":"mg_carousel_carousel_1ex97","carousel__gap-8":"mg_carousel_carousel_gap-8_1ex97","carousel__gap-16":"mg_carousel_carousel_gap-16_1ex97","carousel__gap-24":"mg_carousel_carousel_gap-24_1ex97","carousel__gap-32":"mg_carousel_carousel_gap-32_1ex97","carousel__gap-40":"mg_carousel_carousel_gap-40_1ex97","carousel__buttons":"mg_carousel_carousel_buttons_1ex97","carousel__button":"mg_carousel_carousel_button_1ex97","carousel__header-container":"mg_carousel_carousel_header-container_1ex97","carousel__items_container":"mg_carousel_carousel_items_container_1ex97","carousel__section":"mg_carousel_carousel_section_1ex97","carousel__section--active":"mg_carousel_carousel_section--active_1ex97","carousel__section--flex":"mg_carousel_carousel_section--flex_1ex97","carousel__grid-item":"mg_carousel_carousel_grid-item_1ex97","carousel__mobile-noScroll":"mg_carousel_carousel_mobile-noScroll_1ex97","carousel__mobile-item":"mg_carousel_carousel_mobile-item_1ex97","carousel--mobile":"mg_carousel_carousel--mobile_1ex97","carousel__mobile-slider":"mg_carousel_carousel_mobile-slider_1ex97"};
+
+module.exports = styles;
+//# sourceMappingURL=Carousel.module.scss.js.map

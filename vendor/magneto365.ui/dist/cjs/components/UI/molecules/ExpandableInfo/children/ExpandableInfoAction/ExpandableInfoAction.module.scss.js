@@ -1,0 +1,6 @@
+'use strict';
+
+var styles = {"magneto-ui-expandable-info-action__button":"mg_expandable_info_action_magneto-ui-expandable-info-action_button_1ajzq","magneto-ui-expandable-info-action__button--dark-blue":"mg_expandable_info_action_magneto-ui-expandable-info-action_button--dark-blue_1ajzq","magneto-ui-expandable-info-action__button--light-blue":"mg_expandable_info_action_magneto-ui-expandable-info-action_button--light-blue_1ajzq","magneto-ui-expandable-info-action__button--white":"mg_expandable_info_action_magneto-ui-expandable-info-action_button--white_1ajzq","magneto-ui-expandable-info-action__button--green":"mg_expandable_info_action_magneto-ui-expandable-info-action_button--green_1ajzq","magneto-ui-expandable-info-action__title":"mg_expandable_info_action_magneto-ui-expandable-info-action_title_1ajzq"};
+
+module.exports = styles;
+//# sourceMappingURL=ExpandableInfoAction.module.scss.js.map

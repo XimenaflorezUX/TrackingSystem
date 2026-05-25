@@ -1,0 +1,6 @@
+'use strict';
+
+var styles = {"magneto-ui-login-jobs-header":"mg_login_jobs_header_magneto-ui-login-jobs-header_d3etk","magneto-ui-login-jobs-header--second-row":"mg_login_jobs_header_magneto-ui-login-jobs-header--second-row_d3etk","magneto-ui-login-jobs-header--second-row__left-section":"mg_login_jobs_header_magneto-ui-login-jobs-header--second-row_left-section_d3etk","magneto-ui-login-jobs-header--second-row__left-section--company-logo":"mg_login_jobs_header_magneto-ui-login-jobs-header--second-row_left-section--company-logo_d3etk","magneto-ui-login-jobs-header--second-row__left-section--gif":"mg_login_jobs_header_magneto-ui-login-jobs-header--second-row_left-section--gif_d3etk","magneto-ui-login-jobs-header--second-row__middle-section":"mg_login_jobs_header_magneto-ui-login-jobs-header--second-row_middle-section_d3etk","magneto-ui-login-jobs-header--second-row__right-section":"mg_login_jobs_header_magneto-ui-login-jobs-header--second-row_right-section_d3etk","magneto-ui-login-jobs-header--third-row":"mg_login_jobs_header_magneto-ui-login-jobs-header--third-row_d3etk","have-gif":"mg_login_jobs_header_have-gif_d3etk"};
+
+module.exports = styles;
+//# sourceMappingURL=LoginJobsHeader.module.scss.js.map

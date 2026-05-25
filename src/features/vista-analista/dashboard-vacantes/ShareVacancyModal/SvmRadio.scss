@@ -1,0 +1,76 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+
+// Radio button tamaño S — Style Guideline Magneto (Figma node 2658:6657 / 2658:6667 / 2656:6634)
+.svm-radio {
+  display: inline-flex;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin: 0;
+
+  &--disabled {
+    cursor: not-allowed;
+  }
+
+  &:has(.svm-radio__input:focus-visible) .svm-radio__control {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+}
+
+.svm-radio__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.svm-radio__control {
+  display: grid;
+  place-content: center;
+  width: scale.$scale-px-xl;
+  height: scale.$scale-px-xl;
+  border: scale.$scale-px-xxs solid color.$color-grey-400;
+  border-radius: 50%;
+  background-color: color.$color-grey-50;
+  box-sizing: border-box;
+}
+
+.svm-radio__dot {
+  width: scale.$scale-px-sm-2;
+  height: scale.$scale-px-sm-2;
+  border-radius: 50%;
+  background-color: transparent;
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+
+.svm-radio--checked .svm-radio__control {
+  border-color: color.$color-green-600;
+  border-width: scale.$scale-px-xxs * 2;
+}
+
+.svm-radio--checked .svm-radio__dot {
+  background-color: color.$color-green-600;
+  transform: scale(1);
+}
+
+.svm-radio--disabled:not(.svm-radio--checked) .svm-radio__control {
+  border-color: color.$color-grey-300;
+  background-color: color.$color-grey-100;
+}
+
+.svm-radio--disabled.svm-radio--checked .svm-radio__control {
+  border-color: color.$color-grey-300;
+  background-color: color.$color-grey-100;
+}
+
+.svm-radio--disabled.svm-radio--checked .svm-radio__dot {
+  background-color: color.$color-grey-500;
+  transform: scale(1);
+}

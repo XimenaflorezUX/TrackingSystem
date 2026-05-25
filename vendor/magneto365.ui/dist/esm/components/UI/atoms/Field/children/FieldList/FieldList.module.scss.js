@@ -1,0 +1,4 @@
+var styles = {"magneto-ui-field-list":"mg_field_list_magneto-ui-field-list_1hv9u","magneto-ui-field-list--desktop":"mg_field_list_magneto-ui-field-list--desktop_1hv9u","magneto-ui-field-list--up":"mg_field_list_magneto-ui-field-list--up_1hv9u","magneto-ui-field-list--error":"mg_field_list_magneto-ui-field-list--error_1hv9u","magneto-ui-field-list--hidden":"mg_field_list_magneto-ui-field-list--hidden_1hv9u","magneto-ui-field-list--visible":"mg_field_list_magneto-ui-field-list--visible_1hv9u","magneto-ui-field-list-shadow":"mg_field_list_magneto-ui-field-list-shadow_1hv9u","magneto-ui-field-list-shadow--up":"mg_field_list_magneto-ui-field-list-shadow--up_1hv9u","magneto-ui-field-list-shadow--hidden":"mg_field_list_magneto-ui-field-list-shadow--hidden_1hv9u","magneto-ui-field-list-shadow--visible":"mg_field_list_magneto-ui-field-list-shadow--visible_1hv9u"};
+
+export { styles as default };
+//# sourceMappingURL=FieldList.module.scss.js.map

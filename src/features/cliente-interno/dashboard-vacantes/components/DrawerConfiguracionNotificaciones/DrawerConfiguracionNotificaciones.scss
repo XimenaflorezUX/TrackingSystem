@@ -1,0 +1,361 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text" as text;
+@use "../../vacancies-font" as vac-font;
+
+// Tokens vía `magneto365.ui/dist/tokens` (mismos valores que `.yalc/sistema-de-diseno`).
+
+// Contenedor del `Drawer` de Magneto: el aside ocupa altura y el panel interno puede hacer scroll.
+.dcn-drawer-shell {
+  @include vac-font.vacancies-font-family;
+  @include vac-font.vacancies-font-magneto-roots;
+
+  > aside {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .dcn-drawer {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 0;
+    max-width: none;
+    max-height: none;
+    height: 100%;
+  }
+}
+
+.dcn-drawer {
+  @include vac-font.vacancies-font-family;
+  @include vac-font.vacancies-font-magneto-roots;
+  width: 100%;
+  max-width: min(100vw - #{scale.$scale-px-md}, 560px);
+  min-height: 0;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: color.$color-grey-50;
+  color: color.$color-grey-900;
+}
+
+.dcn-drawer__header {
+  flex-shrink: 0;
+  padding: scale.$scale-px-md scale.$scale-px-md scale.$scale-px-lg;
+  background-color: color.$color-grey-50;
+}
+
+.dcn-drawer__header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: scale.$scale-px-sm-2;
+  padding: 0 scale.$scale-px-sm;
+}
+
+.dcn-drawer__title-group {
+  display: flex;
+  align-items: center;
+  gap: scale.$scale-px-sm;
+  min-width: 0;
+  flex: 1;
+}
+
+.dcn-drawer__title-icon {
+  display: flex;
+  flex-shrink: 0;
+  width: scale.$scale-px-xl;
+  height: scale.$scale-px-xl;
+  color: color.$color-grey-800;
+}
+
+.dcn-drawer__title {
+  margin: 0;
+  font-size: text.$text-lg;
+  font-weight: 700;
+  line-height: scale.$scale-px-xl;
+  color: color.$color-grey-800;
+}
+
+.dcn-drawer__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: scale.$scale-px-md-2;
+  height: scale.$scale-px-md-2;
+  padding: 0;
+  border: none;
+  border-radius: radius.$radius-xs;
+  background: transparent;
+  color: color.$color-grey-800;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+}
+
+.dcn-drawer__tabs {
+  flex-shrink: 0;
+  width: 100%;
+  padding: scale.$scale-px-sm scale.$scale-px-md;
+  padding-top: scale.$scale-px-xl;
+  border-bottom: scale.$scale-px-xxs solid color.$color-grey-100;
+}
+
+.dcn-drawer__tabs-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: scale.$scale-px-xs;
+  height: 38px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.dcn-drawer__tab {
+  flex: 0 0 auto;
+  height: 38px;
+  padding: scale.$scale-px-sm-2 scale.$scale-px-xl;
+  border: scale.$scale-px-xxs solid color.$color-grey-100;
+  border-radius: radius.$radius-xs;
+  background-color: color.$color-grey-50;
+  color: color.$color-grey-900;
+  font-family: inherit;
+  font-size: scale.$scale-px-md;
+  font-weight: 700;
+  line-height: scale.$scale-px-lg;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+
+  &--active {
+    background-color: color.$color-grey-200;
+  }
+}
+
+.dcn-drawer__list {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: scale.$scale-px-sm;
+  padding: 0 scale.$scale-px-md scale.$scale-px-md;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dcn-drawer__empty {
+  margin: 0;
+  padding: scale.$scale-px-xl scale.$scale-px-sm;
+  font-size: text.$text-md;
+  font-weight: 400;
+  line-height: scale.$scale-px-xl;
+  color: color.$color-grey-600;
+  text-align: center;
+}
+
+.dcn-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: scale.$scale-px-md;
+  padding: scale.$scale-px-xl;
+  background-color: color.$color-grey-50;
+  border-bottom: scale.$scale-px-xxs solid color.$color-grey-100;
+}
+
+.dcn-card__icon-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: scale.$scale-px-4xl;
+  height: scale.$scale-px-4xl;
+  padding: scale.$scale-px-md;
+  border: scale.$scale-px-xxs solid color.$color-grey-100;
+  border-radius: radius.$radius-xs;
+  background-color: color.$color-grey-50;
+  color: color.$color-grey-800;
+}
+
+.dcn-card__icon-btn svg {
+  display: block;
+}
+
+.dcn-card__content {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: scale.$scale-px-lg;
+}
+
+.dcn-card__top {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: scale.$scale-px-sm-2;
+}
+
+.dcn-card__headline {
+  flex: 1 1 0;
+  margin: 0;
+  font-size: scale.$scale-px-md-2;
+  font-weight: 700;
+  line-height: 18px;
+  color: color.$color-grey-800;
+}
+
+.dcn-card__time-group {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: scale.$scale-px-xs;
+  height: 18px;
+}
+
+.dcn-card__time {
+  font-size: scale.$scale-px-sm-2;
+  font-weight: 400;
+  line-height: scale.$scale-px-md;
+  color: color.$color-grey-700;
+  white-space: nowrap;
+}
+
+.dcn-card__unread {
+  width: scale.$scale-px-sm-2;
+  height: scale.$scale-px-sm-2;
+  border-radius: radius.$radius-full;
+  background-color: color.$color-red-200;
+  box-shadow: 0 0 0 scale.$scale-px-xxs color.$color-grey-50;
+}
+
+.dcn-card__meta {
+  align-self: stretch;
+  margin: 0;
+  font-size: scale.$scale-px-md-2;
+  font-weight: 400;
+  line-height: 18px;
+  color: color.$color-grey-700;
+}
+
+.dcn-card__actions {
+  align-self: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: scale.$scale-px-sm;
+}
+
+.dcn-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: scale.$scale-px-sm-2;
+  padding: 7px scale.$scale-px-md-2;
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: scale.$scale-px-md-2;
+  font-weight: 700;
+  line-height: 18px;
+  color: color.$color-grey-900;
+  cursor: pointer;
+  border: none;
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+
+  &--outline-grey {
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-200;
+  }
+
+  &--outline-white {
+    min-height: 32px;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-100;
+  }
+
+  &--solid-grey {
+    background-color: color.$color-grey-100;
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  svg {
+    flex-shrink: 0;
+    color: inherit;
+  }
+}
+
+.dcn-drawer__footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: scale.$scale-px-xs scale.$scale-px-lg;
+  border-top: scale.$scale-px-xxs solid color.$color-grey-100;
+}
+
+.dcn-drawer__mark-all {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: scale.$scale-px-sm scale.$scale-px-sm-2;
+  border: none;
+  border-radius: 30px;
+  background-color: color.$color-grey-50;
+  font-family: inherit;
+  font-size: text.$text-lg;
+  font-weight: 700;
+  line-height: scale.$scale-px-xl;
+  color: color.$color-grey-600;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 480px) {
+  .dcn-card__top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dcn-card__time-group {
+    align-self: flex-end;
+  }
+}

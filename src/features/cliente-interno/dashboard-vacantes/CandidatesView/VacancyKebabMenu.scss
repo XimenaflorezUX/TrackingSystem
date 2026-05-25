@@ -1,0 +1,139 @@
+@use "tokens/color"  as color;
+@use "tokens/scale"  as scale;
+@use "tokens/radius" as radius;
+@use "tokens/shadow" as shadow;
+@use "../vacancies-font" as vac-font;
+
+// Altura visible ≈ 4 ítems antes de scroll (12px / lh 1.35; título + subtítulo largo)
+$item-padding-y: scale.$scale-px-md * 2;
+$menu-text-line: 12px * 1.35;
+$approx-item-block: $item-padding-y + 3 * $menu-text-line + scale.$scale-px-xxs;
+$panel-max-four-rows: scale.$scale-px-xs * 2 + 4 * $approx-item-block;
+
+.cv-vacancy-menu {
+  @include vac-font.vacancies-font-family;
+  @include vac-font.vacancies-font-magneto-roots;
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 12px;
+
+  // Forzar 28×28 frente a min-height del Button sm de magneto365.ui (~44px en preview)
+  &__trigger {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
+    padding: 0 !important;
+    line-height: 1;
+    font-size: 12px;
+    color: color.$color-blue-dark-50;
+
+    &:hover,
+    &:focus-visible {
+      color: color.$color-grey-50;
+    }
+
+    span[aria-hidden="true"] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+    }
+  }
+
+  &__panel {
+    @include vac-font.vacancies-font-family;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    padding: scale.$scale-px-xs 0;
+    max-height: min(70vh, $panel-max-four-rows);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: shadow.$shadow-30;
+    border-radius: radius.$radius-sm;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-200;
+  }
+
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    gap: scale.$scale-px-md;
+    width: 100%;
+    padding: scale.$scale-px-md scale.$scale-px-lg;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    font-size: 12px;
+    color: color.$color-grey-900;
+    transition: background-color 0.12s ease;
+
+    &:hover {
+      background-color: color.$color-grey-100;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: -2px;
+    }
+  }
+
+  &__item-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    color: color.$color-grey-600;
+  }
+
+  &__item-body {
+    display: flex;
+    flex-direction: column;
+    gap: scale.$scale-px-xxs;
+    min-width: 0;
+    font-size: 12px;
+  }
+
+  &__item-title {
+    display: block;
+    font-size: 12px !important;
+    line-height: 1.35;
+  }
+
+  &__item-desc {
+    display: block;
+    font-size: 12px !important;
+    line-height: 1.35;
+  }
+
+  // Tipografía interna de magneto365.ui (Typography)
+  &__item-title :where(span, strong, b),
+  &__item-desc :where(span, strong, b) {
+    font-size: 12px !important;
+  }
+
+  &__trigger :where(span) {
+    font-size: 12px;
+  }
+
+  // Tarjetas del listado (VacancyDashboard): mismo patrón visual que .vd-card__menu-btn
+  &--card .cv-vacancy-menu__trigger {
+    color: color.$color-grey-400;
+
+    &:hover,
+    &:focus-visible {
+      color: color.$color-grey-700;
+      background-color: color.$color-grey-100;
+    }
+  }
+}

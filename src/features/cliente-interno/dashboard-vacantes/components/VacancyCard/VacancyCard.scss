@@ -1,0 +1,252 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text" as text;
+@use "tokens/shadow" as shadow;
+
+// ─── Block ────────────────────────────────────────────────────────────────────
+
+.vacancy-card {
+  background-color: color.$color-grey-50;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  border-radius: radius.$radius-lg;
+  padding: scale.$scale-px-2xl;
+  box-shadow: shadow.$shadow-10;
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-md;
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+
+  // ── Modifier: sin acceso ─────────────────────────────────────────────────
+  &--restricted {
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    background-color: color.$color-grey-100;
+    border-color: color.$color-grey-200;
+  }
+
+  // ── Element: mensaje de restricción ──────────────────────────────────────
+  &__restricted-msg {
+    font-size: text.$text-md-2;
+    color: color.$color-grey-500;
+    text-align: center;
+    margin: 0;
+  }
+
+  // ─── Header ───────────────────────────────────────────────────────────────
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: scale.$scale-px-sm;
+  }
+
+  &__title {
+    font-size: text.$text-lg;
+    font-weight: 700;
+    color: color.$color-grey-900;
+    margin: 0;
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  &__menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: scale.$scale-px-4xl;
+    height: scale.$scale-px-4xl;
+    border-radius: radius.$radius-xs;
+    color: color.$color-grey-500;
+    font-size: text.$text-2xl;
+    line-height: 1;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: color.$color-grey-100;
+      color: color.$color-grey-900;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__menu-icon {
+    display: block;
+    pointer-events: none;
+  }
+
+  // ─── Status Row ───────────────────────────────────────────────────────────
+
+  &__status-row {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    flex-wrap: wrap;
+  }
+
+  &__status-dot {
+    display: inline-block;
+    width: scale.$scale-px-sm;
+    height: scale.$scale-px-sm;
+    border-radius: radius.$radius-full;
+    flex-shrink: 0;
+
+    &--published  { background-color: color.$color-green-500; }
+    &--covered    { background-color: color.$color-green-500; }
+    &--expired    { background-color: color.$color-yellow-300; }
+    &--inactive   { background-color: color.$color-red-100; }
+    &--cancelled  { background-color: color.$color-red-200; }
+  }
+
+  &__status-label {
+    font-size: text.$text-md;
+    font-weight: 600;
+
+    &--published  { color: color.$color-green-500; }
+    &--covered    { color: color.$color-green-500; }
+    &--expired    { color: color.$color-yellow-300; }
+    &--inactive   { color: color.$color-red-100; }
+    &--cancelled  { color: color.$color-red-200; }
+  }
+
+  &__dates {
+    font-size: text.$text-md;
+    color: color.$color-grey-500;
+  }
+
+  // ─── Recruiter ────────────────────────────────────────────────────────────
+
+  &__recruiter {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    flex-wrap: wrap;
+  }
+
+  &__recruiter-icon {
+    font-size: text.$text-md-2;
+    color: color.$color-grey-400;
+    flex-shrink: 0;
+  }
+
+  &__recruiter-name {
+    font-size: text.$text-md-2;
+    font-weight: 600;
+    color: color.$color-grey-700;
+  }
+
+  &__recruiter-email {
+    font-size: text.$text-md;
+    color: color.$color-grey-500;
+  }
+
+  // ─── Time elapsed ─────────────────────────────────────────────────────────
+
+  &__time-elapsed {
+    font-size: text.$text-md;
+    color: color.$color-grey-400;
+    font-style: italic;
+    margin: 0;
+  }
+
+  // ─── Footer ───────────────────────────────────────────────────────────────
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: scale.$scale-px-xs;
+    padding-top: scale.$scale-px-md;
+    border-top: scale.$scale-px-xxs solid color.$color-grey-200;
+  }
+
+  &__candidates {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-600;
+  }
+
+  &__actions {
+    display: flex;
+    gap: scale.$scale-px-sm;
+  }
+
+  &__action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: color.$color-grey-100;
+    border: scale.$scale-px-xxs solid color.$color-grey-200;
+    border-radius: radius.$radius-md;
+    padding: scale.$scale-px-xs scale.$scale-px-sm;
+    cursor: pointer;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-600;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+
+    &:hover {
+      background-color: color.$color-grey-200;
+      border-color: color.$color-grey-300;
+      color: color.$color-grey-900;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  // ─── Responsive (Mobile-first) ────────────────────────────────────────────
+
+  @media (max-width: 480px) {
+    padding: scale.$scale-px-lg;
+    max-width: 100%;
+
+    &__status-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__recruiter {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: scale.$scale-px-md;
+    }
+
+    &__actions {
+      align-self: flex-end;
+    }
+  }
+}

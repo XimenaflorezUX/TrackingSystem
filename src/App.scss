@@ -1,0 +1,77 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+@use "tokens/text" as text;
+@use "tokens/radius" as radius;
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  // ─── Dev toolbar ──────────────────────────────────────────────────────────
+  &__dev-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: color.$color-grey-900;
+    padding: scale.$scale-px-sm scale.$scale-px-2xl;
+    gap: scale.$scale-px-lg;
+    flex-wrap: wrap;
+  }
+
+  &__dev-label {
+    font-size: text.$text-md-2;
+    font-weight: 700;
+    color: color.$color-blue-light-400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  &__dev-toggle {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-300;
+    cursor: pointer;
+
+    strong {
+      color: color.$color-green-400;
+    }
+  }
+
+  // ─── Sections ─────────────────────────────────────────────────────────────
+  &__section {
+    &--header {
+      width: 100%;
+    }
+
+    &--dashboard {
+      padding: scale.$scale-px-5xl scale.$scale-px-5xl;
+      flex: 1;
+
+      @media (max-width: 768px) {
+        padding: scale.$scale-px-2xl scale.$scale-px-lg;
+      }
+    }
+  }
+
+  &__section-title {
+    font-size: text.$text-xl;
+    font-weight: 700;
+    color: color.$color-grey-900;
+    margin: 0 0 scale.$scale-px-2xl 0;
+  }
+
+  // ─── Card grid ────────────────────────────────────────────────────────────
+  &__card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: scale.$scale-px-2xl;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      gap: scale.$scale-px-lg;
+    }
+  }
+}

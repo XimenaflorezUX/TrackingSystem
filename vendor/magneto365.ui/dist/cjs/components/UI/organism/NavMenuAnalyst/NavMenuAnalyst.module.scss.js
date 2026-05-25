@@ -1,0 +1,6 @@
+'use strict';
+
+var styles = {"magneto-ui-nav-menu-analyst":"mg_nav_menu_analyst_magneto-ui-nav-menu-analyst_vw2yv","magneto-ui-nav-menu-analyst__container":"mg_nav_menu_analyst_magneto-ui-nav-menu-analyst_container_vw2yv","magneto-ui-nav-menu-analyst--full-menu":"mg_nav_menu_analyst_magneto-ui-nav-menu-analyst--full-menu_vw2yv","magneto-ui-nav-menu-analyst__overflow-placeholder":"mg_nav_menu_analyst_magneto-ui-nav-menu-analyst_overflow-placeholder_vw2yv","magneto-ui-nav-menu-analyst__header":"mg_nav_menu_analyst_magneto-ui-nav-menu-analyst_header_vw2yv","magneto-ui-nav-menu-analyst__sections":"mg_nav_menu_analyst_magneto-ui-nav-menu-analyst_sections_vw2yv","magneto-ui-nav-menu-analyst__section":"mg_nav_menu_analyst_magneto-ui-nav-menu-analyst_section_vw2yv","magneto-ui-nav-menu-analyst__footer":"mg_nav_menu_analyst_magneto-ui-nav-menu-analyst_footer_vw2yv","magneto-ui-nav-menu-analyst__footer--full-menu":"mg_nav_menu_analyst_magneto-ui-nav-menu-analyst_footer--full-menu_vw2yv","magneto-ui-nav-menu-analyst__footer-section":"mg_nav_menu_analyst_magneto-ui-nav-menu-analyst_footer-section_vw2yv","magneto-ui-nav-menu-analyst__region":"mg_nav_menu_analyst_magneto-ui-nav-menu-analyst_region_vw2yv"};
+
+module.exports = styles;
+//# sourceMappingURL=NavMenuAnalyst.module.scss.js.map

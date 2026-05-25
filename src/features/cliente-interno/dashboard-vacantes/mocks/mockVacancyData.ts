@@ -1,0 +1,60 @@
+import type { Vacancy, ProcessTab } from '../interfaces/vacancy.interface';
+
+export const mockVacancies: Vacancy[] = [
+  {
+    id: 'vac-001',
+    title: 'Desarrollador Frontend React Senior',
+    location: 'Bogotá, Colombia (Híbrido)',
+    contractType: 'Término indefinido',
+    status: 'Publicada',
+    createdAt: '2026-03-21T08:00:00.000Z',
+    expiresAt: '2026-06-21T23:59:59.000Z',
+    recruiterEmail: 'ana.rodriguez@magneto.com',
+    recruiterName: 'Ana Rodríguez',
+    totalCandidates: 22,
+  },
+  {
+    id: 'vac-002',
+    title: 'Analista de Datos Junior',
+    location: 'Medellín, Colombia (Remoto)',
+    contractType: 'Por proyecto',
+    status: 'Expirada',
+    createdAt: '2026-01-10T08:00:00.000Z',
+    expiresAt: '2026-04-10T23:59:59.000Z',
+    recruiterEmail: 'carlos.mejia@magneto.com',
+    recruiterName: 'Carlos Mejía',
+    totalCandidates: 8,
+  },
+  {
+    id: 'vac-003',
+    title: 'Diseñador UX/UI',
+    location: 'Cali, Colombia (Presencial)',
+    contractType: 'Término fijo',
+    status: 'Inactiva',
+    createdAt: '2026-02-01T08:00:00.000Z',
+    expiresAt: '2026-05-01T23:59:59.000Z',
+    recruiterEmail: 'lucia.torres@magneto.com',
+    recruiterName: 'Lucía Torres',
+    totalCandidates: 0,
+  },
+  {
+    id: 'vac-004',
+    title: 'Ingeniero DevOps',
+    location: 'Bogotá, Colombia (Remoto)',
+    contractType: 'Término indefinido',
+    status: 'Cubierta',
+    createdAt: '2025-12-01T08:00:00.000Z',
+    expiresAt: '2026-03-01T23:59:59.000Z',
+    recruiterEmail: 'pedro.sanchez@magneto.com',
+    recruiterName: 'Pedro Sánchez',
+    totalCandidates: 14,
+  },
+];
+
+export const mockProcessTabs: ProcessTab[] = [
+  { label: 'Candidatos', count: 22 },
+  { label: 'Preseleccionados', count: 7 },
+  { label: 'Entrevista técnica', count: 3 },
+  { label: 'Oferta', count: 1 },
+  { label: 'Contratados', count: 0 },
+];

@@ -1,0 +1,32 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+
+// Alert informativa — Style Guideline Magneto (Figma node 1702:8722, state: info)
+.svm-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: scale.$scale-px-sm;
+  margin: 0;
+  padding: scale.$scale-px-md;
+  border-radius: scale.$scale-px-sm;
+  background-color: color.$color-blue-light-50;
+  box-sizing: border-box;
+}
+
+.svm-alert__icon {
+  flex-shrink: 0;
+  width: scale.$scale-px-lg;
+  height: scale.$scale-px-lg;
+  margin-top: scale.$scale-px-xxs;
+  color: color.$color-blue-light-400;
+}
+
+.svm-alert__text {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: scale.$scale-px-md-2;
+  line-height: scale.$scale-px-xl;
+  color: color.$color-grey-800;
+  word-break: break-word;
+}

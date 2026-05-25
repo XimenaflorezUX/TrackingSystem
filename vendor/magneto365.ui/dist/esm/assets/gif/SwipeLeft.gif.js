@@ -1,0 +1,4 @@
+var SwipeLeft = "https://dev.cdn.magneto365.com/2.93.7/gif/b858b5e2933b8b3c.gif";
+
+export { SwipeLeft as default };
+//# sourceMappingURL=SwipeLeft.gif.js.map

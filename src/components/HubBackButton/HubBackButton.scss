@@ -1,0 +1,46 @@
+@use "tokens/scale" as scale;
+@use "tokens/color" as color;
+@use "tokens/radius" as radius;
+@use "tokens/shadow" as shadow;
+
+.hub-back {
+  position: fixed;
+  right: scale.$scale-px-lg;
+  bottom: scale.$scale-px-lg;
+  z-index: 9000;
+  display: inline-flex;
+  align-items: center;
+  gap: scale.$scale-px-sm;
+  height: scale.$scale-px-5xl;
+  padding: scale.$scale-px-sm scale.$scale-px-md;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  border-radius: radius.$radius-4xl;
+  background-color: color.$color-grey-50;
+  color: color.$color-grey-900;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.25;
+  cursor: pointer;
+  box-shadow: shadow.$shadow-10;
+
+  &:hover {
+    background-color: color.$color-grey-50;
+  }
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: scale.$scale-px-xxs;
+  }
+
+  @media (max-width: 480px) {
+    right: scale.$scale-px-md;
+    bottom: scale.$scale-px-md;
+  }
+}
+
+.hub-back__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

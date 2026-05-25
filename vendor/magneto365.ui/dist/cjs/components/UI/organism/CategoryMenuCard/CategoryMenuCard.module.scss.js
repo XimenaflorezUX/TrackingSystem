@@ -1,0 +1,6 @@
+'use strict';
+
+var styles = {"magneto-ui-category-menu-container":"mg_category_menu_card_magneto-ui-category-menu-container_1hzb9","magneto-ui-category-menu-container-card":"mg_category_menu_card_magneto-ui-category-menu-container-card_1hzb9","magneto-ui-category-menu-container-card--is-open":"mg_category_menu_card_magneto-ui-category-menu-container-card--is-open_1hzb9","magneto-ui-category-menu-container-card__content":"mg_category_menu_card_magneto-ui-category-menu-container-card_content_1hzb9","magneto-ui-category-menu-container-card__title":"mg_category_menu_card_magneto-ui-category-menu-container-card_title_1hzb9","magneto-ui-category-menu-container-card__icon":"mg_category_menu_card_magneto-ui-category-menu-container-card_icon_1hzb9","magneto-ui-category-menu-container-card__arrow":"mg_category_menu_card_magneto-ui-category-menu-container-card_arrow_1hzb9","magneto-ui-category-menu-container-card__arrow--rotate-arrow":"mg_category_menu_card_magneto-ui-category-menu-container-card_arrow--rotate-arrow_1hzb9"};
+
+module.exports = styles;
+//# sourceMappingURL=CategoryMenuCard.module.scss.js.map

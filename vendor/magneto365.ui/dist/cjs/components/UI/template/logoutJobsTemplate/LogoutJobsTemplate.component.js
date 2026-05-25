@@ -1,0 +1,113 @@
+'use strict';
+
+var tslib_es6 = require('../../../../node_modules/tslib/tslib.es6.js');
+var React = require('react');
+require('../../organism/AlertsPanel/AlertsPanel.component.js');
+require('../../atoms/BarChart/enums.js');
+require('../../../../utils/classNameManager/classNameManager.util.js');
+require('../../atoms/Button/Button.component.js');
+require('../../atoms/Collapse/Collapse.component.js');
+var common_constants = require('../../../../constants/stories/common.constants.js');
+require('../../../../constants/stories/DatePicker.constants.js');
+require('../../../../constants/stories/jobVideo.constants.js');
+require('../../../../constants/stories/megaMenu.constants.js');
+require('../../../../constants/stories/sideFilter.constants.js');
+require('../../../../constants/stories/vacancies.constants.js');
+require('../../../../constants/stories/vacantPositionsCategory.constants.js');
+require('../../../../constants/img.constants.js');
+require('../../../../utils/date/dateInput.util.js');
+require('../../atoms/Field/Field.component.js');
+require('../../atoms/Typography/Typography.component.js');
+require('../../atoms/Typography/Typography.interface.js');
+require('../../atoms/InputFile/InputFile.component.js');
+var Link_component = require('../../atoms/Link/Link.component.js');
+var Logo_component = require('../../atoms/Logo/Logo.component.js');
+var MainButton_component = require('../../atoms/MainButton/MainButton.component.js');
+require('../../atoms/Paragraph/Paragraph.component.js');
+require('../../atoms/Radio/Radio.interface.js');
+require('../../atoms/Radio/Radio.constants.js');
+require('../../../../constants/jobDetails.constants.js');
+require('../../atoms/Toggle/Toggle.component.js');
+require('../../../hooks/useMediaQuery/index.js');
+require('../../molecules/Actions/Actions.component.js');
+require('../../molecules/AlertJobModal/AlertJobModal.component.js');
+require('../../molecules/AlertJobStatus/AlertJobStatus.component.js');
+require('react-dom');
+require('../../../context/container/container.context.js');
+require('../../molecules/BrandsMenuPopover/BrandsMenuPopover.component.js');
+require('../../molecules/CandidateNav/CandidateNav.component.js');
+require('../../molecules/CandidateProfile/CandidateProfile.component.js');
+var Drawer_component = require('../../molecules/Drawer/Drawer.component.js');
+require('../../molecules/ExpandableInfo/children/ExpandableInfoAction/ExpandableInfoAction.constants.js');
+require('../../molecules/ExpandableInfo/children/ExpandableInfoAction/ExpandableInfoAction.interface.js');
+require('../../molecules/ExpandableInfo/children/ExpandableInfoMessage/ExpandableInfoMessage.constants.js');
+require('../../molecules/ExpandableInfo/children/ExpandableInfoPopover/ExpandableInfoPopover.component.js');
+require('../../molecules/ExpandableInfo/ExpandableInfo.interface.js');
+require('../../molecules/SharePopover/SharePopover.js');
+require('../../molecules/JobCard/children/JobCardOption/JobCardOption.component.js');
+require('../../molecules/JobCard/children/JobCardLabelStatus/JobCardLabelStatus.constant.js');
+var ListIconLink_component = require('../../molecules/ListIconLink/ListIconLink.component.js');
+var ListMenuItems_component = require('../../molecules/ListMenuItems/ListMenuItems.component.js');
+require('../../molecules/MegaMenuDrawerItem/MegaMenuDrawerItem.component.js');
+require('../MegaMenu/MegaMenu.context.js');
+require('../../molecules/Modal/Modal.component.js');
+require('../../molecules/SimilarCard/SimilarCard.component.js');
+require('../../molecules/SortMenu/SortMenu.component.js');
+require('../../molecules/TimelineEvent/TimelineEvent.interface.js');
+require('../../molecules/UserMenu/UserMenu.component.js');
+require('../../molecules/UserMenuAnalyst/children/UserMenuAnalystOptions/children/UserMenuAnalystOption/UserMenuAnalystOption.constants.js');
+require('../../molecules/UserMenuAnalyst/children/UserMenuAnalystOptions/children/UserMenuAnalystOption/children/UserMenuAnalystOptionDefault/UserMenuAnalystOptionDefault.component.js');
+require('../../molecules/UserMenuAnalyst/children/UserMenuAnalystOptions/children/UserMenuAnalystOption/children/UserMenuAnalystOptionHover/UserMenuAnalystOptionHover.component.js');
+require('../../molecules/UserMenuAnalyst/children/UserMenuAnalystOptions/children/UserMenuAnalystOption/children/UserMenuAnalystOptionText/UserMenuAnalystOptionText.component.js');
+require('../../molecules/UserMenuAnalyst/children/UserMenuAnalystOptions/children/UserMenuAnalystOption/children/UserMenuAnalystOptionActions/UserMenuAnalystOptionActions.component.js');
+require('../../molecules/UserMenuAnalyst/children/UserMenuAnalystOptions/children/UserMenuAnalystOption/UserMenuAnalystOption.interface.js');
+require('../../molecules/UserMenuWrapperAnalyst/children/UserMenuWrapperAnalystDropdown/UserMenuWrapperAnalystDropdown.component.js');
+require('../../molecules/JobDetails/JobDetails.component.js');
+require('../../molecules/Chat/Chat.component.js');
+require('../../organism/ApplicationSummary/ApplicationSummary.component.js');
+require('../../organism/CategoryMenuCard/CategoryMenuCard.component.js');
+require('../../../Domain/Jobs/SimilarJobs/index.js');
+require('../../organism/JobSuggestedDrawer/JobSuggestedDrawer.component.js');
+require('../../organism/JobSuggestedDrawer/children/JobSuggestedSimilarJobs/JobSuggestedSimilarJobs.component.js');
+var LogoutJobsHeader_component = require('../../organism/LogoutJobsHeader/LogoutJobsHeader.component.js');
+require('../../organism/Swipe/Swipe.interface.js');
+require('../../organism/ModalAnalyst/children/ModalAnalystFooter/ModalAnalystFooter.constants.js');
+require('../../organism/ModalAnalyst/children/ModalAnalystFooter/ModalAnalystFooter.interface.js');
+require('../AnalystTemplate/AnalystTemplate.context.js');
+require('../../organism/ProcessesCard/ProcessesCard.component.js');
+require('../../organism/Select/Select.component.js');
+require('../../organism/Select2/Select2.component.js');
+require('../../organism/UserTerms/UserTerms.component.js');
+require('../../organism/Carousel/Carousel.component.js');
+require('../../organism/Record/record.component.js');
+var LogoutJobsTemplate_module = require('./LogoutJobsTemplate.module.scss.js');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
+
+var Muiclass = 'magneto-ui';
+var LogoutJobsTemplate = function (_a) {
+    var logoutJobsHeaderProps = _a.logoutJobsHeaderProps, homeUrl = _a.homeUrl, listMenuProps = _a.listMenuProps, ListIcon = _a.ListIcon;
+    var _b = logoutJobsHeaderProps.brandMenuProps, companyLogo = _b.companyLogo, companySlug = _b.companySlug, companyUrl = _b.companyUrl, signInLink = logoutJobsHeaderProps.signInLink, signUpButton = logoutJobsHeaderProps.signUpButton;
+    var type = signInLink.type, href = signInLink.href, text = signInLink.text;
+    var buttonText = signUpButton.buttonText, loadingState = signUpButton.loadingState, onClick = signUpButton.onClick;
+    var _c = React.useState(false), toggleDrawer = _c[0], setToggleDrawer = _c[1];
+    return (React__default["default"].createElement("div", { className: LogoutJobsTemplate_module["".concat(Muiclass, "-logout-jobs-template")] },
+        React__default["default"].createElement(LogoutJobsHeader_component, tslib_es6.__assign({}, logoutJobsHeaderProps, { onMenuClick: function () { return setToggleDrawer(true); } })),
+        React__default["default"].createElement(Drawer_component.Drawer, { isOpen: toggleDrawer, onClose: function () { return setToggleDrawer(false); } },
+            React__default["default"].createElement("div", { className: LogoutJobsTemplate_module["".concat(Muiclass, "-logout-jobs-template--brands")] },
+                React__default["default"].createElement("a", { href: homeUrl },
+                    React__default["default"].createElement(Logo_component.LogoComponent, tslib_es6.__assign({}, common_constants.logoProps, { isoView: true }))),
+                React__default["default"].createElement("a", { href: companyUrl },
+                    React__default["default"].createElement("img", { className: LogoutJobsTemplate_module["".concat(Muiclass, "-logout-jobs-template--company-logo")], src: companyLogo, alt: companySlug ? companySlug : '' }))),
+            React__default["default"].createElement("div", { className: LogoutJobsTemplate_module["".concat(Muiclass, "-logout-jobs-template--jobs-menu")] },
+                React__default["default"].createElement(ListMenuItems_component.ListMenuItems, tslib_es6.__assign({}, listMenuProps))),
+            React__default["default"].createElement("div", { className: LogoutJobsTemplate_module["".concat(Muiclass, "-logout-jobs-template--btn-actions")] },
+                React__default["default"].createElement(MainButton_component.MainButton, tslib_es6.__assign({ buttonSize: "full" }, common_constants.SignUpButtonStyle, { buttonText: buttonText, onClick: onClick, loadingState: loadingState })),
+                React__default["default"].createElement(Link_component.Link, { type: type, href: href, text: text, iconProps: common_constants.SignInIcon })),
+            React__default["default"].createElement("div", { className: LogoutJobsTemplate_module["".concat(Muiclass, "-logout-jobs-template--social-media")] }, ListIcon && React__default["default"].createElement(ListIconLink_component.ListIconLink, { size: 34, spacing: 20, listIcon: ListIcon })))));
+};
+
+module.exports = LogoutJobsTemplate;
+//# sourceMappingURL=LogoutJobsTemplate.component.js.map

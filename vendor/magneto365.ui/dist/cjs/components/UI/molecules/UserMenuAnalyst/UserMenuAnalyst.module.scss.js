@@ -1,0 +1,6 @@
+'use strict';
+
+var styles = {"magneto-ui-user-menu-analyst":"mg_user_menu_analyst_magneto-ui-user-menu-analyst_x7jdf","magneto-ui-user-menu-analyst__header":"mg_user_menu_analyst_magneto-ui-user-menu-analyst_header_x7jdf","magneto-ui-user-menu-analyst__user":"mg_user_menu_analyst_magneto-ui-user-menu-analyst_user_x7jdf","magneto-ui-user-menu-analyst__user-info":"mg_user_menu_analyst_magneto-ui-user-menu-analyst_user-info_x7jdf","magneto-ui-user-menu-analyst__user-info--name":"mg_user_menu_analyst_magneto-ui-user-menu-analyst_user-info--name_x7jdf","magneto-ui-user-menu-analyst__user-info--mail":"mg_user_menu_analyst_magneto-ui-user-menu-analyst_user-info--mail_x7jdf","magneto-ui-user-menu-analyst__user-info--title":"mg_user_menu_analyst_magneto-ui-user-menu-analyst_user-info--title_x7jdf","magneto-ui-user-menu-analyst__user-info--action":"mg_user_menu_analyst_magneto-ui-user-menu-analyst_user-info--action_x7jdf","magneto-ui-user-menu-analyst__company":"mg_user_menu_analyst_magneto-ui-user-menu-analyst_company_x7jdf","magneto-ui-user-menu-analyst__company--empty":"mg_user_menu_analyst_magneto-ui-user-menu-analyst_company--empty_x7jdf","magneto-ui-user-menu-analyst__company-dropdown":"mg_user_menu_analyst_magneto-ui-user-menu-analyst_company-dropdown_x7jdf"};
+
+module.exports = styles;
+//# sourceMappingURL=UserMenuAnalyst.module.scss.js.map

@@ -1,0 +1,4 @@
+var Success = "https://dev.cdn.magneto365.com/2.93.7/1e6f2d718cdb70ce.svg";
+
+export { Success as default };
+//# sourceMappingURL=success.svg.js.map

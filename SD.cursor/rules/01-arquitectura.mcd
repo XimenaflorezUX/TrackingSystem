@@ -1,0 +1,26 @@
+---
+alwaysApply: true
+---
+description: Reglas de arquitectura, TypeScript, React y estilos para el proyecto Tracking
+globs: src/**/*.{ts,tsx,scss}
+---
+
+# Arquitectura y Estándares de Código
+
+Estás trabajando en un proyecto React (Vite) + TypeScript + SASS para el Tracking de procesos de selección.
+
+## Estructura de Desarrollo
+- Sigue la estructura de carpetas definida en `src/features/`. Cada vista lógica debe estar autocontenida en su respectiva feature (ej: `auth-otp`, `dashboard-vacantes`).
+- Utiliza componentes funcionales en React escritos en TypeScript estricto. Evita el uso de `any` bajo cualquier circunstancia.
+- Define interfaces de TypeScript claras para las Props y los Modelos de Datos de cada componente.
+
+## Design system (@talenta / magneto365.ui)
+- **Componentes primero:** antes de crear UI manual, comprueba si existe en `@talenta/magneto-ui` (import desde `magneto365.ui`). Obligatorio reutilizarlo cuando aplique.
+- **Sin hardcoding visual en SCSS local:** no hex, ni sombras/bordes “a ojo”; usa tokens (`dist/tokens`) o componentes.
+- **SCSS local = layout:** flex/grid, gaps y márgenes de contenedor con tokens; botones, campos, tipografía y radios vienen de la librería.
+- Detalle de rutas Sass y ejemplos: regla `03-sass-styling.mdc`.
+
+## Manejo de Estilos
+- Utiliza SASS (`.scss`) con metodología BEM para clases de **layout** en vistas y contenedores.
+- No uses estilos CSS inline (`style={{...}}`) a menos que sean valores dinámicos calculados por código en tiempo de ejecución.
+- Todas las maquetas de interfaz deben ser 100% responsivas, priorizando dispositivos móviles (Mobile-First) ya que se plantea su integración en entornos PWA.

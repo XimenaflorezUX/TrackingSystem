@@ -1,0 +1,269 @@
+@use "tokens/color"  as color;
+@use "tokens/scale"  as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text"   as text;
+@use "tokens/shadow" as shadow;
+@use "../vacancies-font" as vac-font;
+
+// ─── Page shell ───────────────────────────────────────────────────────────────
+
+.ep {
+  @include vac-font.vacancies-font-family;
+  @include vac-font.vacancies-font-magneto-roots;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: color.$color-grey-100;
+
+  // ── Canvas ───────────────────────────────────────────────────────────────
+  &__canvas {
+    flex: 1;
+    padding: scale.$scale-px-5xl scale.$scale-px-2xl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  // ─── Email render ────────────────────────────────────────────────────────
+  &__email {
+    width: 100%;
+    max-width: 600px;
+    background-color: color.$color-grey-100;
+    border-radius: radius.$radius-lg;
+    box-shadow: shadow.$shadow-30;
+    overflow: hidden;
+  }
+
+  // ── Preheader + wordmark (plantilla transaccional) ───────────────────────
+  &__preheader {
+    background-color: color.$color-blue-light-100;
+    min-height: scale.$scale-px-lg;
+    padding: scale.$scale-px-lg;
+  }
+
+  &__wordmark-row {
+    background-color: color.$color-grey-50;
+    padding: scale.$scale-px-5xl scale.$scale-px-3xl scale.$scale-px-2xl;
+
+    @media (max-width: 480px) {
+      padding: scale.$scale-px-3xl scale.$scale-px-lg scale.$scale-px-xl;
+    }
+  }
+
+  &__wordmark {
+    display: block;
+    width: 157px;
+    height: auto;
+    max-width: 100%;
+  }
+
+  // ── Email body ───────────────────────────────────────────────────────────
+  &__body {
+    background-color: color.$color-grey-50;
+    padding: 0 scale.$scale-px-3xl scale.$scale-px-5xl;
+
+    @media (max-width: 480px) {
+      padding: 0 scale.$scale-px-lg scale.$scale-px-2xl;
+    }
+  }
+
+  &__greeting {
+    font-size: text.$text-2xl;
+    font-weight: 900;
+    color: color.$color-grey-800;
+    line-height: 1.15;
+    margin: 0 0 scale.$scale-px-2xl;
+  }
+
+  &__intro {
+    font-size: text.$text-md-2;
+    color: color.$color-grey-600;
+    line-height: 1.7;
+    margin: 0 0 scale.$scale-px-2xl;
+  }
+
+  // ── Vacancy card ─────────────────────────────────────────────────────────
+  &__vacancy-card {
+    background-color: color.$color-grey-100;
+    border-radius: radius.$radius-md;
+    padding: scale.$scale-px-md scale.$scale-px-lg;
+    margin-bottom: scale.$scale-px-2xl;
+    display: flex;
+    flex-direction: column;
+    gap: scale.$scale-px-xs;
+  }
+
+  &__vacancy-name {
+    font-size: text.$text-lg;
+    font-weight: 700;
+    color: color.$color-grey-800;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  &__vacancy-company {
+    font-size: text.$text-md;
+    font-weight: 400;
+    color: color.$color-grey-800;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  &__vacancy-meta {
+    margin-top: scale.$scale-px-lg;
+    padding-top: scale.$scale-px-lg;
+    border-top: scale.$scale-px-xxs solid color.$color-grey-200;
+    display: flex;
+    flex-direction: column;
+    gap: scale.$scale-px-xs;
+  }
+
+  &__vacancy-analyst {
+    font-size: text.$text-md-2;
+    color: color.$color-grey-700;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  &__vacancy-sublabel {
+    font-size: text.$text-md-2;
+    font-weight: 400;
+    color: color.$color-grey-700;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  // ── CTA button ───────────────────────────────────────────────────────────
+  &__cta-wrapper {
+    text-align: center;
+    margin-bottom: scale.$scale-px-2xl;
+  }
+
+  &__cta-btn {
+    display:          inline-block;
+    background-color: color.$color-blue-dark-300;
+    color:            color.$color-grey-50;
+    font-size:        text.$text-lg;
+    font-weight:      700;
+    text-decoration:  none;
+    padding:          11px scale.$scale-px-lg;
+    border-radius:    30px;
+    letter-spacing:   0.01em;
+    transition:       background-color 0.15s ease;
+    border:           none;
+    cursor:           pointer;
+    font-family:      inherit;
+
+    &:hover { background-color: color.$color-blue-dark-200; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 3px;
+    }
+  }
+
+  // ── Security block ───────────────────────────────────────────────────────
+  &__security {
+    display: flex;
+    gap: scale.$scale-px-md;
+    background-color: color.$color-yellow-50;
+    border: scale.$scale-px-xxs solid color.$color-yellow-100;
+    border-radius: radius.$radius-md;
+    padding: scale.$scale-px-lg scale.$scale-px-xl;
+  }
+
+  &__security-icon {
+    font-size: text.$text-xl;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  &__security-content {
+    display: flex;
+    flex-direction: column;
+    gap: scale.$scale-px-xs;
+  }
+
+  &__security-title {
+    font-size: text.$text-md-2;
+    font-weight: 700;
+    color: color.$color-grey-800;
+    margin: 0;
+  }
+
+  &__security-text {
+    font-size: text.$text-md;
+    color: color.$color-grey-700;
+    line-height: 1.6;
+    margin: 0;
+
+    strong { color: color.$color-grey-900; }
+  }
+
+  // ── Email footer ─────────────────────────────────────────────────────────
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: scale.$scale-px-lg;
+    padding: scale.$scale-px-3xl scale.$scale-px-xl scale.$scale-px-3xl;
+    text-align: center;
+    border-top: scale.$scale-px-xxs solid color.$color-grey-200;
+    background-color: color.$color-grey-100;
+  }
+
+  &__footer-wordmark {
+    display: block;
+    width: 120px;
+    height: auto;
+    max-width: 100%;
+    opacity: 0.92;
+  }
+
+  &__footer-tagline {
+    font-size: text.$text-md;
+    font-weight: 700;
+    color: color.$color-grey-500;
+    line-height: 1.35;
+    margin: 0;
+    max-width: 35rem;
+  }
+
+  &__footer-text {
+    font-size: text.$text-md;
+    color: color.$color-grey-500;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 35rem;
+  }
+
+  &__footer-legal {
+    font-size: text.$text-md;
+    color: color.$color-grey-500;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 35rem;
+  }
+
+  &__footer-unsub {
+    font-size: text.$text-md;
+    color: color.$color-grey-500;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 35rem;
+  }
+
+  &__footer-unsub-link {
+    color: color.$color-grey-500;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover { color: color.$color-grey-700; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+      border-radius: radius.$radius-xs;
+    }
+  }
+}

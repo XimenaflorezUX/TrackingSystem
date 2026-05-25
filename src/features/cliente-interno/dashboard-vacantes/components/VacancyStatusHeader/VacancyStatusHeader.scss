@@ -1,0 +1,205 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text" as text;
+
+// ─── Block ────────────────────────────────────────────────────────────────────
+
+.vacancy-status-header {
+  background-color: color.$color-blue-dark-500;
+  width: 100%;
+  box-sizing: border-box;
+
+  // ── Modifier: sin acceso ─────────────────────────────────────────────────
+  &--restricted {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: scale.$scale-px-2xl;
+    min-height: 100px;
+  }
+
+  &__restricted-msg {
+    font-size: text.$text-md-2;
+    color: color.$color-grey-400;
+    text-align: center;
+    margin: 0;
+  }
+
+  // ─── Top section ──────────────────────────────────────────────────────────
+
+  &__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: scale.$scale-px-lg;
+    padding: scale.$scale-px-5xl scale.$scale-px-5xl scale.$scale-px-2xl;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      padding: scale.$scale-px-2xl scale.$scale-px-lg scale.$scale-px-lg;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: scale.$scale-px-sm;
+    flex: 1;
+  }
+
+  &__title {
+    font-size: text.$text-2xl;
+    font-weight: 700;
+    color: color.$color-grey-50;
+    margin: 0;
+    line-height: 1.2;
+
+    @media (max-width: 480px) {
+      font-size: text.$text-xl;
+    }
+  }
+
+  &__subtitle {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: scale.$scale-px-xs;
+    margin: 0;
+  }
+
+  &__meta-item {
+    font-size: text.$text-md-2;
+    color: color.$color-blue-dark-50;
+  }
+
+  &__separator {
+    font-size: text.$text-md-2;
+    color: color.$color-blue-dark-200;
+  }
+
+  // ─── Actions ──────────────────────────────────────────────────────────────
+
+  &__actions {
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      align-self: flex-end;
+    }
+  }
+
+  &__ai-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    background-color: color.$color-blue-dark-300;
+    border: scale.$scale-px-xxs solid color.$color-blue-dark-200;
+    border-radius: radius.$radius-2xl;
+    padding: scale.$scale-px-sm scale.$scale-px-lg;
+    color: color.$color-grey-50;
+    font-size: text.$text-md-2;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+
+    &:hover {
+      background-color: color.$color-blue-dark-200;
+      border-color: color.$color-blue-dark-100;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  &__ai-icon {
+    font-size: text.$text-md-2;
+    color: color.$color-blue-light-400;
+  }
+
+  // ─── Navigation Tabs ──────────────────────────────────────────────────────
+
+  &__tabs {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    padding: 0 scale.$scale-px-5xl;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0 scale.$scale-px-lg;
+    }
+  }
+
+  &__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: scale.$scale-px-md scale.$scale-px-lg;
+    color: color.$color-blue-dark-50;
+    font-size: text.$text-md-2;
+    font-weight: 400;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+
+    &:hover {
+      color: color.$color-grey-50;
+      border-bottom-color: color.$color-blue-dark-50;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: -2px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    // ── Active tab ────────────────────────────────────────────────────────
+    &--active {
+      color: color.$color-grey-50;
+      border-bottom-color: color.$color-green-500;
+      font-weight: 600;
+    }
+  }
+
+  &__tab-index {
+    color: color.$color-blue-dark-100;
+    font-weight: 400;
+  }
+
+  &__tab-count {
+    font-size: text.$text-md;
+    color: color.$color-blue-dark-50;
+    font-weight: 400;
+
+    .vacancy-status-header__tab--active & {
+      color: color.$color-grey-300;
+    }
+  }
+}

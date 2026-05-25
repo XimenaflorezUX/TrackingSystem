@@ -1,0 +1,442 @@
+// Tokens Sass desde magneto365.ui (dist/tokens), namespace "foundations-*".
+@use "tokens/color" as foundations-color;
+@use "tokens/scale" as foundations-scale;
+@use "tokens/radius" as foundations-radius;
+@use "tokens/text" as foundations-text;
+@use "tokens/shadow" as foundations-shadow;
+
+// ─── Page wrapper ─────────────────────────────────────────────────────────────
+
+.tracking-admin {
+  min-height: 100vh;
+  background-color: foundations-color.$color-grey-100;
+  padding: foundations-scale.$scale-px-5xl;
+  display: flex;
+  flex-direction: column;
+  gap: foundations-scale.$scale-px-2xl;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding: foundations-scale.$scale-px-2xl foundations-scale.$scale-px-lg;
+  }
+
+  // ─── Header ───────────────────────────────────────────────────────────────
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: foundations-scale.$scale-px-2xl;
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    gap: foundations-scale.$scale-px-sm;
+    flex: 1;
+  }
+
+  &__title {
+    font-size: foundations-text.$text-2xl;
+    font-weight: 700;
+    color: foundations-color.$color-blue-dark-500;
+    margin: 0;
+    line-height: 1.2;
+
+    @media (max-width: 480px) {
+      font-size: foundations-text.$text-xl;
+    }
+  }
+
+  &__subtitle {
+    font-size: foundations-text.$text-md-2;
+    color: foundations-color.$color-grey-600;
+    margin: 0;
+    max-width: 560px;
+    line-height: 1.5;
+  }
+
+  &__create-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: foundations-scale.$scale-px-sm;
+    background-color: foundations-color.$color-blue-dark-500;
+    color: foundations-color.$color-grey-50;
+    border: none;
+    border-radius: foundations-radius.$radius-2xl;
+    padding: foundations-scale.$scale-px-md foundations-scale.$scale-px-2xl;
+    font-size: foundations-text.$text-md-2;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: foundations-color.$color-blue-dark-400;
+    }
+
+    &:focus-visible {
+      outline: foundations-scale.$scale-px-xxs solid foundations-color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      background-color: foundations-color.$color-grey-300;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    @media (max-width: 640px) {
+      justify-content: center;
+    }
+  }
+
+  // ─── Main card ────────────────────────────────────────────────────────────
+
+  &__card {
+    background-color: foundations-color.$color-grey-50;
+    border-radius: foundations-radius.$radius-lg;
+    box-shadow: foundations-shadow.$shadow-10;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// ─── Filter bar ───────────────────────────────────────────────────────────────
+
+.tracking-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: foundations-scale.$scale-px-lg;
+  padding: foundations-scale.$scale-px-2xl;
+  border-bottom: foundations-scale.$scale-px-xxs solid foundations-color.$color-grey-200;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  // ── Search ──────────────────────────────────────────────────────────────
+  &__search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: foundations-scale.$scale-px-sm;
+    background-color: foundations-color.$color-grey-50;
+    border: foundations-scale.$scale-px-xxs solid foundations-color.$color-grey-300;
+    border-radius: foundations-radius.$radius-md;
+    padding: foundations-scale.$scale-px-sm foundations-scale.$scale-px-md;
+    flex: 1;
+    max-width: 400px;
+    transition: border-color 0.15s ease;
+    cursor: text;
+
+    &:focus-within {
+      border-color: foundations-color.$color-blue-light-400;
+      box-shadow: 0 0 0 3px rgba(0, 167, 225, 0.12);
+    }
+
+    @media (max-width: 600px) {
+      max-width: 100%;
+    }
+  }
+
+  &__search-icon {
+    color: foundations-color.$color-grey-400;
+    flex-shrink: 0;
+  }
+
+  &__search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: foundations-text.$text-md-2;
+    color: foundations-color.$color-grey-900;
+
+    &::placeholder {
+      color: foundations-color.$color-grey-400;
+    }
+
+    &::-webkit-search-cancel-button {
+      cursor: pointer;
+    }
+  }
+
+  // ── Status select ────────────────────────────────────────────────────────
+  &__select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__select {
+    appearance: none;
+    background-color: foundations-color.$color-grey-50;
+    border: foundations-scale.$scale-px-xxs solid foundations-color.$color-grey-300;
+    border-radius: foundations-radius.$radius-md;
+    padding: foundations-scale.$scale-px-sm foundations-scale.$scale-px-5xl foundations-scale.$scale-px-sm foundations-scale.$scale-px-md;
+    font-size: foundations-text.$text-md-2;
+    color: foundations-color.$color-grey-700;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+
+    &:hover {
+      border-color: foundations-color.$color-grey-400;
+    }
+
+    &:focus-visible {
+      outline: foundations-scale.$scale-px-xxs solid foundations-color.$color-blue-light-400;
+      outline-offset: 2px;
+      border-color: foundations-color.$color-blue-light-400;
+    }
+  }
+
+  &__chevron {
+    position: absolute;
+    right: foundations-scale.$scale-px-md;
+    color: foundations-color.$color-grey-500;
+    pointer-events: none;
+  }
+}
+
+// ─── Table ────────────────────────────────────────────────────────────────────
+
+.tracking-table {
+  // ── Scrollable wrapper ───────────────────────────────────────────────────
+  &__wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  width: 100%;
+  border-collapse: collapse;
+  font-size: foundations-text.$text-md-2;
+
+  // ── Head ────────────────────────────────────────────────────────────────
+  &__head {
+    background-color: foundations-color.$color-grey-100;
+  }
+
+  &__th {
+    padding: foundations-scale.$scale-px-md foundations-scale.$scale-px-lg;
+    text-align: left;
+    font-size: foundations-text.$text-md;
+    font-weight: 600;
+    color: foundations-color.$color-grey-600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    border-bottom: foundations-scale.$scale-px-xxs solid foundations-color.$color-grey-200;
+
+    &--center { text-align: center; }
+    &--right  { text-align: right; }
+    &--vacancy { min-width: 220px; }
+  }
+
+  // ── Body ────────────────────────────────────────────────────────────────
+  &__row {
+    border-bottom: foundations-scale.$scale-px-xxs solid foundations-color.$color-grey-200;
+    transition: background-color 0.1s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: foundations-color.$color-grey-100;
+    }
+  }
+
+  &__td {
+    padding: foundations-scale.$scale-px-lg;
+    vertical-align: middle;
+    color: foundations-color.$color-grey-700;
+
+    &--center { text-align: center; }
+    &--right  { text-align: right; }
+
+    &--vacancy {
+      min-width: 220px;
+    }
+  }
+
+  // ── Vacancy cell ────────────────────────────────────────────────────────
+  &__vacancy-name {
+    display: block;
+    font-weight: 600;
+    color: foundations-color.$color-grey-900;
+    margin-bottom: foundations-scale.$scale-px-xs;
+  }
+
+  &__vacancy-meta {
+    display: block;
+    font-size: foundations-text.$text-md;
+    color: foundations-color.$color-grey-500;
+  }
+
+  // ── Other cells ─────────────────────────────────────────────────────────
+  &__date {
+    color: foundations-color.$color-grey-600;
+    white-space: nowrap;
+  }
+
+  &__email {
+    color: foundations-color.$color-grey-600;
+    font-size: foundations-text.$text-md;
+  }
+
+  &__candidates-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: foundations-scale.$scale-px-3xl;
+    height: foundations-scale.$scale-px-3xl;
+    border-radius: foundations-radius.$radius-full;
+    background-color: foundations-color.$color-blue-light-50;
+    color: foundations-color.$color-blue-light-500;
+    font-size: foundations-text.$text-md;
+    font-weight: 700;
+  }
+
+  // ── Status badge ────────────────────────────────────────────────────────
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: foundations-scale.$scale-px-xs foundations-scale.$scale-px-md;
+    border-radius: foundations-radius.$radius-full;
+    font-size: foundations-text.$text-md;
+    font-weight: 600;
+    white-space: nowrap;
+
+    &--active {
+      background-color: foundations-color.$color-green-50;
+      border: foundations-scale.$scale-px-xxs solid foundations-color.$color-green-200;
+      color: foundations-color.$color-green-600;
+    }
+
+    &--inactive {
+      background-color: foundations-color.$color-grey-100;
+      border: foundations-scale.$scale-px-xxs solid foundations-color.$color-grey-300;
+      color: foundations-color.$color-grey-600;
+    }
+  }
+
+  // ── Action buttons ──────────────────────────────────────────────────────
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: foundations-scale.$scale-px-xs;
+  }
+
+  &__action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: foundations-scale.$scale-px-4xl;
+    height: foundations-scale.$scale-px-4xl;
+    background: transparent;
+    border: none;
+    border-radius: foundations-radius.$radius-xs;
+    color: foundations-color.$color-grey-500;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: foundations-color.$color-grey-100;
+      color: foundations-color.$color-grey-900;
+    }
+
+    &:focus-visible {
+      outline: foundations-scale.$scale-px-xxs solid foundations-color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  // ── Empty state ─────────────────────────────────────────────────────────
+  &__empty {
+    padding: foundations-scale.$scale-px-5xl;
+    text-align: center;
+    color: foundations-color.$color-grey-500;
+    font-size: foundations-text.$text-md-2;
+  }
+}
+
+// ─── Pagination ───────────────────────────────────────────────────────────────
+
+.tracking-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: foundations-scale.$scale-px-lg;
+  padding: foundations-scale.$scale-px-lg foundations-scale.$scale-px-2xl;
+  border-top: foundations-scale.$scale-px-xxs solid foundations-color.$color-grey-200;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+    gap: foundations-scale.$scale-px-md;
+  }
+
+  &__info {
+    font-size: foundations-text.$text-md-2;
+    color: foundations-color.$color-grey-500;
+    margin: 0;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: foundations-scale.$scale-px-sm;
+  }
+
+  &__current {
+    font-size: foundations-text.$text-md-2;
+    color: foundations-color.$color-grey-600;
+    min-width: 48px;
+    text-align: center;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: foundations-scale.$scale-px-xs;
+    background-color: foundations-color.$color-grey-50;
+    border: foundations-scale.$scale-px-xxs solid foundations-color.$color-grey-300;
+    border-radius: foundations-radius.$radius-md;
+    padding: foundations-scale.$scale-px-sm foundations-scale.$scale-px-md;
+    font-size: foundations-text.$text-md-2;
+    color: foundations-color.$color-grey-700;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+
+    &:hover:not(:disabled) {
+      background-color: foundations-color.$color-grey-100;
+      border-color: foundations-color.$color-grey-400;
+    }
+
+    &:focus-visible {
+      outline: foundations-scale.$scale-px-xxs solid foundations-color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}

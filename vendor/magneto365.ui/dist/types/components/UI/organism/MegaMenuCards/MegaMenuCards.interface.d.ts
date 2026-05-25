@@ -1,0 +1,16 @@
+import { IMegaMenuCard } from '@components/UI/molecules';
+import { IMegaMenuLink } from '@components/UI/template/MegaMenu/MegaMenuContext.interface';
+import { IAlphabetFilter } from '../AlphabetFilter/AlphabetFilter.interface';
+
+interface IMegaMenuCards {
+    jobs: IMegaMenuCard[];
+    filterProps?: IAlphabetFilter;
+    action?: IMegaMenuLink;
+    title?: string;
+    actionTitle?: IMegaMenuLink;
+    className?: string;
+    maxCards?: number;
+    renderRight?: () => React.ReactNode;
+}
+
+export { IMegaMenuCards };

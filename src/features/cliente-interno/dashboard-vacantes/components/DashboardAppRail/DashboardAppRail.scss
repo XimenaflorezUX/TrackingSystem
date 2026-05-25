@@ -1,0 +1,159 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text" as text;
+@use "../../vacancies-font" as vac-font;
+
+// Molécula: riel de navegación lateral (estado minimizado / expandido) — alineado a Figma analistas.
+
+.vd-rail {
+  @include vac-font.vacancies-font-family;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60px;
+  flex-shrink: 0;
+  background-color: color.$color-blue-dark-400;
+  overflow: hidden;
+  transition: width 0.2s ease;
+  z-index: 95;
+
+  &--expanded {
+    width: 220px;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 70px;
+    padding: scale.$scale-px-md scale.$scale-px-md-2;
+    background-color: color.$color-blue-dark-500;
+  }
+
+  &__menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: scale.$scale-px-sm;
+    border: none;
+    border-radius: radius.$radius-xs;
+    background: transparent;
+    color: color.$color-grey-50;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__groups {
+    display: flex;
+    flex-direction: column;
+    padding: scale.$scale-px-sm-2 0 scale.$scale-px-xl;
+    gap: scale.$scale-px-xl;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  &__divider {
+    display: flex;
+    align-items: center;
+    padding: scale.$scale-px-sm-2 0 scale.$scale-px-sm scale.$scale-px-xl;
+  }
+
+  &__divider-line {
+    width: scale.$scale-px-xl;
+    height: scale.$scale-px-xxs;
+    background-color: color.$color-blue-light-300;
+    border-radius: radius.$radius-xs;
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    width: 100%;
+    padding: scale.$scale-px-md scale.$scale-px-xl scale.$scale-px-md scale.$scale-px-sm;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: color.$color-grey-50;
+    text-align: left;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.06);
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: -2px;
+    }
+  }
+
+  &__item-indicator {
+    width: 4px;
+    align-self: stretch;
+    border-radius: 0 radius.$radius-sm radius.$radius-sm 0;
+    background-color: transparent;
+    flex-shrink: 0;
+  }
+
+  &__item--active {
+    color: color.$color-blue-light-300;
+
+    .vd-rail__item-indicator {
+      background-color: color.$color-blue-light-300;
+    }
+
+    .vd-rail__item-icon {
+      color: color.$color-blue-light-300;
+    }
+  }
+
+  &__item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: inherit;
+  }
+
+  &__item-label {
+    font-size: text.$text-md-2;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    padding: 0 scale.$scale-px-sm scale.$scale-px-xl;
+  }
+
+  &__flag-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: scale.$scale-px-sm scale.$scale-px-sm-2;
+    border-radius: radius.$radius-sm;
+  }
+
+  &__flag {
+    font-size: text.$text-md-2;
+    line-height: 1;
+  }
+}

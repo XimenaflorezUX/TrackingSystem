@@ -1,0 +1,30 @@
+---
+alwaysApply: true
+---
+---
+# Lógica de Negocio y Seguridad (Especificaciones del Proceso)
+
+Al desarrollar o maquetar las funcionalidades de la aplicación de Tracking, debes respetar estrictamente los siguientes criterios del documento funcional:
+
+## 1. Seguridad de Acceso y OTP (HU 2)
+- El acceso se realiza únicamente mediante Link + OTP.
+- La página intermedia de validación de identidad debe enmascarar el correo del usuario (ej: xi****@empresa.com).
+- El envío del OTP de 6 caracteres NO es automático; el usuario debe hacer clic explícitamente en "Enviar código".
+- El OTP tiene una vigencia estricta de 5 minutos.
+- Si hay 3 intentos fallidos consecutivos de ingreso del OTP, el link de acceso debe deshabilitarse temporalmente por seguridad.
+
+## 2. Control de Vigencia de Vacantes (HU 4)
+- El tracking solo está activo si la vacante está en estado "Publicada", "Expirada" o "Cubierta".
+- Si cambia a "Inactiva" o "Cancelada", el acceso se revoca de inmediato. Si un usuario intenta ingresar bajo estos estados, debe mostrarse el mensaje: *"Este proceso de selección ya no se encuentra disponible para seguimiento"*.
+
+## 3. Inmutabilidad y Auditoría (HU 5, HU 10, HU 15)
+- Todos los comentarios (generales o de candidatos), "decisiones rápidas" e hitos del timeline son ESTRICTAMENTE INMUTABLES. 
+- Queda prohibida la implementación de operaciones de edición (UPDATE) o eliminación (DELETE) sobre estos registros en el panel del cliente interno.
+
+## 4. Visibilidad y Sanitización de Datos (HU 6, HU 8)
+- El perfil del candidato presentado al cliente interno debe estar sanitizado según la preconfiguración del analista. 
+- Se debe ocultar por defecto la información de contacto directo, el número de documento de identidad, la edad y el historial salarial detallado.
+
+## 5. Decisiones Rápidas (HU 14)
+- Los botones de decisión rápida (Avanzar, No continuar, Pendiente) actúan únicamente como señales o sugerencias para el analista. 
+- Al hacer clic en ellos, NO se debe mover al candidato de etapa en el pipeline real del ATS de forma automática.

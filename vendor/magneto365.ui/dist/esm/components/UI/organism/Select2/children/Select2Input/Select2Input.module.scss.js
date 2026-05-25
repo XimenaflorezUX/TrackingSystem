@@ -1,0 +1,4 @@
+var styles = {"magneto-ui-select2-input__button":"mg_select2_input_magneto-ui-select2-input_button_14gdi","magneto-ui-select2-input__button--disabled":"mg_select2_input_magneto-ui-select2-input_button--disabled_14gdi","magneto-ui-select2-input__button-text--selected":"mg_select2_input_magneto-ui-select2-input_button-text--selected_14gdi","magneto-ui-select2-input__button-text--placeholder":"mg_select2_input_magneto-ui-select2-input_button-text--placeholder_14gdi","magneto-ui-select2-input__suffix-icon--rotate-arrow":"mg_select2_input_magneto-ui-select2-input_suffix-icon--rotate-arrow_14gdi","magneto-ui-select2-input__suffix-icon--static-arrow":"mg_select2_input_magneto-ui-select2-input_suffix-icon--static-arrow_14gdi","select-label":"mg_select2_input_select-label_14gdi"};
+
+export { styles as default };
+//# sourceMappingURL=Select2Input.module.scss.js.map

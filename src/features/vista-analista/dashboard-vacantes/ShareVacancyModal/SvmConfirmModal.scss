@@ -1,0 +1,208 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text" as text;
+@use "tokens/weight" as weight;
+@use "tokens/shadow" as shadow;
+@use "../vacancies-font" as vac-font;
+
+.svm-confirm-backdrop {
+  @include vac-font.vacancies-font-family;
+  @include vac-font.vacancies-font-magneto-roots;
+
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(10, 12, 14, 0.55);
+  padding: scale.$scale-px-lg;
+}
+
+.svm-confirm-shell {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.svm-confirm__close {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: radius.$radius-full;
+  background-color: color.$color-grey-900;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+}
+
+.svm-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-xl;
+  width: 100%;
+  max-height: 90dvh;
+  overflow-y: auto;
+  background-color: color.$color-grey-50;
+  border-radius: radius.$radius-md;
+  box-shadow: shadow.$shadow-30;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.svm-confirm__title {
+  margin: 0;
+  font-size: scale.$scale-px-2xl;
+  font-weight: weight.$weight-bold;
+  line-height: 1.2;
+  color: color.$color-grey-900;
+}
+
+.svm-confirm__subtitle {
+  margin: 0;
+  font-size: scale.$scale-px-md-2;
+  line-height: scale.$scale-px-xl;
+  color: color.$color-grey-700;
+}
+
+.svm-confirm__body {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-sm;
+}
+
+.svm-confirm__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: scale.$scale-px-sm;
+  padding: scale.$scale-px-md;
+  border-radius: scale.$scale-px-md;
+  background-color: color.$color-grey-50;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  box-sizing: border-box;
+}
+
+.svm-confirm__card--compact {
+  gap: 0;
+  padding-top: scale.$scale-px-sm;
+  padding-bottom: scale.$scale-px-sm;
+}
+
+.svm-confirm__card--flush {
+  gap: 0;
+}
+
+.svm-confirm__card-header {
+  display: flex;
+  align-items: center;
+  gap: scale.$scale-px-sm;
+}
+
+.svm-confirm__card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: scale.$scale-px-4xl;
+  height: scale.$scale-px-4xl;
+  border-radius: 8px;
+  background-color: color.$color-grey-100;
+  color: color.$color-grey-700;
+
+  svg {
+    width: scale.$scale-px-lg;
+    height: scale.$scale-px-lg;
+  }
+}
+
+.svm-confirm__card-title {
+  margin: 0;
+  font-size: scale.$scale-px-md-2;
+  font-weight: weight.$weight-bold;
+  line-height: scale.$scale-px-xl;
+  color: color.$color-grey-900;
+}
+
+.svm-confirm__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-xs;
+  padding-left: calc(#{scale.$scale-px-4xl} + #{scale.$scale-px-sm});
+}
+
+.svm-confirm__card-value {
+  margin: 0;
+  font-size: scale.$scale-px-md-2;
+  line-height: scale.$scale-px-xl;
+  color: color.$color-grey-800;
+  word-break: break-word;
+}
+
+.svm-confirm__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-xs;
+}
+
+.svm-confirm__list-item {
+  display: flex;
+  align-items: center;
+  gap: scale.$scale-px-xs;
+  font-size: scale.$scale-px-md-2;
+  line-height: scale.$scale-px-xl;
+  color: color.$color-grey-800;
+
+  svg {
+    flex-shrink: 0;
+    color: color.$color-green-600;
+  }
+}
+
+.svm-confirm__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: scale.$scale-px-sm;
+  flex-wrap: wrap;
+
+  button[data-size="md"] {
+    min-height: scale.$scale-px-5xl;
+    height: scale.$scale-px-5xl;
+  }
+}
+
+@media (max-width: 480px) {
+  .svm-confirm {
+    padding: scale.$scale-px-xl;
+    max-height: 85dvh;
+  }
+
+  .svm-confirm__card-body {
+    padding-left: 0;
+  }
+
+  .svm-confirm__footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,6 @@
+'use strict';
+
+var DocumentTextGray = "https://dev.cdn.magneto365.com/2.93.7/f28fb578393adc83.svg";
+
+module.exports = DocumentTextGray;
+//# sourceMappingURL=DocumentTextGray.svg.js.map

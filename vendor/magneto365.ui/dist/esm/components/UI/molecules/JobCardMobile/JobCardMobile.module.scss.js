@@ -1,0 +1,4 @@
+var style = {"magneto-ui-card-mobile-jobs":"mg_job_card_mobile_magneto-ui-card-mobile-jobs_18tcb","magneto-ui-card-mobile-jobs--data":"mg_job_card_mobile_magneto-ui-card-mobile-jobs--data_18tcb","magneto-ui-card-mobile-jobs--row1":"mg_job_card_mobile_magneto-ui-card-mobile-jobs--row1_18tcb","magneto-ui-card-mobile-jobs--row2":"mg_job_card_mobile_magneto-ui-card-mobile-jobs--row2_18tcb","magneto-ui-card-mobile-jobs--row2__position":"mg_job_card_mobile_magneto-ui-card-mobile-jobs--row2_position_18tcb","magneto-ui-card-mobile-jobs--row2__info":"mg_job_card_mobile_magneto-ui-card-mobile-jobs--row2_info_18tcb","magneto-ui-card-mobile-jobs--brand":"mg_job_card_mobile_magneto-ui-card-mobile-jobs--brand_18tcb","magneto-ui-card-mobile-jobs--brand__img":"mg_job_card_mobile_magneto-ui-card-mobile-jobs--brand_img_18tcb"};
+
+export { style as default };
+//# sourceMappingURL=JobCardMobile.module.scss.js.map

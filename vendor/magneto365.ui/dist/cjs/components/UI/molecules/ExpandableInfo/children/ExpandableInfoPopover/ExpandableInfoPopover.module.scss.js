@@ -1,0 +1,6 @@
+'use strict';
+
+var styles = {"magneto-ui-expandable-info-popover":"mg_expandable_info_popover_magneto-ui-expandable-info-popover_13xbj","magneto-ui-expandable-info-popover--small":"mg_expandable_info_popover_magneto-ui-expandable-info-popover--small_13xbj","magneto-ui-expandable-info-popover--large":"mg_expandable_info_popover_magneto-ui-expandable-info-popover--large_13xbj","magneto-ui-expandable-info-popover--white":"mg_expandable_info_popover_magneto-ui-expandable-info-popover--white_13xbj","magneto-ui-expandable-info-popover__arrow":"mg_expandable_info_popover_magneto-ui-expandable-info-popover_arrow_13xbj","magneto-ui-expandable-info-popover__arrow--small":"mg_expandable_info_popover_magneto-ui-expandable-info-popover_arrow--small_13xbj","magneto-ui-expandable-info-popover__arrow--large":"mg_expandable_info_popover_magneto-ui-expandable-info-popover_arrow--large_13xbj"};
+
+module.exports = styles;
+//# sourceMappingURL=ExpandableInfoPopover.module.scss.js.map

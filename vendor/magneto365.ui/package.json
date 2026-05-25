@@ -1,0 +1,49 @@
+{
+  "name": "magneto365.ui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/W170/talenta.magneto365.ui.git"
+  },
+  "version": "2.93.7",
+  "description": "Magneto365 UI common components",
+  "scripts": {
+    "generate:tokens": "node ./.scripts/generateTokens.js",
+    "generate:modules": "node ./.scripts/generatePackageModules.js",
+    "generate:css": "node ./.scripts/generateSeparateCssFiles.js",
+    "lint": "eslint ./src --ext .js,.ts,.jsx,.tsx",
+    "prettier": "prettier --write ./**/*.{js,ts,jsx,tsx}  --list-different",
+    "prebuild": "yarn generate:tokens",
+    "build": "rollup -c rollup.config.js --configPlugin typescript",
+    "postbuild": "yarn generate:css",
+    "test": "jest",
+    "storybook": "yarn generate:tokens && storybook dev -p 6006",
+    "build-storybook": "yarn generate:tokens && storybook build"
+  },
+  "author": "Wilmer H Muñoz Gomez",
+  "license": "UNLICENSED",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
+  "dependencies": {},
+  "peerDependencies": {
+    "react-dom": "17.0.2"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./dist/*.css": "./dist/*.css",
+    "./Domain/Jobs": {
+      "import": "./dist/esm/components/Domain/Jobs/index.js",
+      "require": "./dist/cjs/components/Domain/Jobs/index.js",
+      "types": "./dist/types/components/Domain/Jobs/index.d.ts"
+    }
+  },
+  "yalcSig": "da4e3e402c89b97615cbddd1a98e7743"
+}

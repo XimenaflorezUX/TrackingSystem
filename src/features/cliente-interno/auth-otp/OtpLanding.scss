@@ -1,0 +1,119 @@
+// Solo layout: espaciado vía tokens oficiales. Lo visual (botones, campos, tipografía) vive en magneto365.ui.
+@use "tokens/scale" as scale;
+@use "tokens/color" as color;
+@use "tokens/radius" as radius;
+
+.otl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: scale.$scale-px-lg;
+}
+
+.otl__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: scale.$scale-full;
+  max-width: scale.$scale-px-container-xs;
+  gap: scale.$scale-px-md;
+  padding: scale.$scale-px-4xl scale.$scale-px-4xl scale.$scale-px-3xl;
+
+  &--blocked {
+    align-items: center;
+    text-align: center;
+    gap: scale.$scale-px-lg;
+  }
+
+  @media (max-width: #{scale.$scale-px-container-xs}) {
+    padding: scale.$scale-px-3xl scale.$scale-px-2xl;
+  }
+}
+
+.otl__logo-host {
+  margin-bottom: scale.$scale-px-xs;
+}
+
+.otl__logo-img {
+  display: block;
+  width: 110px;
+  height: auto;
+  max-width: 100%;
+}
+
+.otl__header {
+  width: scale.$scale-full;
+  margin-top: scale.$scale-px-xs;
+}
+
+.otl__section {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-sm;
+  width: scale.$scale-full;
+}
+
+.otl__otp-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: scale.$scale-px-sm;
+  width: scale.$scale-full;
+}
+
+.otl__otp-field {
+  display: flex;
+  justify-content: center;
+  width: scale.$scale-full;
+  min-width: 0;
+
+  /* Ajuste sobre el Field de magneto-ui: wrapper 68px, input 32px, dígito centrado */
+  span[data-slot='field-input'] {
+    width: 68px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  span[data-slot='field-input'] input {
+    width: 32px;
+    max-width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+}
+
+.otl__timer-row {
+  margin-top: scale.$scale-px-xs;
+  width: scale.$scale-full;
+}
+
+.otl__actions {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-md;
+  width: scale.$scale-full;
+}
+
+.otl__dev-hint {
+  margin: scale.$scale-px-md 0 0;
+  padding: scale.$scale-px-sm scale.$scale-px-md;
+  width: scale.$scale-full;
+  border-radius: radius.$radius-xs;
+  background-color: color.$color-grey-100;
+  color: color.$color-grey-600;
+  font-size: scale.$scale-px-sm-2;
+  line-height: 1.35;
+}
+
+.otl__dev-hint-code {
+  font-family: ui-monospace, monospace;
+  font-size: scale.$scale-px-sm-2;
+  word-break: break-all;
+}
+
+.otl__state-icon {
+  display: flex;
+  justify-content: center;
+  width: scale.$scale-full;
+  color: currentColor;
+}

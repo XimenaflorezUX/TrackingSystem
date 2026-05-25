@@ -1,0 +1,1067 @@
+@use "tokens/color"  as color;
+@use "tokens/scale"  as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text"   as text;
+@use "tokens/shadow" as shadow;
+@use "../vacancies-font" as vac-font;
+
+// ─── Page shell ───────────────────────────────────────────────────────────────
+
+.cv {
+  @include vac-font.vacancies-font-family;
+  @include vac-font.vacancies-font-magneto-roots;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: color.$color-grey-100;
+}
+
+// ─── Pipeline Header (navy) ───────────────────────────────────────────────────
+
+.cv-pipeline {
+  display: flex;
+  align-items: center;
+  gap: scale.$scale-px-md;
+  background-color: color.$color-blue-dark-400;
+  padding: scale.$scale-px-md scale.$scale-px-2xl;
+  flex-shrink: 0;
+  overflow: hidden;
+
+  &__back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: color.$color-grey-50;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: radius.$radius-xs;
+    transition: background-color 0.15s ease;
+
+    &:hover  { background-color: color.$color-blue-dark-300; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__vacancy-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex-shrink: 0;
+  }
+
+  &__vacancy-name {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+  }
+
+  &__status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: radius.$radius-full;
+    background-color: #22D3B7;
+    flex-shrink: 0;
+  }
+
+  &__vacancy-title {
+    font-size: text.$text-lg;
+    font-weight: 700;
+    color: color.$color-grey-50;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__vacancy-meta {
+    font-size: text.$text-md;
+    color: color.$color-blue-dark-50;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // ── Vacancy action icons ─────────────────────────────────────────────────
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    flex-shrink: 0;
+  }
+
+  &__action-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: color.$color-grey-50;
+    padding: 2px;
+    border-radius: radius.$radius-xs;
+    transition: color 0.15s ease;
+
+    &:hover { color: color.$color-blue-dark-100; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Pipeline stage tabs ──────────────────────────────────────────────────
+  &__stages {
+    display: flex;
+    align-items: stretch;
+    gap: scale.$scale-px-sm;
+    flex: 1;
+    padding: scale.$scale-px-xs scale.$scale-px-xs;
+    border-left: 1px solid color.$color-blue-dark-200;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  &__stage-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(26, 50, 76, 0.40);
+    border: none;
+    cursor: pointer;
+    color: color.$color-grey-50;
+    padding: scale.$scale-px-sm scale.$scale-px-xs;
+    border-radius: radius.$radius-sm;
+    flex-shrink: 0;
+    opacity: 0.30;
+    transition: opacity 0.15s ease;
+
+    &:hover { opacity: 1; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__stage {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    background-color: color.$color-blue-dark-400;
+    border: none;
+    border-radius: radius.$radius-sm;
+    padding: scale.$scale-px-sm scale.$scale-px-md;
+    font-size: text.$text-md-2;
+    font-weight: 400;
+    color: color.$color-blue-dark-50;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: color.$color-blue-dark-300;
+      color: color.$color-grey-50;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    // Active stage: white bg, dark navy text
+    &--active {
+      background-color: color.$color-grey-50;
+      color: color.$color-blue-dark-500;
+      font-weight: 700;
+
+      &:hover { background-color: color.$color-grey-50; }
+    }
+  }
+}
+
+// ─── Secondary Filter Bar ─────────────────────────────────────────────────────
+
+.cv-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: scale.$scale-px-lg;
+  background-color: color.$color-grey-100;
+  padding: scale.$scale-px-sm scale.$scale-px-2xl;
+  height: 64px;
+  flex-shrink: 0;
+
+  @media (max-width: 900px) {
+    height: auto;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-md;
+    flex-wrap: nowrap;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-md;
+    flex-shrink: 0;
+  }
+
+  // ── "Todos" checkbox + label chip ──────────────────────────────────────
+  &__select-all-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    height: 40px;
+    padding: scale.$scale-px-sm scale.$scale-px-md;
+    background-color: color.$color-grey-200;
+    border-radius: radius.$radius-sm;
+    cursor: pointer;
+  }
+
+  &__select-all {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: scale.$scale-px-xxs solid color.$color-grey-400;
+    border-radius: radius.$radius-xs;
+    background-color: color.$color-grey-50;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+
+    &:checked {
+      background-color: color.$color-blue-light-400;
+      border-color: color.$color-blue-light-400;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 6px;
+        border-left: 2px solid color.$color-grey-50;
+        border-bottom: 2px solid color.$color-grey-50;
+        transform: translate(4px, 4px) rotate(-45deg);
+      }
+    }
+
+    &:indeterminate {
+      background-color: color.$color-blue-light-400;
+      border-color: color.$color-blue-light-400;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 2px;
+        background: color.$color-grey-50;
+        transform: translate(4px, 8px);
+      }
+    }
+  }
+
+  &__total-label {
+    font-size: text.$text-md-2;
+    color: color.$color-grey-900;
+    white-space: nowrap;
+  }
+
+  // ── Rounded search btn ───────────────────────────────────────────────────
+  &__search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: color.$color-grey-50;
+    border: none;
+    border-radius: radius.$radius-full;
+    cursor: pointer;
+    color: color.$color-grey-900;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease;
+
+    &:hover { background-color: color.$color-grey-200; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Status segmented controls ────────────────────────────────────────────
+  &__status-segment {
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    border-radius: radius.$radius-sm;
+    overflow: hidden;
+  }
+
+  &__segment-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    height: 100%;
+    padding: scale.$scale-px-xs scale.$scale-px-sm;
+    background: transparent;
+    border: none;
+    font-size: text.$text-md-2;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &--left {
+      border-top-left-radius: radius.$radius-sm;
+      border-bottom-left-radius: radius.$radius-sm;
+      border-right: scale.$scale-px-xxs solid color.$color-grey-300;
+      color: color.$color-grey-900;
+    }
+
+    &--right {
+      border-top-right-radius: radius.$radius-xs;
+      border-bottom-right-radius: radius.$radius-xs;
+      color: color.$color-grey-600;
+    }
+
+    &--on {
+      background-color: color.$color-grey-200;
+      font-weight: 600;
+      color: color.$color-grey-900;
+    }
+
+    &:hover { background-color: color.$color-grey-200; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Sort combo (select + order toggle) ──────────────────────────────────
+  &__sort-combo {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__sort-select {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    height: 36px;
+    padding: 0 scale.$scale-px-md;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    border-right: none;
+    border-top-left-radius: radius.$radius-2xl;
+    border-bottom-left-radius: radius.$radius-2xl;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-900;
+    white-space: nowrap;
+    cursor: pointer;
+    min-width: 160px;
+  }
+
+  &__sort-label {
+    flex: 1;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-900;
+  }
+
+  &__sort-order-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 36px;
+    background-color: color.$color-grey-100;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    border-top-right-radius: radius.$radius-2xl;
+    border-bottom-right-radius: radius.$radius-2xl;
+    cursor: pointer;
+    color: color.$color-grey-900;
+    transition: background-color 0.15s ease;
+
+    &:hover { background-color: color.$color-grey-200; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Columns selector ─────────────────────────────────────────────────────
+  &__col-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    height: 36px;
+    padding: 0 scale.$scale-px-md;
+    background-color: color.$color-grey-100;
+    border-radius: radius.$radius-sm;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-900;
+    white-space: nowrap;
+    cursor: pointer;
+    min-width: 160px;
+    transition: background-color 0.15s ease;
+
+    &:hover { background-color: color.$color-grey-200; }
+  }
+
+  // ── Tool icon buttons ────────────────────────────────────────────────────
+  &__tool-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: transparent;
+    border: none;
+    border-radius: radius.$radius-full;
+    cursor: pointer;
+    color: color.$color-grey-900;
+    transition: background-color 0.15s ease;
+
+    &:hover { background-color: color.$color-grey-200; }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Filter action button (dark navy + green icon) ────────────────────────
+  &__filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: color.$color-blue-dark-500;
+    border: none;
+    border-radius: radius.$radius-full;
+    cursor: pointer;
+    color: color.$color-green-500;
+    transition: background-color 0.15s ease;
+
+    &:hover { background-color: color.$color-blue-dark-400; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 3px;
+    }
+  }
+}
+
+// ─── Candidates Table ─────────────────────────────────────────────────────────
+
+.cv-table {
+  // ── Scroll container ─────────────────────────────────────────────────────
+  &__scroll-wrapper {
+    flex: 1;
+    overflow: auto;
+    background-color: color.$color-grey-50;
+    position: relative;
+  }
+
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+
+  // ── Column widths ────────────────────────────────────────────────────────
+  &__th--checkbox  { width: 60px;   min-width: 60px;  }
+  &__th--candidate { width: 280px;  min-width: 220px; }
+  &__th--date      { width: 150px;  min-width: 130px; }
+  &__th--pct       { width: 150px;  min-width: 130px; }
+  &__th--study     { width: 160px;  min-width: 140px; }
+  &__th--category  { width: 160px;  min-width: 140px; }
+  &__th--narrow    { width: 130px;  min-width: 100px; }
+  &__th--salary    { width: 130px;  min-width: 110px; }
+  &__th--wide      { width: 230px;  min-width: 180px; }
+  &__th--medium    { width: 160px;  min-width: 130px; }
+  &__th--test      { width: 160px;  min-width: 140px; }
+
+  // ── Head ────────────────────────────────────────────────────────────────
+  &__head {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: color.$color-grey-50;
+  }
+
+  &__th {
+    padding: scale.$scale-px-sm scale.$scale-px-md;
+    text-align: left;
+    font-size: text.$text-md-2;
+    font-weight: 700;
+    color: color.$color-grey-800;
+    border-bottom: scale.$scale-px-xxs solid color.$color-grey-100;
+    white-space: normal;
+    line-height: 1.3;
+    height: 60px;
+    vertical-align: middle;
+
+    // Sticky checkbox column
+    &--checkbox {
+      position: sticky;
+      left: 0;
+      z-index: 11;
+      background-color: color.$color-grey-50;
+    }
+
+    // Sticky candidate column
+    &--candidate {
+      position: sticky;
+      left: 60px;
+      z-index: 11;
+      background-color: color.$color-grey-50;
+      box-shadow: 2px 0 8px rgba(102, 118, 136, 0.20);
+    }
+  }
+
+  // ── Rows ────────────────────────────────────────────────────────────────
+  &__row {
+    background-color: color.$color-grey-50;
+    border-bottom: scale.$scale-px-xxs solid color.$color-grey-100;
+    transition: background-color 0.1s ease;
+    min-height: 86px;
+
+    &:hover { background-color: color.$color-grey-100; }
+
+    &--selected { background-color: #F0F7FF; }
+  }
+
+  &__td {
+    padding: scale.$scale-px-md scale.$scale-px-md;
+    vertical-align: middle;
+    height: 86px;
+    font-size: text.$text-md;
+    color: color.$color-grey-800;
+
+    // Sticky checkbox
+    &--checkbox {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background-color: inherit;
+      padding-left: scale.$scale-px-2xl;
+    }
+
+    // Sticky candidate
+    &--candidate {
+      position: sticky;
+      left: 60px;
+      z-index: 2;
+      background-color: inherit;
+      box-shadow: 2px 0 8px rgba(102, 118, 136, 0.20);
+    }
+  }
+
+  // ── Checkbox ─────────────────────────────────────────────────────────────
+  &__checkbox {
+    width: 20px;
+    height: 20px;
+    border: scale.$scale-px-xxs solid color.$color-grey-400;
+    border-radius: radius.$radius-xs;
+    background-color: color.$color-grey-50;
+    cursor: pointer;
+    accent-color: color.$color-blue-light-400;
+    color: color.$color-grey-50;
+    flex-shrink: 0;
+  }
+
+  // ── Candidate cell ────────────────────────────────────────────────────────
+  &__candidate-cell {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    min-width: 0;
+  }
+
+  &__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: radius.$radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: text.$text-md;
+    font-weight: 700;
+    color: color.$color-grey-50;
+    flex-shrink: 0;
+
+    &--color-1 { background-color: color.$color-blue-dark-300; }
+    &--color-2 { background-color: color.$color-green-400; }
+    &--color-3 { background-color: color.$color-blue-light-300; }
+    &--color-4 { background-color: color.$color-yellow-300; color: color.$color-grey-900; }
+    &--color-5 { background-color: color.$color-blue-dark-200; }
+    &--color-6 { background-color: color.$color-purple-200; color: color.$color-grey-900; }
+  }
+
+
+  &__candidate-info {
+    display: flex;
+    flex-direction: column;
+    gap: scale.$scale-px-xs;
+    min-width: 0;
+    flex: 1;
+  }
+
+  &__candidate-name-btn {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: text.$text-md-2;
+    font-weight: 700;
+    color: color.$color-grey-800;
+    text-align: left;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:hover { color: color.$color-blue-dark-400; text-decoration: underline; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+      border-radius: radius.$radius-xs;
+    }
+  }
+
+  // ── Inline tags (Invitado / Marca) ────────────────────────────────────────
+  &__tags {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    flex-wrap: wrap;
+  }
+
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: scale.$scale-px-xs scale.$scale-px-xs;
+    background-color: color.$color-grey-100;
+    border-radius: radius.$radius-xs;
+    font-size: 10px;
+    font-weight: 700;
+    color: color.$color-grey-600;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  &__rating-sentiment {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: 22px;
+    min-height: 22px;
+    padding: scale.$scale-px-xs scale.$scale-px-xs;
+    border-radius: radius.$radius-xs;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: nowrap;
+
+    &--bueno {
+      color: color.$color-green-600;
+      background-color: color.$color-green-100;
+    }
+
+    &--regular {
+      color: #916308;
+      background-color: color.$color-yellow-100;
+    }
+
+    &--malo {
+      color: color.$color-red-300;
+      background-color: color.$color-red-100;
+    }
+  }
+
+  // ── Fit cell ─────────────────────────────────────────────────────────────
+  &__fit-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  &__train-link {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    color: #000096;
+    text-align: left;
+    padding: 0;
+    line-height: 1.3;
+    transition: opacity 0.1s ease;
+
+    &:hover { text-decoration: underline; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Standard text cells ──────────────────────────────────────────────────
+  &__cell-text {
+    display: block;
+    font-size: text.$text-md;
+    color: color.$color-grey-800;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // ── Expandable cells ─────────────────────────────────────────────────────
+  &__expandable {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__see-more {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-md;
+    font-weight: 700;
+    color: color.$color-blue-dark-400;
+    padding: 0;
+    text-align: left;
+    transition: opacity 0.1s ease;
+
+    &:hover { text-decoration: underline; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Test-status cells ─────────────────────────────────────────────────────
+  &__test-status {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    flex-wrap: nowrap;
+  }
+
+  // Status badges ─────────────────────────────────────────────────────────────
+  &__test-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    padding: 0 scale.$scale-px-sm;
+    border-radius: radius.$radius-full;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: color.$color-grey-800;
+    white-space: nowrap;
+
+    // ERI result (e.g. FP = red-light)
+    &--eri {
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      background-color: #FEBFBF;
+    }
+
+    // TM potential levels (e.g. Media = light blue)
+    &--potential {
+      min-width: 55px;
+      background-color: #A3DAF2;
+      border-radius: radius.$radius-md; // 12px – overrides the full-pill from base
+    }
+
+    // MCSA seller type (e.g. Agricultor = very-light blue)
+    &--seller {
+      min-width: 55px;
+      background-color: #E0F3FB;
+    }
+
+    // No-data state
+    &--nodata {
+      min-width: 55px;
+      background-color: color.$color-grey-200;
+      border-radius: radius.$radius-md; // 12px – overrides the full-pill from base
+    }
+  }
+}
+
+// ─── Pagination ───────────────────────────────────────────────────────────────
+
+.cv-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: scale.$scale-px-sm;
+  flex-wrap: wrap;
+  padding: scale.$scale-px-md scale.$scale-px-2xl;
+  background-color: color.$color-grey-50;
+  border-top: scale.$scale-px-xxs solid color.$color-grey-200;
+  flex-shrink: 0;
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-500;
+    padding: scale.$scale-px-xs scale.$scale-px-md;
+    border-radius: radius.$radius-sm;
+    transition: color 0.15s ease, background-color 0.15s ease;
+
+    &:hover:not(:disabled) {
+      color: color.$color-grey-900;
+      background-color: color.$color-grey-100;
+    }
+
+    &:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__pages {
+    display: flex;
+    gap: scale.$scale-px-xs;
+  }
+
+  &__page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: scale.$scale-px-3xl;
+    height: scale.$scale-px-3xl;
+    border-radius: radius.$radius-full;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-600;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover:not(&--active) {
+      background-color: color.$color-grey-200;
+      color: color.$color-grey-900;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      background-color: color.$color-blue-dark-500;
+      color: color.$color-grey-50;
+      font-weight: 700;
+      cursor: default;
+    }
+  }
+
+  &__size-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: scale.$scale-px-md;
+
+    svg {
+      position: absolute;
+      right: scale.$scale-px-sm;
+      pointer-events: none;
+      color: color.$color-grey-500;
+    }
+  }
+
+  &__size-select {
+    appearance: none;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    border-radius: radius.$radius-2xl;
+    padding: scale.$scale-px-xs scale.$scale-px-4xl scale.$scale-px-xs scale.$scale-px-md;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-700;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// ─── Mass Actions Floating Bar ────────────────────────────────────────────────
+
+.cv-mass-actions {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+
+  display: inline-flex;
+  align-items: center;
+  gap: scale.$scale-px-2xl;
+  height: 55px;
+  padding: scale.$scale-px-sm scale.$scale-px-2xl;
+
+  background-color: #001B38;
+  border-radius: 30px;
+  box-shadow: none;
+  white-space: nowrap;
+
+  // ── Left section: title + count ─────────────────────────────────────────
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+  }
+
+  &__title {
+    font-size: text.$text-lg;
+    font-weight: 900;
+    color: #A3DAF2;
+    line-height: 1;
+  }
+
+  &__count-row {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+  }
+
+  &__count-bubble {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: radius.$radius-full;
+    background-color: #fff;
+    font-size: text.$text-md;
+    font-weight: 700;
+    color: #00A7E1;
+  }
+
+  &__clear-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-50;
+    padding: 0;
+    transition: opacity 0.15s ease;
+
+    &:hover { opacity: 0.8; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+      border-radius: radius.$radius-xs;
+    }
+  }
+
+  // ── Action icons ────────────────────────────────────────────────────────
+  &__action-icons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    border-radius: radius.$radius-full;
+    cursor: pointer;
+    color: color.$color-grey-50;
+    transition: background-color 0.15s ease;
+
+    &:hover { background-color: rgba(255, 255, 255, 0.12); }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Divider ─────────────────────────────────────────────────────────────
+  &__divider {
+    width: 1px;
+    height: 34px;
+    background-color: color.$color-grey-200;
+    flex-shrink: 0;
+    opacity: 0.30;
+  }
+
+  // ── Quick action buttons (export / reject / approve) ─────────────────────
+  &__quick-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__quick-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: radius.$radius-full;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.15s ease;
+
+    &:hover { opacity: 0.85; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    // Neutral light blue
+    &--neutral {
+      background-color: #F0F9FF;
+      color: #001B38;
+    }
+
+    // Reject – red
+    &--reject { background-color: color.$color-red-200; }
+
+    // Approve – teal/cyan (closest design-token: teal-500)
+    &--approve { background-color: #70ECD4; }
+  }
+}

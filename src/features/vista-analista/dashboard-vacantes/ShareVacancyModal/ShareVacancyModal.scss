@@ -1,0 +1,347 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text" as text;
+@use "../vacancies-font" as vac-font;
+
+.svm-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.svm {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-xl;
+  padding: 0 scale.$scale-px-md scale.$scale-px-md 0;
+  max-height: 400px;
+  overflow-y: auto;
+  text-align: left;
+
+  // Magneto Switch: fila alineada a la izquierda (hash de clase varía por build)
+  [class*="switch_container"] {
+    justify-content: flex-start !important;
+  }
+
+  label {
+    font-size: scale.$scale-px-md-2;
+    line-height: 18px;
+    color: color.$color-grey-800;
+  }
+}
+
+.svm__modal-description {
+  margin: 0 0 scale.$scale-px-xs;
+}
+
+.svm__section {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-md;
+}
+
+.svm__section-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: scale.$scale-px-sm;
+  font-size: text.$text-md;
+  font-weight: 700;
+  line-height: scale.$scale-px-xl;
+  color: color.$color-grey-900;
+}
+
+.svm__section-title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: scale.$scale-px-4xl;
+  height: scale.$scale-px-4xl;
+  border-radius: 8px;
+  background-color: color.$color-grey-100;
+  color: color.$color-grey-700;
+
+  svg {
+    width: scale.$scale-px-lg;
+    height: scale.$scale-px-lg;
+  }
+}
+
+.svm__section-title-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: scale.$scale-px-md-2;
+}
+
+.svm__hint {
+  margin: 0;
+  font-size: scale.$scale-px-md-2;
+  line-height: 18px;
+  color: color.$color-grey-800;
+}
+
+.svm__error {
+  margin: 0;
+  font-size: scale.$scale-px-sm-2;
+  line-height: scale.$scale-px-md;
+  color: color.$color-red-200;
+}
+
+.svm__success-banner {
+  margin: 0 0 scale.$scale-px-md;
+  padding: scale.$scale-px-md scale.$scale-px-lg;
+  border-radius: radius.$radius-sm;
+  border: scale.$scale-px-xxs solid color.$color-blue-light-200;
+  background-color: color.$color-blue-light-50;
+}
+
+.svm__success-text {
+  margin: 0 0 scale.$scale-px-xs;
+  font-size: text.$text-md-2;
+  line-height: 1.35;
+  font-weight: 600;
+  color: color.$color-blue-light-500;
+}
+
+.svm__success-hint {
+  margin: 0;
+  font-size: scale.$scale-px-sm-2;
+  line-height: 1.4;
+  color: color.$color-grey-700;
+}
+
+.svm--success-mode {
+  .svm__section,
+  .svm-alert {
+    opacity: 0.48;
+    pointer-events: none;
+  }
+
+  .svm__modal-description {
+    opacity: 0.65;
+  }
+}
+
+.modal-ui-drawer .svm-modal {
+  // Modal Magneto se renderiza en portal fuera del árbol `.vd`; forzamos Lato en todo el shell.
+  @include vac-font.vacancies-font-family;
+  @include vac-font.vacancies-font-magneto-roots;
+
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  max-width: 600px;
+  max-height: 90dvh;
+
+  [class*="magneto-ui-modal_title"] {
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+  }
+
+  // CloseModales (Figma): círculo grey-900 34×34; icono en `src/styles/modal-close.scss`
+  button[data-name="close-drawer"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: none;
+    border-radius: radius.$radius-full;
+    background-color: color.$color-grey-900;
+  }
+}
+
+.svm-radios {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-md;
+  padding-top: scale.$scale-px-md;
+  padding-bottom: scale.$scale-px-md;
+  color: color.$color-blue-light-400;
+  background-color: color.$color-grey-100;
+  border-radius: scale.$scale-px-md;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+}
+
+.svm-radios__row {
+  display: flex;
+  align-items: flex-start;
+  gap: scale.$scale-px-sm;
+}
+
+.svm-radios__row-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: scale.$scale-px-md;
+  min-width: 0;
+  align-items: flex-start;
+}
+
+.svm-radios__row:has(.svm-stages) {
+  display: grid;
+  grid-template-columns: scale.$scale-px-xl minmax(0, 1fr);
+  column-gap: scale.$scale-px-sm;
+  row-gap: scale.$scale-px-md;
+  align-items: start;
+
+  > .svm-radio {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  > .svm-radios__row-body {
+    display: contents;
+  }
+
+  .svm-radios__label {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .svm-stages {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+  }
+}
+
+.svm-radios__label {
+  cursor: pointer;
+  color: color.$color-grey-800;
+}
+
+.svm-stages {
+  margin-top: 0;
+  padding: 0 scale.$scale-px-sm;
+  border-radius: radius.$radius-md;
+  border: scale.$scale-px-xxs solid color.$color-grey-100;
+  background-color: color.$color-grey-100;
+  text-align: left;
+  box-sizing: border-box;
+
+  .svm__section-title {
+    margin-bottom: scale.$scale-px-md;
+    justify-content: flex-start;
+  }
+}
+
+.svm-stages__loading {
+  margin: 0;
+  font-size: scale.$scale-px-md-2;
+  color: color.$color-grey-600;
+}
+
+.svm-stages__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: scale.$scale-px-sm-2;
+  width: 100%;
+}
+
+.svm-stages__row {
+  display: flex;
+  align-items: center;
+  gap: scale.$scale-px-sm;
+  min-height: scale.$scale-px-xl;
+  padding-left: scale.$scale-px-xs;
+  padding-right: scale.$scale-px-xs;
+}
+
+.svm-fields {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-sm-2;
+}
+
+.svm-fields__group {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-sm-2;
+  padding: scale.$scale-px-md;
+  border-radius: scale.$scale-px-md;
+  background-color: color.$color-grey-100;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  box-sizing: border-box;
+}
+
+.svm-fields__row {
+  display: flex;
+  align-items: flex-start;
+  gap: scale.$scale-px-sm;
+  min-height: scale.$scale-px-xl;
+  color: color.$color-grey-800;
+
+  &:has(.svm-checkbox--disabled) > label {
+    color: color.$color-grey-600;
+  }
+}
+
+.svm-fields__label-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: scale.$scale-px-xs;
+}
+
+.svm-fields__tooltip-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: scale.$scale-px-xl;
+  height: scale.$scale-px-xl;
+  padding: 0;
+  border: none;
+  border-radius: radius.$radius-full;
+  background-color: color.$color-grey-100;
+  color: color.$color-grey-700;
+  cursor: help;
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+}
+
+.svm-feedback__options {
+  width: 100%;
+}
+
+.svm-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: scale.$scale-px-sm;
+  padding-top: scale.$scale-px-xl;
+  border-top: scale.$scale-px-xxs solid color.$color-grey-100;
+
+  button[data-size="md"] {
+    min-height: scale.$scale-px-5xl;
+    height: scale.$scale-px-5xl;
+  }
+}
+
+@media (max-width: 480px) {
+  .svm {
+    max-height: min(80vh, 400px);
+    padding: 0 scale.$scale-px-sm scale.$scale-px-sm 0;
+  }
+
+  .svm-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+}

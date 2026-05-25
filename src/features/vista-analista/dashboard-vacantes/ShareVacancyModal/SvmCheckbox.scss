@@ -1,0 +1,66 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+@use "tokens/radius" as radius;
+
+// Checkbox tamaño S — Style Guideline Magneto (Figma node 3948:11717 / 3948:11723 / 3948:11731)
+.svm-checkbox {
+  display: inline-flex;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin: 0;
+
+  &--disabled {
+    cursor: not-allowed;
+  }
+
+  &:has(.svm-checkbox__input:focus-visible) .svm-checkbox__box {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+}
+
+.svm-checkbox__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.svm-checkbox__box {
+  display: grid;
+  place-content: center;
+  width: scale.$scale-px-xl;
+  height: scale.$scale-px-xl;
+  border: scale.$scale-px-xxs solid color.$color-grey-400;
+  border-radius: radius.$radius-xs;
+  background-color: color.$color-grey-50;
+  box-sizing: border-box;
+}
+
+.svm-checkbox--checked .svm-checkbox__box {
+  border-color: color.$color-green-600;
+  background-color: color.$color-green-600;
+  color: color.$color-grey-50;
+}
+
+.svm-checkbox--disabled.svm-checkbox--checked .svm-checkbox__box {
+  border-color: color.$color-grey-300;
+  background-color: color.$color-grey-300;
+  color: color.$color-grey-600;
+}
+
+.svm-checkbox--disabled:not(.svm-checkbox--checked) .svm-checkbox__box {
+  border-color: color.$color-grey-300;
+  background-color: color.$color-grey-100;
+}
+
+.svm-checkbox__icon {
+  display: block;
+  width: scale.$scale-px-lg;
+  height: scale.$scale-px-lg;
+}

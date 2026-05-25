@@ -1,0 +1,63 @@
+---
+alwaysApply: true
+---
+description: Consumo de @talenta/magneto-ui (paquete npm `magneto365.ui`) y rol del SCSS local en Tracking
+globs: src/**/*.scss
+---
+
+# Estilos y tokens (Lead UX)
+
+El design system se consume como **`@talenta/magneto-ui`** en documentación; en `package.json` el nombre npm/Yalc es **`magneto365.ui`**.
+
+## 1. Prioridad de componentes
+
+Antes de maquetar a mano (HTML/JSX “crudo”), revisa si el componente existe en la librería (`Button`, `Field`, `Typography`, `Divider`, `LogoComponent`, etc.). Si existe, **úsalo**.
+
+## 2. Rol del SCSS en Tracking
+
+Los `.scss` del proyecto se limitan a **estructura de página**:
+
+- `display: flex` / `grid`, alineación, `flex`/`min-width` en cabeceras.
+- `gap` y márgenes de contenedor usando **solo tokens** (`scale.$scale-px-*`, etc.).
+
+**No** dupliques aquí apariencia de botones, inputs, tipografía, radios o sombras que ya cubre la librería: eso va en JSX con componentes + CSS del paquete (`magneto.ui.lib.min.css` en el entry).
+
+## 3. Prohibición de hardcoding
+
+Queda prohibido en SCSS local: colores hex, sombras o bordes con valores sueltos en px que no provengan de tokens. Usa variables del DS (`color.$…`, `scale.$…`, `radius.$…`, `shadow.$…`).
+
+## 4. Importación de tokens Sass
+
+Vite añade `loadPaths` con `node_modules/magneto365.ui/dist`, por lo que los partials se importan así (sin prefijo de paquete; evita el límite de `exports` del `package.json`):
+
+```scss
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+
+.mi-layout {
+  display: flex;
+  gap: scale.$scale-px-md;
+  padding: scale.$scale-px-lg;
+}
+```
+
+### Namespace unificado
+
+```scss
+@use "tokens/index" as tokens;
+```
+
+Los primitivos se nombran como en el DS (p. ej. `tokens.$color-blue-dark-500`). No asumas un único `$color-primary`; usa primitivos o colores semánticos vía componentes/Typography.
+
+## 5. Estilos globales
+
+`src/styles/global.scss` solo aplica reset mínimo (`box-sizing`), fondo/texto base con **tokens** y `@use "tokens/utilities"` del paquete. No añadas hojas locales que dupliquen `:root` o utilidades ya generadas por la librería.
+
+## 6. Tipografía (familia, tamaños y pesos)
+
+- **Familia global:** **Lato** (primera en el stack; carga en `index.html` vía Google Fonts). El `font-family` base vive en `src/styles/global.scss`.
+- **Tamaños y pesos canónicos del producto:** los mismos primitivos que expone Magneto en `tokens/text` y `tokens/weight`, alineados con el paquete enlazado por Yalc **`sistema-de-diseno`**, archivos:
+  - `.yalc/sistema-de-diseno/src/components/atoms/_text.scss` (`$text-*`, `$text-map`)
+  - `.yalc/sistema-de-diseno/src/components/atoms/_weight.scss` (`$weight-normal`, `$weight-bold`, `$weight-black`, `$weight-map`)
+- En `global.scss` esos valores se referencian con `@use` directo al módulo Sass del yalc (`text` / `weight`) para el cuerpo base (`font-size`, `font-weight`), sin duplicar escalas sueltas en el repo.
+- En el módulo **vacantes** (lista, candidatos, historial, menú kebab en portal, previsualización de correo), el stack **Lato** se centraliza en `src/features/cliente-interno/dashboard-vacantes/_vacancies-font.scss` (cliente interno) y en el equivalente `src/features/vista-analista/dashboard-vacantes/_vacancies-font.scss` (analista); se aplica en los shells `.vd`, `.cv`, `.ep`, `.hvd-drawer-shell` / `.hvd` y en el panel del menú portal para que el Drawer y los portales no pierdan la fuente respecto al `body`.

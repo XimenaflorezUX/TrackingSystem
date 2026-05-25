@@ -1,0 +1,6 @@
+'use strict';
+
+var styles = {"magneto-ui-nav-menu-analyst-region-modal-content__container":"mg_nav_menu_analsyt_region_modal_content_magneto-ui-nav-menu-analyst-region-modal-content_container_1b9x9","magneto-ui-nav-menu-analyst-region-modal-content__option":"mg_nav_menu_analsyt_region_modal_content_magneto-ui-nav-menu-analyst-region-modal-content_option_1b9x9","magneto-ui-nav-menu-analyst-region-modal-content__flag":"mg_nav_menu_analsyt_region_modal_content_magneto-ui-nav-menu-analyst-region-modal-content_flag_1b9x9","magneto-ui-nav-menu-analyst-region-modal-content__footer":"mg_nav_menu_analsyt_region_modal_content_magneto-ui-nav-menu-analyst-region-modal-content_footer_1b9x9","magneto-ui-nav-menu-analyst-region-modal-content__button":"mg_nav_menu_analsyt_region_modal_content_magneto-ui-nav-menu-analyst-region-modal-content_button_1b9x9","magneto-ui-nav-menu-analyst-region-modal-content__button--cancel":"mg_nav_menu_analsyt_region_modal_content_magneto-ui-nav-menu-analyst-region-modal-content_button--cancel_1b9x9","magneto-ui-nav-menu-analyst-region-modal-content__button--apply":"mg_nav_menu_analsyt_region_modal_content_magneto-ui-nav-menu-analyst-region-modal-content_button--apply_1b9x9"};
+
+module.exports = styles;
+//# sourceMappingURL=NavMenuAnalsytRegionModalContent.module.scss.js.map

@@ -1,0 +1,6 @@
+'use strict';
+
+var styles = {"magneto-ui-horizontal-filter":"mg_horizontal_filter_magneto-ui-horizontal-filter_74ozl","magneto-ui-horizontal-filter__header":"mg_horizontal_filter_magneto-ui-horizontal-filter_header_74ozl","magneto-ui-horizontal-filter__clear-button":"mg_horizontal_filter_magneto-ui-horizontal-filter_clear-button_74ozl","magneto-ui-horizontal-filter__clear-button--disabled":"mg_horizontal_filter_magneto-ui-horizontal-filter_clear-button--disabled_74ozl","magneto-ui-horizontal-filter__filters-container":"mg_horizontal_filter_magneto-ui-horizontal-filter_filters-container_74ozl","magneto-ui-horizontal-filter__scroll-container":"mg_horizontal_filter_magneto-ui-horizontal-filter_scroll-container_74ozl","btn-next":"mg_horizontal_filter_btn-next_74ozl","btn-next-container":"mg_horizontal_filter_btn-next-container_74ozl"};
+
+module.exports = styles;
+//# sourceMappingURL=HorizontalFilter.module.scss.js.map

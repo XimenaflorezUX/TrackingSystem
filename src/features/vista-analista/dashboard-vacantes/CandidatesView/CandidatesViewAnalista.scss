@@ -1,0 +1,743 @@
+@use "tokens/color"  as color;
+@use "tokens/scale"  as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text"   as text;
+@use "tokens/shadow" as shadow;
+@use "../vacancies-font" as vac-font;
+
+// ─── Page shell ───────────────────────────────────────────────────────────────
+
+.cv {
+  @include vac-font.vacancies-font-family;
+  @include vac-font.vacancies-font-magneto-roots;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: color.$color-grey-100;
+}
+
+// ─── Pipeline Header (navy) ───────────────────────────────────────────────────
+
+.cv-pipeline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: scale.$scale-px-lg;
+  background-color: color.$color-blue-dark-500;
+  padding: 0 scale.$scale-px-2xl;
+  height: 64px;
+  flex-shrink: 0;
+  overflow: hidden;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-md;
+    flex-shrink: 0;
+    min-width: 0;
+    max-width: 280px;
+  }
+
+  &__back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: color.$color-grey-50;
+    flex-shrink: 0;
+    padding: scale.$scale-px-xs;
+    border-radius: radius.$radius-xs;
+    transition: background-color 0.15s ease;
+
+    &:hover  { background-color: color.$color-blue-dark-400; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__vacancy-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  &__vacancy-name {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+  }
+
+  &__vacancy-title {
+    font-size: text.$text-md-2;
+    font-weight: 700;
+    color: color.$color-grey-50;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__dots-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: color.$color-blue-dark-50;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: radius.$radius-xs;
+    flex-shrink: 0;
+    transition: color 0.15s ease;
+
+    &:hover { color: color.$color-grey-50; }
+  }
+
+  &__vacancy-meta {
+    font-size: text.$text-md;
+    color: color.$color-blue-dark-50;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // ── Pipeline stage tabs ──────────────────────────────────────────────────
+  &__stages {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-right: scale.$scale-px-md;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  &__stage {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: color.$color-blue-dark-400;
+    border: scale.$scale-px-xxs solid transparent;
+    border-radius: radius.$radius-sm;
+    padding: scale.$scale-px-sm scale.$scale-px-md;
+    font-size: text.$text-md;
+    color: color.$color-blue-dark-50;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: color.$color-blue-dark-300;
+      color: color.$color-grey-50;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    // Sugeridos por IA
+    &--ai {
+      background-color: transparent;
+      border-color: color.$color-blue-dark-200;
+      color: color.$color-grey-50;
+
+      &:hover { background-color: color.$color-blue-dark-400; }
+    }
+
+    // Active stage: white bg, navy text
+    &--active {
+      background-color: color.$color-grey-50;
+      color: color.$color-blue-dark-500;
+      font-weight: 600;
+
+      &:hover { background-color: color.$color-grey-50; }
+    }
+  }
+
+  &__stage-index {
+    opacity: 0.7;
+  }
+
+  &__stage-count {
+    font-size: text.$text-md;
+    opacity: 0.8;
+  }
+
+  &__stage-dots {
+    margin-left: 2px;
+    color: color.$color-grey-500;
+  }
+
+  &__scroll-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: color.$color-grey-50;
+    padding: scale.$scale-px-xs;
+    border-radius: radius.$radius-xs;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease;
+
+    &:hover { background-color: color.$color-blue-dark-400; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// ─── Secondary Filter Bar ─────────────────────────────────────────────────────
+
+.cv-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: scale.$scale-px-lg;
+  background-color: color.$color-grey-50;
+  border-bottom: scale.$scale-px-xxs solid color.$color-grey-200;
+  padding: scale.$scale-px-sm scale.$scale-px-2xl;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__left,
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    flex-wrap: wrap;
+  }
+
+  &__select-all {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    accent-color: color.$color-blue-light-400;
+  }
+
+  &__total-label {
+    font-size: text.$text-md-2;
+    color: color.$color-grey-500;
+    white-space: nowrap;
+  }
+
+  &__divider {
+    display: inline-block;
+    width: scale.$scale-px-xxs;
+    height: 16px;
+    background-color: color.$color-grey-200;
+    flex-shrink: 0;
+  }
+
+  &__search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: color.$color-grey-500;
+    padding: scale.$scale-px-xs;
+    border-radius: radius.$radius-xs;
+    transition: color 0.15s ease;
+
+    &:hover { color: color.$color-grey-900; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__status-group {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-lg;
+  }
+
+  &__status-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-500;
+    padding: scale.$scale-px-xs 0;
+    transition: color 0.15s ease;
+
+    &:hover { color: color.$color-grey-900; }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      color: color.$color-blue-light-500;
+      font-weight: 600;
+    }
+  }
+
+  // ── Right tools ─────────────────────────────────────────────────────────
+  &__sort-wrapper,
+  &__col-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    border-radius: radius.$radius-2xl;
+    padding: scale.$scale-px-xs scale.$scale-px-md;
+    font-size: text.$text-md;
+    color: color.$color-grey-700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color 0.15s ease;
+
+    &:hover { border-color: color.$color-grey-400; }
+  }
+
+  &__sort-label {
+    font-size: text.$text-md;
+    color: color.$color-grey-700;
+  }
+
+  &__tool-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    border-radius: radius.$radius-xs;
+    cursor: pointer;
+    color: color.$color-grey-600;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      background-color: color.$color-grey-100;
+      border-color: color.$color-grey-400;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: color.$color-green-500;
+    border: none;
+    border-radius: radius.$radius-full;
+    cursor: pointer;
+    color: color.$color-grey-50;
+    transition: background-color 0.15s ease;
+
+    &:hover { background-color: color.$color-green-600; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-green-500;
+      outline-offset: 3px;
+    }
+  }
+}
+
+// ─── Candidates Table ─────────────────────────────────────────────────────────
+
+.cv-table {
+  &__scroll-wrapper {
+    flex: 1;
+    overflow: auto;
+    background-color: color.$color-grey-50;
+  }
+
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+
+  // ── Column widths ────────────────────────────────────────────────────────
+  &__th--candidate { width: 240px; }
+  &__th--fit       { width: 130px; text-align: center !important; }
+  &__th--actions   { width: 110px; }
+
+  // ── Head ────────────────────────────────────────────────────────────────
+  &__head {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: color.$color-grey-50;
+  }
+
+  &__th {
+    padding: scale.$scale-px-md scale.$scale-px-lg;
+    text-align: left;
+    font-size: text.$text-md;
+    font-weight: 600;
+    color: color.$color-grey-500;
+    border-bottom: scale.$scale-px-xxs solid color.$color-grey-200;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // ── Rows ────────────────────────────────────────────────────────────────
+  &__row {
+    background-color: color.$color-grey-50;
+    border-bottom: scale.$scale-px-xxs solid color.$color-grey-200;
+    transition: background-color 0.1s ease;
+
+    &:hover {
+      background-color: color.$color-grey-100;
+
+      .cv-table__row-actions {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+
+    &--selected {
+      background-color: color.$color-blue-light-50;
+    }
+  }
+
+  &__td {
+    padding: scale.$scale-px-lg;
+    vertical-align: middle;
+    overflow: hidden;
+    min-width: 100px;
+  }
+
+  &__td--candidate { min-width: 240px; }
+  &__td--fit       { text-align: center; }
+  &__td--actions   { min-width: 110px; }
+
+  // ── Candidate cell ───────────────────────────────────────────────────────
+  &__candidate-cell {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+  }
+
+  &__checkbox {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    cursor: pointer;
+    accent-color: color.$color-blue-light-400;
+  }
+
+  &__avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  &__avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: radius.$radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: text.$text-md;
+    font-weight: 700;
+    color: color.$color-grey-50;
+    flex-shrink: 0;
+
+    &--color-1 { background-color: color.$color-blue-dark-300; }
+    &--color-2 { background-color: color.$color-green-400; }
+    &--color-3 { background-color: color.$color-blue-light-300; }
+    &--color-4 { background-color: color.$color-yellow-300; color: color.$color-grey-900; }
+    &--color-5 { background-color: color.$color-blue-dark-200; }
+    &--color-6 { background-color: color.$color-purple-200; color: color.$color-grey-900; }
+  }
+
+  // Small video badge on avatar
+  &__avatar-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 16px;
+    height: 16px;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-200;
+    border-radius: radius.$radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: color.$color-grey-500;
+  }
+
+  &__candidate-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  &__candidate-name {
+    font-size: text.$text-md-2;
+    font-weight: 600;
+    color: color.$color-grey-900;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background-color: color.$color-grey-100;
+    border: scale.$scale-px-xxs solid color.$color-grey-200;
+    border-radius: radius.$radius-2xl;
+    padding: 1px scale.$scale-px-xs;
+    font-size: text.$text-sm-2;
+    color: color.$color-grey-600;
+    white-space: nowrap;
+  }
+
+  // ── Fit % cell ───────────────────────────────────────────────────────────
+  &__fit-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  &__fit-pct {
+    font-size: text.$text-xl;
+    font-weight: 700;
+    color: color.$color-grey-800;
+    line-height: 1;
+  }
+
+  &__train-link {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-sm-2;
+    color: color.$color-blue-light-400;
+    text-align: center;
+    padding: 0;
+    line-height: 1.3;
+    transition: opacity 0.1s ease;
+
+    &:hover { text-decoration: underline; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Standard text cells ──────────────────────────────────────────────────
+  &__cell-text {
+    display: block;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // ── Expandable cells ─────────────────────────────────────────────────────
+  &__expandable {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__see-more {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-md;
+    font-weight: 600;
+    color: color.$color-blue-light-400;
+    padding: 0;
+    text-align: left;
+    transition: opacity 0.1s ease;
+
+    &:hover { text-decoration: underline; }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Row action buttons (hidden until row hover) ───────────────────────────
+  &__row-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: scale.$scale-px-xs;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  &__action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: radius.$radius-full;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+
+    &:hover { transform: scale(1.1); }
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    // Red — reject
+    &--reject {
+      background-color: color.$color-red-200;
+      color: color.$color-grey-50;
+    }
+
+    // Cyan/teal — approve (blue-light-400 is the closest to cyan in our palette)
+    &--approve {
+      background-color: color.$color-blue-light-400;
+      color: color.$color-grey-50;
+    }
+
+    // Info
+    &--info {
+      background-color: color.$color-grey-200;
+      color: color.$color-grey-700;
+
+      &:hover { background-color: color.$color-grey-300; }
+    }
+  }
+}
+
+// ─── Pagination ───────────────────────────────────────────────────────────────
+
+.cv-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: scale.$scale-px-sm;
+  flex-wrap: wrap;
+  padding: scale.$scale-px-md scale.$scale-px-2xl;
+  background-color: color.$color-grey-50;
+  border-top: scale.$scale-px-xxs solid color.$color-grey-200;
+  flex-shrink: 0;
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-500;
+    padding: scale.$scale-px-xs scale.$scale-px-md;
+    border-radius: radius.$radius-sm;
+    transition: color 0.15s ease, background-color 0.15s ease;
+
+    &:hover:not(:disabled) {
+      color: color.$color-grey-900;
+      background-color: color.$color-grey-100;
+    }
+
+    &:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__pages {
+    display: flex;
+    gap: scale.$scale-px-xs;
+  }
+
+  &__page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: scale.$scale-px-3xl;
+    height: scale.$scale-px-3xl;
+    border-radius: radius.$radius-full;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-600;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover:not(&--active) {
+      background-color: color.$color-grey-200;
+      color: color.$color-grey-900;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      background-color: color.$color-blue-dark-500;
+      color: color.$color-grey-50;
+      font-weight: 700;
+      cursor: default;
+    }
+  }
+
+  &__size-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: scale.$scale-px-md;
+
+    svg {
+      position: absolute;
+      right: scale.$scale-px-sm;
+      pointer-events: none;
+      color: color.$color-grey-500;
+    }
+  }
+
+  &__size-select {
+    appearance: none;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    border-radius: radius.$radius-2xl;
+    padding: scale.$scale-px-xs scale.$scale-px-4xl scale.$scale-px-xs scale.$scale-px-md;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-700;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+}

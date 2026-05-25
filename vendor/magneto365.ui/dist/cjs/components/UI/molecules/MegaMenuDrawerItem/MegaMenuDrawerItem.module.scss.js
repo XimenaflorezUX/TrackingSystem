@@ -1,0 +1,6 @@
+'use strict';
+
+var style = {"mega-menu-drawer-item__content":"mg_mega_menu_drawer_item_mega-menu-drawer-item_content_becoo","is-active":"mg_mega_menu_drawer_item_is-active_becoo","mega-menu-drawer-item__arrow":"mg_mega_menu_drawer_item_mega-menu-drawer-item_arrow_becoo","mega-menu-drawer-item__action":"mg_mega_menu_drawer_item_mega-menu-drawer-item_action_becoo","mega-menu-drawer-item__action--icon":"mg_mega_menu_drawer_item_mega-menu-drawer-item_action--icon_becoo","item-drawer__content":"mg_mega_menu_drawer_item_item-drawer_content_becoo","item-drawer__header":"mg_mega_menu_drawer_item_item-drawer_header_becoo","item-drawer__title":"mg_mega_menu_drawer_item_item-drawer_title_becoo","item-drawer__back":"mg_mega_menu_drawer_item_item-drawer_back_becoo"};
+
+module.exports = style;
+//# sourceMappingURL=MegaMenuDrawerItem.module.scss.js.map

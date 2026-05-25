@@ -1,0 +1,111 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+@use "tokens/weight" as weight;
+
+// Override del Notification de Magneto para el toast del Share Vacancy Modal
+.svm-toast {
+  font-family: 'Lato', system-ui, sans-serif;
+  min-width: 280px;
+  max-width: 420px;
+  gap: scale.$scale-px-sm;
+
+  [class*='notification__content'] {
+    display: flex;
+    align-items: flex-start;
+    gap: scale.$scale-px-sm;
+  }
+
+  [class*='notification__message'] {
+    flex: 1;
+    min-width: 0;
+  }
+
+  button[aria-label='Close notification'] {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    background-image: url('../../../../assets/icons/toast-close.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px 16px;
+    cursor: pointer;
+    border-radius: scale.$scale-px-xs;
+
+    &:hover {
+      background-color: color.$color-grey-100;
+    }
+
+    &:focus-visible {
+      outline: 2px solid color.$color-grey-300;
+      outline-offset: 2px;
+    }
+
+    img {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  }
+
+  &--success {
+    border-left: 4px solid color.$color-green-500;
+
+    .svm-toast__icon {
+      color: color.$color-green-500;
+    }
+  }
+
+  &--error {
+    border-left: 4px solid color.$color-red-200;
+
+    .svm-toast__icon {
+      color: color.$color-red-200;
+    }
+  }
+
+  &--top-center {
+    top: scale.$scale-px-lg !important;
+    right: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+}
+
+.svm-toast__recipients {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-xs;
+  border-top: scale.$scale-px-xxs solid color.$color-grey-200;
+  padding-top: scale.$scale-px-xs;
+}
+
+.svm-toast__recipient {
+  display: flex;
+  align-items: center;
+  gap: scale.$scale-px-xs;
+  font-size: scale.$scale-px-md-2;
+  color: color.$color-grey-700;
+  word-break: break-all;
+}
+
+.svm-toast__icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}

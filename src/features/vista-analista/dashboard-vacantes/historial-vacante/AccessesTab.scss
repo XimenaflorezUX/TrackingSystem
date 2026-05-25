@@ -1,0 +1,505 @@
+@use "tokens/color" as color;
+@use "tokens/scale" as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text" as text;
+@use "tokens/weight" as weight;
+@use "tokens/shadow" as shadow;
+
+// ─── Shell de la pestaña ─────────────────────────────────────────────────────
+
+.acc {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-lg;
+}
+
+.acc__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: scale.$scale-px-md;
+  flex-wrap: wrap;
+}
+
+.acc__heading {
+  margin: 0;
+  font-size: text.$text-lg;
+  font-weight: weight.$weight-bold;
+  color: color.$color-grey-900;
+  line-height: 1.2;
+}
+
+// ─── Filtros ─────────────────────────────────────────────────────────────────
+
+.acc-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: scale.$scale-px-xs;
+}
+
+.acc-filters__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: scale.$scale-px-xs;
+  padding: scale.$scale-px-xs scale.$scale-px-md;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  border-radius: 32px;
+  background-color: color.$color-grey-50;
+  font-size: text.$text-md;
+  font-weight: 500;
+  color: color.$color-grey-700;
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+
+  &:hover {
+    background-color: color.$color-grey-100;
+    border-color: color.$color-grey-300;
+    color: color.$color-grey-900;
+  }
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+
+  &--active {
+    background-color: color.$color-grey-900;
+    border-color: color.$color-grey-900;
+    color: color.$color-grey-50;
+
+    &:hover {
+      background-color: color.$color-grey-800;
+      border-color: color.$color-grey-800;
+      color: color.$color-grey-50;
+    }
+  }
+}
+
+.acc-filters__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 scale.$scale-px-xs;
+  border-radius: radius.$radius-full;
+  background-color: color.$color-grey-200;
+  font-size: text.$text-md;
+  font-weight: 600;
+  color: color.$color-grey-700;
+  line-height: 1;
+
+  .acc-filters__btn--active & {
+    background-color: color.$color-grey-600;
+    color: color.$color-grey-50;
+  }
+}
+
+// ─── Lista ────────────────────────────────────────────────────────────────────
+
+.acc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-md;
+}
+
+// ─── Estados vacíos / error ───────────────────────────────────────────────────
+
+.acc__state {
+  text-align: center;
+  font-size: text.$text-md;
+  color: color.$color-grey-600;
+  padding: scale.$scale-px-xl 0;
+  margin: 0;
+}
+
+.acc__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: scale.$scale-px-md;
+  padding: scale.$scale-px-2xl scale.$scale-px-md;
+  text-align: center;
+}
+
+.acc__empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: radius.$radius-full;
+  background-color: color.$color-grey-100;
+  color: color.$color-grey-500;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.acc__empty-text {
+  margin: 0;
+  font-size: text.$text-md-2;
+  color: color.$color-grey-700;
+  max-width: 280px;
+}
+
+.acc__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: scale.$scale-px-sm;
+  padding: scale.$scale-px-lg;
+  border: scale.$scale-px-xxs solid color.$color-red-200;
+  border-radius: radius.$radius-md;
+  background-color: color.$color-red-50;
+  text-align: center;
+
+  p {
+    margin: 0;
+    font-size: text.$text-md-2;
+    color: color.$color-red-300;
+  }
+}
+
+// ─── Tarjeta de acceso ────────────────────────────────────────────────────────
+
+.acc-card {
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  border-radius: radius.$radius-md;
+  background-color: color.$color-grey-50;
+  padding: scale.$scale-px-md scale.$scale-px-lg;
+  box-shadow: shadow.$shadow-10;
+  transition: border-color 0.15s ease;
+
+  &--revoked {
+    background-color: color.$color-grey-100;
+    border-color: color.$color-grey-200;
+    opacity: 0.75;
+  }
+}
+
+.acc-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: scale.$scale-px-md;
+  margin-bottom: scale.$scale-px-sm;
+}
+
+.acc-card__header-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: scale.$scale-px-sm;
+  min-width: 0;
+}
+
+.acc-card__email {
+  font-size: text.$text-md-2;
+  font-weight: weight.$weight-bold;
+  color: color.$color-grey-900;
+  word-break: break-all;
+  min-width: 0;
+}
+
+.acc-card__toggle {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: radius.$radius-xs;
+  background: transparent;
+  color: color.$color-grey-600;
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
+
+  &:hover {
+    background-color: color.$color-grey-100;
+    color: color.$color-grey-900;
+  }
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+}
+
+.acc-card__chevron {
+  display: flex;
+  transition: transform 0.2s ease;
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+// Meta: fechas y estado secundario
+.acc-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: scale.$scale-px-sm scale.$scale-px-md;
+  margin-bottom: scale.$scale-px-sm;
+}
+
+.acc-card__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: scale.$scale-px-xs;
+  font-size: text.$text-md;
+  color: color.$color-grey-700;
+  line-height: 1.3;
+
+  &--muted {
+    color: color.$color-grey-500;
+    font-style: italic;
+  }
+
+  &--danger {
+    color: color.$color-red-300;
+  }
+}
+
+// Detalle expandido de permisos
+.acc-card__detail {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-sm;
+  padding: scale.$scale-px-md;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  border-radius: radius.$radius-sm;
+  background-color: color.$color-grey-100;
+  margin-bottom: scale.$scale-px-md;
+}
+
+.acc-card__perm-row {
+  display: flex;
+  align-items: flex-start;
+  gap: scale.$scale-px-sm;
+}
+
+.acc-card__perm-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  color: color.$color-grey-600;
+}
+
+.acc-card__perm-body {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-xxs;
+  min-width: 0;
+}
+
+.acc-card__perm-title {
+  font-size: text.$text-sm-2;
+  font-weight: weight.$weight-bold;
+  color: color.$color-grey-900;
+  line-height: 1.3;
+}
+
+.acc-card__perm-subtext {
+  font-size: text.$text-md;
+  color: color.$color-grey-700;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+// Acciones de la tarjeta
+.acc-card__actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: scale.$scale-px-sm;
+  border-top: scale.$scale-px-xxs solid color.$color-grey-200;
+  margin-top: scale.$scale-px-sm;
+}
+
+// ─── Badge de estado ─────────────────────────────────────────────────────────
+
+.acc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: scale.$scale-px-xs;
+  padding: scale.$scale-px-xxs scale.$scale-px-sm;
+  border-radius: 32px;
+  font-size: text.$text-md;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+
+  &--pending-otp {
+    background-color: color.$color-yellow-50;
+    border: scale.$scale-px-xxs solid color.$color-yellow-200;
+    color: color.$color-yellow-300;
+  }
+
+  &--active {
+    background-color: color.$color-green-50;
+    border: scale.$scale-px-xxs solid color.$color-green-200;
+    color: color.$color-green-600;
+  }
+
+  &--revoked {
+    background-color: color.$color-grey-100;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    color: color.$color-grey-600;
+  }
+}
+
+// ─── Modal de confirmación de revocación ─────────────────────────────────────
+
+.acc-revoke-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(10, 12, 14, 0.6);
+  padding: scale.$scale-px-lg;
+}
+
+.acc-revoke-shell {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+}
+
+.acc-revoke__close {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: radius.$radius-full;
+  background-color: color.$color-grey-900;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+}
+
+.acc-revoke {
+  background-color: color.$color-grey-50;
+  border-radius: radius.$radius-md;
+  box-shadow: shadow.$shadow-30;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: scale.$scale-px-xl;
+  text-align: center;
+}
+
+.acc-revoke__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: scale.$scale-px-sm;
+  width: scale.$scale-full;
+}
+
+.acc-revoke__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+
+  img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    display: block;
+  }
+}
+
+.acc-revoke__title {
+  margin: 0;
+  font-size: scale.$scale-px-2xl;
+  font-weight: weight.$weight-bold;
+  color: color.$color-grey-900;
+  line-height: 1.2;
+}
+
+.acc-revoke__body {
+  margin: 0;
+  font-size: text.$text-md-2;
+  color: color.$color-grey-800;
+  line-height: 1.45;
+  text-align: left;
+
+  strong {
+    font-weight: weight.$weight-bold;
+    word-break: break-all;
+  }
+}
+
+.acc-revoke__hint {
+  margin: 0;
+  width: 380px;
+  align-self: flex-start;
+  text-align: left;
+  font-size: text.$text-md;
+  color: color.$color-grey-700;
+  line-height: 1.4;
+}
+
+.acc-revoke__footer {
+  display: flex;
+  gap: scale.$scale-px-md;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: scale.$scale-px-sm;
+
+  button {
+    height: 40px;
+  }
+}
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+
+@media (max-width: 480px) {
+  .acc__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .acc-card__meta {
+    flex-direction: column;
+    gap: scale.$scale-px-xs;
+  }
+
+  .acc-revoke {
+    padding: scale.$scale-px-lg;
+  }
+
+  .acc-revoke__footer {
+    flex-direction: column;
+  }
+}

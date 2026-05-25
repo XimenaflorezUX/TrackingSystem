@@ -1,0 +1,36 @@
+import { IBarChart } from '@components/UI/atoms/BarChart/BarChart.interface';
+
+interface IBarsChart {
+    /**
+     * Array of bar chart data objects
+     */
+    data: IBarChart[];
+    /**
+     * Represents the mean value to be displayed
+     */
+    mean: number;
+    /**
+     * Sets the maximum height of the bar
+     */
+    maxHeight?: number;
+    /**
+     * Text labels used in the chart
+     */
+    texts: IBarsChartText;
+}
+interface IBarsChartText {
+    /**
+     * Label for jobs description
+     */
+    jobs: string;
+    /**
+     * Label for mean value
+     */
+    mean: string;
+    /**
+     * Label for month value
+     */
+    month: string;
+}
+
+export { IBarsChart, IBarsChartText };

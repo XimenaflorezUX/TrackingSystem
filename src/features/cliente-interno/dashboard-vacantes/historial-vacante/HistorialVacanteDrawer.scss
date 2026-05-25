@@ -1,0 +1,705 @@
+@use "tokens/color"  as color;
+@use "tokens/scale"  as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text"   as text;
+@use "tokens/weight" as weight;
+@use "tokens/shadow" as shadow;
+@use "../vacancies-font" as vac-font;
+
+// Drawer Magneto: el panel puede quedar fuera del árbol `.vd` / `.cv`; forzamos Lato en el shell.
+// Cadena flex + `min-height: 0` para que `.hvd__scroll` sea la zona scrollable bajo el título fijo.
+.hvd-drawer-shell {
+  @include vac-font.vacancies-font-family;
+  @include vac-font.vacancies-font-magneto-roots;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.hvd-drawer-shell > aside {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// ─── Shell (contenido del Drawer magneto365.ui) ─────────────────────────────
+
+.hvd {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 100dvh;
+  overflow: hidden;
+  background-color: color.$color-grey-50;
+  position: relative;
+}
+
+// Título de vacante + barra de pestañas: fijos arriba (sticky); el scroll es solo `.hvd__scroll`.
+.hvd__top {
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: color.$color-grey-50;
+}
+
+.hvd__chrome {
+  position: absolute;
+  top: scale.$scale-px-md;
+  right: scale.$scale-px-md;
+  z-index: 2;
+}
+
+.hvd__dismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: scale.$scale-px-3xl;
+  height: scale.$scale-px-3xl;
+  padding: 0;
+  border: none;
+  border-radius: radius.$radius-xs;
+  background: transparent;
+  color: color.$color-grey-600;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+
+  &:hover {
+    color: color.$color-grey-900;
+    background-color: color.$color-grey-100;
+  }
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+}
+
+.hvd__vacancy-context {
+  margin: 0;
+  padding: scale.$scale-px-md scale.$scale-px-3xl scale.$scale-px-sm scale.$scale-px-lg;
+  font-size: text.$text-md;
+  color: color.$color-grey-600;
+  line-height: 1.35;
+  word-break: break-word;
+  border-bottom: scale.$scale-px-xxs solid color.$color-grey-100;
+}
+
+// Barra de pestañas (orden negocio: Detalle → Etapas → Historial)
+.hvd-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  padding: (scale.$scale-px-xl + scale.$scale-px-xxs) scale.$scale-px-3xl 0 scale.$scale-px-lg; // 21px superior vía tokens
+  border-bottom: scale.$scale-px-xxs solid color.$color-grey-200;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.hvd-tabs__tab {
+  @include vac-font.vacancies-font-family;
+  flex: 0 0 auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: text.$text-md;
+  font-weight: 500;
+  color: color.$color-grey-600;
+  padding: scale.$scale-px-sm scale.$scale-px-md scale.$scale-px-md;
+  margin-bottom: 0;
+  border-bottom: scale.$scale-px-sm solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    color: color.$color-grey-900;
+  }
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+    border-radius: radius.$radius-xs;
+  }
+
+  &--active {
+    color: color.$color-grey-900;
+    font-weight: 700;
+    border-bottom-color: color.$color-green-500;
+  }
+}
+
+.hvd__scroll {
+  box-sizing: border-box;
+  flex: 1;
+  min-height: 0;
+  height: fit-content;
+  width: min(468px, 100%);
+  max-width: 100%;
+  overflow-y: auto;
+  padding: scale.$scale-px-md scale.$scale-px-lg scale.$scale-px-lg;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hvd__footer {
+  flex-shrink: 0;
+  padding: scale.$scale-px-md scale.$scale-px-lg;
+  border-top: scale.$scale-px-xxs solid color.$color-grey-200;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hvd__loading,
+.hvd__end {
+  text-align: center;
+  font-size: text.$text-md;
+  color: color.$color-grey-600;
+  padding: scale.$scale-px-md scale.$scale-px-sm;
+}
+
+.hvd__sentinel {
+  height: 1px;
+  width: 100%;
+}
+
+// Paneles Detalle / Etapas
+.hvd-panel__title {
+  margin: 0 0 scale.$scale-px-md;
+}
+
+.hvd-panel__text {
+  margin: 0;
+  line-height: 1.45;
+}
+
+// Sección Historial (HU 5 + eventos operativos)
+.hvd-historial__heading {
+  margin: 0 0 scale.$scale-px-lg;
+}
+
+// Timeline vertical (foundations: línea + nodos)
+.hvd-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.hvd-timeline__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  grid-template-rows: auto 1fr;
+  column-gap: scale.$scale-px-md;
+  row-gap: scale.$scale-px-xs;
+  padding-bottom: scale.$scale-px-xl;
+
+  &:last-child {
+    padding-bottom: 0;
+
+    .hvd-timeline__rail-line {
+      display: none;
+    }
+  }
+
+  &--highlight .hvd-timeline__body {
+    border-radius: radius.$radius-xs;
+    box-shadow: 0 0 0 2px color.$color-blue-light-400;
+    transition: box-shadow 0.8s ease-out;
+  }
+}
+
+.hvd-timeline__head {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: scale.$scale-px-md;
+  align-items: center;
+  min-width: 0;
+}
+
+.hvd-timeline__rail {
+  grid-column: 1;
+  grid-row: 2;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.hvd-timeline__rail-line {
+  position: absolute;
+  top: 0;
+  bottom: calc(-1 * #{scale.$scale-px-xl} - #{scale.$scale-px-xs});
+  width: scale.$scale-px-xxs;
+  background-color: color.$color-grey-200;
+}
+
+.hvd-timeline__kind-chip {
+  grid-column: 1 / -1;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  gap: scale.$scale-px-xs;
+  width: fit-content;
+  max-width: calc(100% - 7.5rem);
+  padding: scale.$scale-px-xxs scale.$scale-px-sm;
+  border-radius: radius.$radius-sm;
+  font-size: text.$text-md;
+  font-weight: 600;
+  line-height: 1.25;
+  min-width: 0;
+
+  svg {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+  }
+
+  &--client {
+    background-color: color.$color-blue-light-50;
+    color: color.$color-blue-light-500;
+  }
+
+  &--published {
+    background-color: color.$color-green-50;
+    color: color.$color-green-600;
+  }
+
+  &--expired {
+    background-color: color.$color-yellow-50;
+    color: color.$color-yellow-300;
+  }
+
+  &--reassign {
+    background-color: color.$color-grey-100;
+    color: color.$color-grey-800;
+  }
+
+  &--publish {
+    background-color: color.$color-green-50;
+    color: color.$color-green-600;
+  }
+
+  &--paused {
+    background-color: color.$color-yellow-50;
+    color: color.$color-yellow-300;
+  }
+
+  &--cancelled {
+    background-color: color.$color-red-50;
+    color: color.$color-red-300;
+  }
+
+  &--closed {
+    background-color: color.$color-grey-100;
+    color: color.$color-grey-700;
+  }
+
+  &--bulk {
+    background-color: color.$color-blue-light-50;
+    color: color.$color-blue-light-500;
+  }
+
+  &--other {
+    background-color: color.$color-grey-100;
+    color: color.$color-grey-700;
+  }
+}
+
+.hvd-timeline__head .hvd-log__when {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.hvd-timeline__body {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
+}
+
+// Patrón de log: [acción] + fecha/hora; etiqueta; bloque neutral-100
+.hvd-log__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: scale.$scale-px-md;
+  margin-bottom: scale.$scale-px-xs;
+}
+
+.hvd-log__action {
+  flex: 1;
+  min-width: 0;
+  font-size: text.$text-md-2;
+  line-height: 1.35;
+}
+
+.hvd-log__when {
+  flex-shrink: 0;
+  text-align: right;
+  line-height: 1.35;
+  max-width: 46%;
+  font-size: text.$text-md;
+  font-weight: weight.$weight-normal;
+}
+
+.hvd-log__tag {
+  display: inline-block;
+  font-size: text.$text-md;
+  font-weight: 500;
+  color: color.$color-grey-700;
+  background-color: color.$color-grey-100;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  border-radius: radius.$radius-sm;
+  padding: scale.$scale-px-xxs scale.$scale-px-sm;
+  margin-bottom: scale.$scale-px-sm;
+}
+
+.hvd-log__attribution-block {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-xxs;
+  margin-bottom: scale.$scale-px-sm;
+}
+
+.hvd-log__attribution-heading {
+  font-size: text.$text-md-2;
+  font-weight: 600;
+  line-height: 1.35;
+  color: color.$color-grey-600;
+}
+
+.hvd-log__attribution-block .hvd-log__footer-meta {
+  margin-top: 0;
+}
+
+.hvd-log__attribution-block--external {
+  margin-top: 21px;
+  margin-bottom: scale.$scale-px-sm;
+}
+
+.hvd-log__impact-summary {
+  display: block;
+  margin: 0 0 scale.$scale-px-sm;
+  font-size: text.$text-md !important;
+  font-weight: weight.$weight-normal !important;
+  line-height: 1.4;
+  color: color.$color-grey-800;
+
+  :is(span, strong) {
+    font-weight: weight.$weight-normal !important;
+  }
+}
+
+.hvd-log__internal-panel {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-md;
+}
+
+.hvd-log__internal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-sm;
+}
+
+.hvd-log__action-item {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-xs;
+}
+
+.hvd-log__action-head {
+  display: flex;
+  align-items: flex-start;
+  gap: scale.$scale-px-sm;
+}
+
+.hvd-log__action-icon {
+  display: flex;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: color.$color-grey-600;
+
+  svg {
+    color: color.$color-grey-600;
+  }
+
+  &--comment,
+  &--rating,
+  &--decision {
+    color: color.$color-grey-600;
+
+    svg {
+      color: color.$color-grey-600;
+    }
+  }
+}
+
+.hvd-log__action-head .hvd-log__impact-summary {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.hvd-log__action-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: scale.$scale-px-sm;
+  padding: scale.$scale-px-sm scale.$scale-px-md;
+  border: scale.$scale-px-xxs solid color.$color-grey-100;
+  border-radius: radius.$radius-sm;
+  background-color: color.$color-grey-50;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+
+  :is(span, strong) {
+    font-size: text.$text-md-2 !important;
+    color: color.$color-grey-600 !important;
+  }
+
+  &:hover {
+    border-color: color.$color-grey-400;
+    background-color: color.$color-grey-100;
+  }
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+}
+
+.hvd-log__action-chevron {
+  display: flex;
+  color: color.$color-grey-600;
+  transition: transform 0.2s ease;
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+.hvd-log__action-lists {
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-sm;
+}
+
+.hvd-log__action-list-heading {
+  display: block;
+  font-size: text.$text-md;
+  font-weight: 600;
+  color: color.$color-grey-700;
+  margin-bottom: scale.$scale-px-xxs;
+}
+
+.hvd-log__action-list {
+  list-style: none;
+  margin: 0;
+  padding: scale.$scale-px-sm scale.$scale-px-md;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  border-radius: radius.$radius-sm;
+  background-color: color.$color-grey-50;
+}
+
+.hvd-log__action-list-item {
+  padding: scale.$scale-px-xs 0;
+  border-bottom: scale.$scale-px-xxs solid color.$color-grey-100;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// Bloque tipo tarjeta (neutral-100 ≈ grey-100 en tokens)
+.hvd-log__box {
+  background-color: color.$color-grey-100;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  border-radius: radius.$radius-md;
+  padding: scale.$scale-px-md scale.$scale-px-lg;
+  box-shadow: none;
+}
+
+.hvd-log__box-line {
+  display: block;
+  margin: 0 0 scale.$scale-px-sm;
+  font-size: text.$text-md;
+  line-height: 1.45;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.hvd-log__comentario-creado {
+  display: block;
+  margin: 0;
+  font-size: text.$text-md;
+  line-height: 1.45;
+  white-space: pre-line;
+  word-break: break-word;
+}
+
+.hvd-log__structured-line {
+  display: block;
+  margin: 0 0 scale.$scale-px-sm;
+  font-size: text.$text-md;
+  line-height: 1.45;
+  word-break: break-word;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.hvd-log__actor {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: scale.$scale-px-xxs;
+  margin: 0 0 scale.$scale-px-md;
+  padding: scale.$scale-px-xl 0 0;
+}
+
+.hvd-log__actor .hvd-log__footer-meta {
+  margin-top: 0;
+}
+
+.hvd-log__badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: text.$text-md;
+  font-weight: 600;
+  color: color.$color-blue-dark-500;
+  background-color: color.$color-blue-light-100;
+  border-radius: radius.$radius-sm;
+  padding: scale.$scale-px-xxs scale.$scale-px-sm;
+
+  &--muted {
+    color: color.$color-grey-700;
+    background-color: color.$color-grey-200;
+  }
+}
+
+.hvd-log__single-candidate {
+  display: block;
+  margin-top: scale.$scale-px-md;
+  font-size: text.$text-md-2 !important;
+}
+
+.hvd-log__bulk {
+  margin-top: scale.$scale-px-md;
+}
+
+.hvd-log__bulk-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: scale.$scale-px-sm;
+  padding: scale.$scale-px-sm scale.$scale-px-md;
+  border: scale.$scale-px-xxs solid color.$color-grey-300;
+  border-radius: radius.$radius-sm;
+  background-color: color.$color-grey-50;
+  cursor: pointer;
+  text-align: left;
+  font-size: text.$text-md-2;
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+
+  // Typography.Text size="sm" de magneto365.ui (~12px): forzar 14px en el trigger
+  :is(span, strong) {
+    font-size: text.$text-md-2 !important;
+  }
+
+  &:hover {
+    border-color: color.$color-grey-400;
+    background-color: color.$color-grey-100;
+  }
+
+  &:focus-visible {
+    outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+    outline-offset: 2px;
+  }
+}
+
+.hvd-log__bulk-chevron {
+  display: flex;
+  color: color.$color-grey-600;
+  transition: transform 0.2s ease;
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+.hvd-log__bulk-list {
+  list-style: none;
+  margin: scale.$scale-px-sm 0 0;
+  padding: scale.$scale-px-sm scale.$scale-px-md scale.$scale-px-md;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  border-top: none;
+  border-radius: 0 0 radius.$radius-sm radius.$radius-sm;
+  background-color: color.$color-grey-50;
+}
+
+.hvd-log__bulk-list-item {
+  padding: scale.$scale-px-xs 0;
+  border-bottom: scale.$scale-px-xxs solid color.$color-grey-100;
+  font-size: text.$text-md-2;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.hvd-log__footer-meta {
+  display: block;
+  margin-top: scale.$scale-px-sm;
+  font-size: text.$text-md-2 !important;
+}
+
+@media (max-width: 480px) {
+  .hvd__scroll {
+    padding: scale.$scale-px-md;
+  }
+
+  .hvd-tabs {
+    padding-left: scale.$scale-px-md;
+    padding-right: scale.$scale-px-3xl;
+  }
+
+  .hvd-timeline__item {
+    grid-template-columns: 32px 1fr;
+    gap: scale.$scale-px-sm;
+  }
+
+  .hvd-timeline__node {
+    width: 26px;
+    height: 26px;
+  }
+
+  .hvd-log__head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hvd-log__when {
+    max-width: none;
+    text-align: left;
+  }
+}

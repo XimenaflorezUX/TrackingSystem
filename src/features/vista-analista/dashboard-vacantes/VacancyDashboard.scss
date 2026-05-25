@@ -1,0 +1,848 @@
+@use "tokens/color"  as color;
+@use "tokens/scale"  as scale;
+@use "tokens/radius" as radius;
+@use "tokens/text"   as text;
+@use "tokens/shadow" as shadow;
+@use "vacancies-font" as vac-font;
+
+// ─── App shell ────────────────────────────────────────────────────────────────
+
+.vd {
+  @include vac-font.vacancies-font-family;
+  @include vac-font.vacancies-font-magneto-roots;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: color.$color-grey-100;
+
+  // Controles nativos suelen traer `font` del UA; alineamos con Lato del shell.
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+  }
+
+  &__body {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    background-color: color.$color-grey-100;
+  }
+
+  &__content {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: scale.$scale-px-2xl scale.$scale-px-2xl;
+    display: flex;
+    flex-direction: column;
+    gap: scale.$scale-px-lg;
+    background-color: color.$color-grey-100;
+
+    @media (max-width: 768px) {
+      padding: scale.$scale-px-lg;
+    }
+  }
+
+  &__empty {
+    padding: scale.$scale-px-5xl;
+    text-align: center;
+    color: color.$color-grey-500;
+    font-size: text.$text-md-2;
+  }
+
+  // ── Floating action button (chat) ────────────────────────────────────────
+  &__fab {
+    position: fixed;
+    bottom: scale.$scale-px-2xl;
+    right: scale.$scale-px-2xl;
+    width: 48px;
+    height: 48px;
+    border-radius: radius.$radius-full;
+    background-color: color.$color-green-500;
+    border: none;
+    cursor: pointer;
+    color: color.$color-grey-50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: shadow.$shadow-30;
+    z-index: 300;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+
+    &:hover {
+      background-color: color.$color-green-600;
+      transform: scale(1.06);
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-green-500;
+      outline-offset: 3px;
+    }
+  }
+}
+
+// ─── NavBar ───────────────────────────────────────────────────────────────────
+
+.vd-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: color.$color-blue-dark-500;
+  padding: 0 scale.$scale-px-2xl;
+  height: 56px;
+  flex-shrink: 0;
+  z-index: 100;
+
+  &__left,
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-lg;
+  }
+
+  // ── Icon buttons ────────────────────────────────────────────────────────
+  &__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: color.$color-grey-300;
+    width: scale.$scale-px-3xl;
+    height: scale.$scale-px-3xl;
+    border-radius: radius.$radius-xs;
+    transition: color 0.15s ease, background-color 0.15s ease;
+
+    &:hover {
+      color: color.$color-grey-50;
+      background-color: color.$color-blue-dark-400;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Magneto logo ────────────────────────────────────────────────────────
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+  }
+
+  &__logo-img {
+    flex-shrink: 0;
+    display: block;
+    height: 28px;
+    width: auto;
+    max-width: min(160px, 42vw);
+    object-fit: contain;
+  }
+
+  // ── Profile ─────────────────────────────────────────────────────────────
+  &__profile {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: scale.$scale-px-xs scale.$scale-px-sm;
+    border-radius: radius.$radius-md;
+    color: color.$color-grey-300;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: color.$color-blue-dark-400;
+      color: color.$color-grey-50;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: scale.$scale-px-3xl;
+    height: scale.$scale-px-3xl;
+    border-radius: radius.$radius-full;
+    background-color: color.$color-green-500;
+    color: color.$color-grey-50;
+    font-size: text.$text-md;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
+
+  &__user-name {
+    font-size: text.$text-md-2;
+    font-weight: 600;
+    color: color.$color-grey-50;
+    white-space: nowrap;
+  }
+
+  &__user-org {
+    font-size: text.$text-md;
+    color: color.$color-blue-dark-50;
+  }
+}
+
+// ─── Sidebar ──────────────────────────────────────────────────────────────────
+
+.vd-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: color.$color-blue-dark-500;
+  width: 64px;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: width 0.2s ease;
+  z-index: 90;
+
+  &--expanded {
+    width: 220px;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    padding: scale.$scale-px-lg 0;
+    gap: scale.$scale-px-xs;
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-md;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: scale.$scale-px-md scale.$scale-px-xl;
+    color: color.$color-blue-dark-50;
+    width: 100%;
+    text-align: left;
+    transition: color 0.15s ease, background-color 0.15s ease;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background-color: transparent;
+      border-radius: 0 radius.$radius-xs radius.$radius-xs 0;
+      transition: background-color 0.15s ease;
+    }
+
+    &:hover {
+      color: color.$color-grey-50;
+      background-color: color.$color-blue-dark-400;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: -2px;
+    }
+
+    // Active state: white vertical bar on left edge
+    &--active {
+      color: color.$color-grey-50;
+
+      &::before {
+        background-color: color.$color-grey-50;
+      }
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: text.$text-md-2;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: scale.$scale-px-lg 0;
+    border-top: scale.$scale-px-xxs solid color.$color-blue-dark-300;
+  }
+
+  &__flag {
+    font-size: text.$text-xl;
+    line-height: 1;
+  }
+}
+
+// ─── Horizontal Tabs ──────────────────────────────────────────────────────────
+
+.vd-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background-color: color.$color-grey-50;
+  border-bottom: scale.$scale-px-xxs solid color.$color-grey-200;
+  padding: scale.$scale-px-md scale.$scale-px-lg;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-shrink: 0;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // ── Page label ("Vacantes") — not a tab ─────────────────────────────────
+  &__page-label {
+    font-size: text.$text-md-2;
+    font-weight: 700;
+    color: color.$color-grey-900;
+    padding: scale.$scale-px-lg scale.$scale-px-lg scale.$scale-px-md;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    // Vertical separator on the right
+    border-right: scale.$scale-px-xxs solid color.$color-grey-200;
+    margin-right: scale.$scale-px-xs;
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: scale.$scale-px-lg scale.$scale-px-md scale.$scale-px-md;
+    font-size: text.$text-md-2;
+    font-weight: 400;
+    color: color.$color-grey-500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      color: color.$color-grey-900;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: -2px;
+    }
+
+    // Active tab: green underline + bold dark text
+    &--active {
+      font-weight: 700;
+      color: color.$color-grey-900;
+      border-bottom-color: color.$color-green-500;
+    }
+  }
+}
+
+// ─── Filter Row ───────────────────────────────────────────────────────────────
+
+.vd-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: scale.$scale-px-md;
+  flex-wrap: wrap;
+
+  &__left,
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+  }
+
+  // ── Search circle button ─────────────────────────────────────────────────
+  &__search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: scale.$scale-px-3xl;
+    height: scale.$scale-px-3xl;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    border-radius: radius.$radius-full;
+    cursor: pointer;
+    color: color.$color-grey-600;
+    transition: border-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      border-color: color.$color-blue-light-400;
+      color: color.$color-blue-light-400;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Create button ────────────────────────────────────────────────────────
+  &__create-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    border-radius: radius.$radius-2xl;
+    padding: scale.$scale-px-sm scale.$scale-px-lg;
+    font-size: text.$text-md-2;
+    font-weight: 500;
+    color: color.$color-grey-900;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      background-color: color.$color-grey-100;
+      border-color: color.$color-grey-400;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  // ── Sort direction button ────────────────────────────────────────────────
+  &__sort-dir-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: scale.$scale-px-3xl;
+    height: scale.$scale-px-3xl;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    border-radius: radius.$radius-sm;
+    cursor: pointer;
+    color: color.$color-grey-600;
+    transition: border-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      border-color: color.$color-grey-500;
+      color: color.$color-grey-900;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Advanced filter (green circle) ───────────────────────────────────────
+  &__filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: scale.$scale-px-3xl;
+    height: scale.$scale-px-3xl;
+    background-color: color.$color-green-500;
+    border: none;
+    border-radius: radius.$radius-full;
+    cursor: pointer;
+    color: color.$color-grey-50;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: color.$color-green-600;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-green-500;
+      outline-offset: 3px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ─── Sort Dropdown ────────────────────────────────────────────────────────────
+
+.vd-sort {
+  position: relative;
+
+  &__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    border-radius: radius.$radius-sm;
+    padding: scale.$scale-px-sm scale.$scale-px-md;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color 0.15s ease;
+
+    &:hover {
+      border-color: color.$color-grey-400;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 200px;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-200;
+    border-radius: radius.$radius-md;
+    box-shadow: shadow.$shadow-30;
+    list-style: none;
+    margin: 0;
+    padding: scale.$scale-px-xs 0;
+    z-index: 200;
+  }
+
+  &__option {
+    padding: scale.$scale-px-md scale.$scale-px-lg;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-700;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+
+    &:hover {
+      background-color: color.$color-grey-100;
+    }
+
+    &--selected {
+      background-color: color.$color-blue-light-50;
+      color: color.$color-blue-light-500;
+      font-weight: 600;
+    }
+  }
+}
+
+// ─── Card Grid ────────────────────────────────────────────────────────────────
+
+.vd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: scale.$scale-px-md;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ─── Vacancy Card ─────────────────────────────────────────────────────────────
+
+.vd-card {
+  background-color: color.$color-grey-50;
+  border: scale.$scale-px-xxs solid color.$color-grey-200;
+  border-radius: radius.$radius-md;
+  padding: scale.$scale-px-md;
+  display: flex;
+  flex-direction: column;
+  gap: scale.$scale-px-xs;
+  transition: box-shadow 0.15s ease;
+
+  &:hover {
+    box-shadow: shadow.$shadow-20;
+  }
+
+  // ── Header ──────────────────────────────────────────────────────────────
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: scale.$scale-px-sm;
+    vertical-align: middle;
+  }
+
+  // Clickable title button (leads to candidates view)
+  &__title-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-md-2;
+    font-weight: 600;
+    color: color.$color-grey-900;
+    text-align: left;
+    padding: 0;
+    height: 28px;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: color.$color-blue-light-400;
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+      border-radius: radius.$radius-xs;
+    }
+  }
+
+  // ── Location ────────────────────────────────────────────────────────────
+  &__location {
+    font-size: text.$text-md;
+    color: color.$color-grey-500;
+    margin: 0;
+  }
+
+  // ── Status row ──────────────────────────────────────────────────────────
+  &__status-row {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-sm;
+  }
+
+  &__status-dot {
+    width: scale.$scale-px-sm;
+    height: scale.$scale-px-sm;
+    border-radius: radius.$radius-full;
+    background-color: color.$color-green-500;
+    flex-shrink: 0;
+  }
+
+  &__dates {
+    font-size: text.$text-md;
+    color: color.$color-grey-600;
+  }
+
+  // ── Channel ─────────────────────────────────────────────────────────────
+  &__channel {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    color: color.$color-grey-500;
+    min-width: 0;
+  }
+
+  &__channel-email {
+    font-size: text.$text-md;
+    color: color.$color-grey-500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+  }
+
+  // ── Footer ──────────────────────────────────────────────────────────────
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: scale.$scale-px-sm;
+    border-top: scale.$scale-px-xxs solid color.$color-grey-200;
+    margin-top: scale.$scale-px-xs;
+  }
+
+  &__applicants {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    font-size: text.$text-md-2;
+    font-weight: 600;
+    color: color.$color-grey-600;
+  }
+
+  &__actions {
+    display: flex;
+    gap: scale.$scale-px-xs;
+  }
+
+  &__action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: scale.$scale-px-3xl;
+    height: scale.$scale-px-3xl;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-200;
+    border-radius: radius.$radius-xs;
+    cursor: pointer;
+    color: color.$color-grey-500;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: color.$color-grey-100;
+      border-color: color.$color-grey-300;
+      color: color.$color-grey-900;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ─── Pagination ───────────────────────────────────────────────────────────────
+
+.vd-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: scale.$scale-px-sm;
+  flex-wrap: wrap;
+  padding: scale.$scale-px-lg 0;
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-500;
+    padding: scale.$scale-px-sm scale.$scale-px-md;
+    border-radius: radius.$radius-sm;
+    transition: color 0.15s ease, background-color 0.15s ease;
+
+    &:hover:not(:disabled) {
+      color: color.$color-grey-900;
+      background-color: color.$color-grey-100;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__pages {
+    display: flex;
+    gap: scale.$scale-px-xs;
+  }
+
+  &__page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: scale.$scale-px-3xl;
+    height: scale.$scale-px-3xl;
+    border-radius: radius.$radius-full;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-600;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover:not(&--active) {
+      background-color: color.$color-grey-200;
+      color: color.$color-grey-900;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+
+    // Active page: navy circle with white number
+    &--active {
+      background-color: color.$color-blue-dark-500;
+      color: color.$color-grey-50;
+      font-weight: 700;
+      cursor: default;
+    }
+  }
+
+  &__size-wrapper {
+    display: flex;
+    align-items: center;
+    gap: scale.$scale-px-xs;
+    position: relative;
+    margin-left: scale.$scale-px-md;
+
+    svg {
+      position: absolute;
+      right: scale.$scale-px-sm;
+      pointer-events: none;
+      color: color.$color-grey-500;
+    }
+  }
+
+  &__size-select {
+    appearance: none;
+    background-color: color.$color-grey-50;
+    border: scale.$scale-px-xxs solid color.$color-grey-300;
+    border-radius: radius.$radius-2xl;
+    padding: scale.$scale-px-xs scale.$scale-px-4xl scale.$scale-px-xs scale.$scale-px-md;
+    font-size: text.$text-md-2;
+    color: color.$color-grey-700;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+
+    &:hover {
+      border-color: color.$color-grey-400;
+    }
+
+    &:focus-visible {
+      outline: scale.$scale-px-xxs solid color.$color-blue-light-400;
+      outline-offset: 2px;
+    }
+  }
+}

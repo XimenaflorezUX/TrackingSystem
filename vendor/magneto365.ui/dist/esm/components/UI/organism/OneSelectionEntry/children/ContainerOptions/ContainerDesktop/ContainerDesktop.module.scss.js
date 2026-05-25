@@ -1,0 +1,4 @@
+var style = {"magneto-ui-container-options":"mg_container_desktop_magneto-ui-container-options_1ug44","magneto-ui-container-options-drop-down-container":"mg_container_desktop_magneto-ui-container-options-drop-down-container_1ug44","magneto-ui-container-options-tags-container":"mg_container_desktop_magneto-ui-container-options-tags-container_1ug44","magneto-ui-container-options__menu":"mg_container_desktop_magneto-ui-container-options_menu_1ug44","magneto-ui-container-options__menu--tags":"mg_container_desktop_magneto-ui-container-options_menu--tags_1ug44","magneto-ui-container-options__menu--list":"mg_container_desktop_magneto-ui-container-options_menu--list_1ug44","hide":"mg_container_desktop_hide_1ug44"};
+
+export { style as default };
+//# sourceMappingURL=ContainerDesktop.module.scss.js.map
