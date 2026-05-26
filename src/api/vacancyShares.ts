@@ -1,4 +1,5 @@
 import { apiBase } from './apiBase';
+import { listDemoVacancyShares, revokeDemoVacancyShare } from './demoVacancyShares';
 import type { SaveVacancyShareRequest, VacancyShareRecord } from './vacancyShares.types';
 
 const ERROR_HINTS: Record<string, string> = {
@@ -18,6 +19,29 @@ const ERROR_HINTS: Record<string, string> = {
 
 const DEV_API_HINT =
   'En local, el front reenvía /vacancies al API en el puerto 4000. Ejecute en otra terminal `npm run server:dev` o use `npm run dev:full` para levantar web y API a la vez.';
+
+function shouldUseDemoShares(res: Response | null): boolean {
+  if (res === null) return true;
+  return res.status === 500 || res.status === 502 || res.status === 503;
+}
+
+async function fetchVacancySharesFromApi(): Promise<VacancyShareRecord[] | null> {
+  try {
+    const res = await fetch(`${apiBase()}/vacancies`);
+    if (!res.ok) {
+      if (shouldUseDemoShares(res)) {
+        return listDemoVacancyShares();
+      }
+      throw new Error(await readErrorMessage(res));
+    }
+    return (await res.json()) as VacancyShareRecord[];
+  } catch (e) {
+    if (e instanceof Error && e.message.startsWith('Error del servidor')) {
+      throw e;
+    }
+    return listDemoVacancyShares();
+  }
+}
 
 async function readErrorMessage(res: Response): Promise<string> {
   let text = '';
@@ -66,13 +90,10 @@ export async function saveVacancyShare(body: SaveVacancyShareRequest): Promise<V
   return (await res.json()) as VacancyShareRecord;
 }
 
-/** Lista todos los registros guardados (orden descendente por fecha en el servidor). */
+/** Lista registros del API o, si no está disponible, datos demo embebidos (Pages / solo front). */
 export async function fetchVacancyShares(): Promise<VacancyShareRecord[]> {
-  const res = await fetch(`${apiBase()}/vacancies`);
-  if (!res.ok) {
-    throw new Error(await readErrorMessage(res));
-  }
-  return (await res.json()) as VacancyShareRecord[];
+  const rows = await fetchVacancySharesFromApi();
+  return rows ?? listDemoVacancyShares();
 }
 
 /** HU 13 — Revoca un acceso compartido por id. */
@@ -80,13 +101,23 @@ export async function revokeVacancyShare(
   id: string,
   revokedBy: string,
 ): Promise<VacancyShareRecord> {
-  const res = await fetch(`${apiBase()}/vacancies/${id}/revoke`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ revokedBy }),
-  });
-  if (!res.ok) {
-    throw new Error(await readErrorMessage(res));
+  try {
+    const res = await fetch(`${apiBase()}/vacancies/${id}/revoke`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ revokedBy }),
+    });
+    if (!res.ok) {
+      if (shouldUseDemoShares(res)) {
+        return revokeDemoVacancyShare(id, revokedBy);
+      }
+      throw new Error(await readErrorMessage(res));
+    }
+    return (await res.json()) as VacancyShareRecord;
+  } catch (e) {
+    if (e instanceof Error && e.message.startsWith('Error del servidor')) {
+      throw e;
+    }
+    return revokeDemoVacancyShare(id, revokedBy);
   }
-  return (await res.json()) as VacancyShareRecord;
 }

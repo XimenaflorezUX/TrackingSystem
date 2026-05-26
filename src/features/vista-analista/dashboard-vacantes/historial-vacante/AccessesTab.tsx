@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Button } from 'magneto365.ui';
+import { resolveShareVacancyIds } from '../../../../api/demoVacancyShares';
 import { fetchVacancyShares, revokeVacancyShare } from '../../../../api/vacancyShares';
 import type { VacancyShareRecord, VacancyShareStatus } from '../../../../api/vacancyShares.types';
 import revokeAccessIcon from '../../../../assets/icons/revoke-access-icon.png';
@@ -292,7 +293,8 @@ const AccessesTab = ({ vacancyId, onShareVacancy }: AccessesTabProps): JSX.Eleme
     setError(null);
     try {
       const all = await fetchVacancyShares();
-      setRecords(all.filter((r) => r.vacancyId === vacancyId));
+      const vacancyIds = new Set(resolveShareVacancyIds(vacancyId));
+      setRecords(all.filter((r) => vacancyIds.has(r.vacancyId)));
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Error al cargar los accesos.');
     } finally {
