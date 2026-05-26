@@ -300,13 +300,13 @@ const SortDropdown = ({ isOpen, selected, onToggle, onSelect }: SortDropdownProp
 interface VacancyDashboardProps {
   onVacancyClick: (vacancy: VacancyItem) => void;
   onVacancySharePersisted?: (record: VacancyShareRecord) => void;
-  onContinueToEmailSimulation?: () => void;
+  onShareThenEmailSimulation?: (recipientEmails: string[]) => void;
 }
 
 const VacancyDashboard = ({
   onVacancyClick,
   onVacancySharePersisted,
-  onContinueToEmailSimulation,
+  onShareThenEmailSimulation,
 }: VacancyDashboardProps) => {
   const [sidebarOpen, setSidebarOpen]   = useState(false);
   const [activeTab,   setActiveTab]     = useState('published');
@@ -535,7 +535,7 @@ const VacancyDashboard = ({
             })
           }
           onSharePersisted={onVacancySharePersisted}
-          onContinueToEmailSimulation={onContinueToEmailSimulation}
+          onShareThenEmailSimulation={onShareThenEmailSimulation}
         />
       )}
     </div>

@@ -77,10 +77,28 @@
   }
 
   &--top-center {
+    position: fixed !important;
     top: scale.$scale-px-lg !important;
     right: auto !important;
     left: 50% !important;
+    bottom: auto !important;
     transform: translateX(-50%);
+    z-index: 10002;
+    margin: 0 !important;
+  }
+}
+
+// Portal del Notification: no interceptar clics fuera del toast
+.modal-ui-drawer:has(> .svm-toast--top-center) {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+
+  > .svm-toast--top-center {
+    pointer-events: auto;
   }
 }
 

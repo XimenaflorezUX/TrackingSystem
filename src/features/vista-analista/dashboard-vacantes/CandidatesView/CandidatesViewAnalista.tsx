@@ -302,7 +302,7 @@ interface CandidatesViewProps {
   onBack: () => void;
   openShareOnMount?: boolean;
   onVacancySharePersisted?: (record: VacancyShareRecord) => void;
-  onContinueToEmailSimulation?: () => void;
+  onShareThenEmailSimulation?: (recipientEmails: string[]) => void;
 }
 
 const CandidatesView = ({
@@ -310,7 +310,7 @@ const CandidatesView = ({
   onBack,
   openShareOnMount = false,
   onVacancySharePersisted,
-  onContinueToEmailSimulation,
+  onShareThenEmailSimulation,
 }: CandidatesViewProps) => {
   const [activeStage,    setActiveStage]    = useState<PipelineStage>('videoentrevista');
   const [activeStatus,   setActiveStatus]   = useState<StatusFilter>('active');
@@ -534,7 +534,7 @@ const CandidatesView = ({
           })
         }
         onSharePersisted={onVacancySharePersisted}
-        onContinueToEmailSimulation={onContinueToEmailSimulation}
+        onShareThenEmailSimulation={onShareThenEmailSimulation}
       />
 
       <div className="cv-pagination" aria-label="Paginación">

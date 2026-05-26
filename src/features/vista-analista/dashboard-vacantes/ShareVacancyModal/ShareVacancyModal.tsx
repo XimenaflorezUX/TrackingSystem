@@ -13,7 +13,7 @@ import SvmConfirmModal from './SvmConfirmModal';
 import './SvmConfirmModal.scss';
 import SvmRadio from './SvmRadio';
 import SvmRecipientTagsField from './SvmRecipientTagsField';
-import { useSvmToast } from './useSvmToast';
+import { TOAST_DURATION_MS, useSvmToast } from './useSvmToast';
 
 const MAX_RECIPIENTS = 5;
 const STAGE_FETCH_MS = 420;
@@ -52,10 +52,9 @@ export interface ShareVacancyModalProps {
   /** Tras guardar con éxito cuando `onSubmit` devuelve el registro persistido (p. ej. `sessionStorage`). */
   onSharePersisted?: (record: VacancyShareRecord) => void;
   /**
-   * Tras **Guardar y Enviar** con éxito: se cierra el modal y se invoca en el siguiente tick
-   * (p. ej. abrir la simulación del correo). Si no se define, se muestra el banner de éxito en el modal.
+   * Tras **Confirmar y Enviar** con éxito: toast ~6 s dentro del modal y luego navegación al correo.
    */
-  onContinueToEmailSimulation?: () => void;
+  onShareThenEmailSimulation?: (recipientEmails: string[]) => void;
 }
 
 const IconSectionRecipients = (): JSX.Element => (
@@ -124,10 +123,11 @@ const ShareVacancyModal = ({
   pipelineStages,
   onSubmit,
   onSharePersisted,
-  onContinueToEmailSimulation,
+  onShareThenEmailSimulation,
 }: ShareVacancyModalProps): JSX.Element | null => {
   const titleId = useId();
   const firstFieldRef = useRef<HTMLInputElement>(null);
+  const emailNavTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [emails, setEmails] = useState<string[]>([]);
   const [draft, setDraft] = useState('');
@@ -144,7 +144,27 @@ const ShareVacancyModal = ({
   const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const { showToast, ToastPortal } = useSvmToast();
+  const [pendingEmailNav, setPendingEmailNav] = useState(false);
+  const { showToast, hideToast, ToastPortal } = useSvmToast({ defaultPosition: 'top-center' });
+
+  const clearEmailNavTimer = useCallback(() => {
+    if (emailNavTimerRef.current !== null) {
+      clearTimeout(emailNavTimerRef.current);
+      emailNavTimerRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) {
+      clearEmailNavTimer();
+      setPendingEmailNav(false);
+      hideToast();
+    }
+  }, [isOpen, clearEmailNavTimer, hideToast]);
+
+  useEffect(() => () => {
+    clearEmailNavTimer();
+  }, [clearEmailNavTimer]);
 
   const allStageIds = useMemo(() => pipelineStages.map((s) => s.id), [pipelineStages]);
 
@@ -258,7 +278,6 @@ const ShareVacancyModal = ({
 
   const handleSubmit = useCallback(async () => {
     setSubmitError(null);
-    setConfirmOpen(false);
 
     const visibleStageIds =
       visibilityScope === 'global' ? [...allStageIds] : [...selectedStageIds];
@@ -292,20 +311,30 @@ const ShareVacancyModal = ({
           ? '¡Vacante compartida! Correo enviado a:'
           : `¡Vacante compartida! Correo enviado a ${emails.length} destinatarios:`;
 
-      if (onContinueToEmailSimulation !== undefined) {
-        showToast(toastMsg, 'success', [...emails]);
-        onClose();
-        window.setTimeout(() => {
-          onContinueToEmailSimulation();
-        }, 0);
+      setConfirmOpen(false);
+
+      if (onShareThenEmailSimulation !== undefined) {
+        const recipients = [...emails];
+        showToast(toastMsg, 'success', recipients);
+        setPendingEmailNav(true);
+        clearEmailNavTimer();
+        emailNavTimerRef.current = setTimeout(() => {
+          emailNavTimerRef.current = null;
+          hideToast();
+          setPendingEmailNav(false);
+          onClose();
+          onShareThenEmailSimulation(recipients);
+        }, TOAST_DURATION_MS);
         return;
       }
+
       showToast(toastMsg, 'success', [...emails]);
       setSubmitSuccess(SHARE_SUCCESS_MESSAGE);
     } catch (err) {
       const message =
         err instanceof Error ? err.message : 'No se pudo guardar. Intente nuevamente.';
       setSubmitError(message);
+      setConfirmOpen(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -324,9 +353,11 @@ const ShareVacancyModal = ({
     feedbackStageDecisionOn,
     onSubmit,
     onSharePersisted,
-    onContinueToEmailSimulation,
+    onShareThenEmailSimulation,
     onClose,
     showToast,
+    hideToast,
+    clearEmailNavTimer,
   ]);
 
   const openGmailInbox = useCallback(() => {
@@ -336,9 +367,17 @@ const ShareVacancyModal = ({
   const shareDescription =
     'Configure los accesos con precisión; esta acción requiere su confirmación explícita.';
 
+  const modalBusy = isSubmitting || pendingEmailNav;
+
   return (
     <>
-    <Modal isOpen={isOpen} onClose={onClose} title="Compartir vacante con cliente interno" blockBackgroundClose={false} className="svm-modal">
+    <Modal
+      isOpen={isOpen}
+      onClose={modalBusy ? () => undefined : onClose}
+      title="Compartir vacante con cliente interno"
+      blockBackgroundClose={modalBusy}
+      className="svm-modal"
+    >
       <>
         <div
           className={`svm${submitSuccess !== null ? ' svm--success-mode' : ''}`}
@@ -559,7 +598,7 @@ const ShareVacancyModal = ({
             </>
           ) : (
             <>
-              <Button type="button" variant="ghost" size="md" onClick={onClose} disabled={isSubmitting}>
+              <Button type="button" variant="ghost" size="md" onClick={onClose} disabled={modalBusy}>
                 Cancelar
               </Button>
               <Button
@@ -567,7 +606,7 @@ const ShareVacancyModal = ({
                 variant="blue"
                 size="md"
                 onClick={openConfirm}
-                disabled={isSubmitting}
+                disabled={modalBusy}
               >
                 {isSubmitting ? 'Guardando y enviando correo…' : 'Compartir vacante'}
               </Button>

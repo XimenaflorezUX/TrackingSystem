@@ -1,4 +1,4 @@
-import type { VacancyShareRecord } from './vacancyShares.types';
+import type { SaveVacancyShareRequest, VacancyShareRecord } from './vacancyShares.types';
 import demoSharesSeed from '../../server/data/vacancies.json';
 
 /** IDs de vacante equivalentes para la demo (hub usa `preview-v-02`, datos en JSON usan `v-02`). */
@@ -15,6 +15,19 @@ let demoCache: VacancyShareRecord[] = (demoSharesSeed as VacancyShareRecord[]).m
 
 export function listDemoVacancyShares(): VacancyShareRecord[] {
   return [...demoCache].sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+}
+
+/** Simula POST /vacancies cuando el API no está disponible (demo / GitHub Pages). */
+export function saveDemoVacancyShare(body: SaveVacancyShareRequest): VacancyShareRecord {
+  const record: VacancyShareRecord = {
+    ...body,
+    id: crypto.randomUUID(),
+    createdAt: new Date().toISOString(),
+    confirmationCode: String(Math.floor(100000 + Math.random() * 900000)),
+    status: 'pending-otp',
+  };
+  demoCache = [...demoCache, record];
+  return record;
 }
 
 export function revokeDemoVacancyShare(id: string, revokedBy: string): VacancyShareRecord {

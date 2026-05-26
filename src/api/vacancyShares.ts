@@ -1,5 +1,9 @@
 import { apiBase } from './apiBase';
-import { listDemoVacancyShares, revokeDemoVacancyShare } from './demoVacancyShares';
+import {
+  listDemoVacancyShares,
+  revokeDemoVacancyShare,
+  saveDemoVacancyShare,
+} from './demoVacancyShares';
 import type { SaveVacancyShareRequest, VacancyShareRecord } from './vacancyShares.types';
 
 const ERROR_HINTS: Record<string, string> = {
@@ -79,15 +83,25 @@ async function readErrorMessage(res: Response): Promise<string> {
  * En desarrollo, con `VITE_API_BASE_URL` vacío, Vite reenvía `/vacancies` al API (ver `vite.config.ts`).
  */
 export async function saveVacancyShare(body: SaveVacancyShareRequest): Promise<VacancyShareRecord> {
-  const res = await fetch(`${apiBase()}/vacancies`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) {
-    throw new Error(await readErrorMessage(res));
+  try {
+    const res = await fetch(`${apiBase()}/vacancies`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      if (shouldUseDemoShares(res)) {
+        return saveDemoVacancyShare(body);
+      }
+      throw new Error(await readErrorMessage(res));
+    }
+    return (await res.json()) as VacancyShareRecord;
+  } catch (e) {
+    if (e instanceof Error && e.message.startsWith('Error del servidor')) {
+      throw e;
+    }
+    return saveDemoVacancyShare(body);
   }
-  return (await res.json()) as VacancyShareRecord;
 }
 
 /** Lista registros del API o, si no está disponible, datos demo embebidos (Pages / solo front). */

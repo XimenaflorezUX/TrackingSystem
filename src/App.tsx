@@ -21,7 +21,6 @@ import {
   readVacancyShareSession,
   readShareConfirmationDigits,
 } from './session/vacancyShareSession';
-
 /**
  * Query `view` para saltar de pantalla (válido en dev y en build / `vite preview`).
  * - Sin `view` o `?view=hub` → menú principal de navegación.
@@ -67,6 +66,10 @@ const App = () => {
     setView(next);
   }, []);
 
+  const handleShareThenEmailSimulation = useCallback(() => {
+    goView('email-preview');
+  }, [goView]);
+
   const goHub = useCallback(() => {
     goView('hub');
   }, [goView]);
@@ -101,6 +104,7 @@ const App = () => {
 
   if (view === 'hub') {
     return (
+      <>
       <NavigationHub
         onNavigateAnalistaDashboard={() => goView('analista-dashboard')}
         onNavigateAnalistaCandidates={() => {
@@ -133,6 +137,7 @@ const App = () => {
           });
         }}
       />
+      </>
     );
   }
 
@@ -191,7 +196,7 @@ const App = () => {
         vacancy={selectedVacancy}
         openShareOnMount={Boolean(navExtras.openShareOnMount)}
         onVacancySharePersisted={handleSharePersisted}
-        onContinueToEmailSimulation={() => goView('email-preview')}
+        onShareThenEmailSimulation={handleShareThenEmailSimulation}
         onBack={() => {
           goView('analista-dashboard');
           setSelectedVacancy(null);
@@ -208,7 +213,7 @@ const App = () => {
           goView('candidates-analista');
         }}
         onVacancySharePersisted={handleSharePersisted}
-        onContinueToEmailSimulation={() => goView('email-preview')}
+        onShareThenEmailSimulation={handleShareThenEmailSimulation}
       />
     );
   }

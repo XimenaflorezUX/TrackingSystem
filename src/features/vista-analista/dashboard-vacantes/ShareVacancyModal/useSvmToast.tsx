@@ -34,7 +34,7 @@ interface UseSvmToastReturn {
   ToastPortal: () => JSX.Element | null;
 }
 
-const TOAST_DURATION_MS = 6000;
+export const TOAST_DURATION_MS = 6000;
 
 const IconCheckCircle = (): JSX.Element => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="svm-toast__icon">
