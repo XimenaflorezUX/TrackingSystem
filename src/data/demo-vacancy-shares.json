@@ -1,0 +1,323 @@
+[
+  {
+    "vacancyId": "v-02",
+    "vacancyTitle": "Desarrollador Frontend React Senior",
+    "recipientEmails": [
+      "patricia.gomez@cliente.co"
+    ],
+    "visibilityScope": "specific",
+    "visibleStageIds": [
+      "etapa-entrevista",
+      "etapa-prueba"
+    ],
+    "visibleStages": [
+      {
+        "id": "etapa-entrevista",
+        "label": "Entrevista jefe directo"
+      },
+      {
+        "id": "etapa-prueba",
+        "label": "Prueba técnica"
+      }
+    ],
+    "includeSanitizedCv": false,
+    "includeContactData": true,
+    "includeAnalystComments": true,
+    "feedbackGeneralEnabled": false,
+    "feedbackGeneralText": "",
+    "feedbackRatingEnabled": true,
+    "feedbackStageDecisionEnabled": true,
+    "feedbackSpecificChoice": null,
+    "id": "aac1-0001-demo-acceso-activo",
+    "createdAt": "2026-05-20T10:05:00.000Z",
+    "confirmationCode": "112233",
+    "status": "active",
+    "lastAccessAt": "2026-05-21T09:14:00.000Z"
+  },
+  {
+    "vacancyId": "v-02",
+    "vacancyTitle": "Desarrollador Frontend React Senior",
+    "recipientEmails": [
+      "ricardo.mora@cliente.co"
+    ],
+    "visibilityScope": "specific",
+    "visibleStageIds": [
+      "etapa-entrevista",
+      "etapa-prueba"
+    ],
+    "visibleStages": [
+      {
+        "id": "etapa-entrevista",
+        "label": "Entrevista jefe directo"
+      },
+      {
+        "id": "etapa-prueba",
+        "label": "Prueba técnica"
+      }
+    ],
+    "includeSanitizedCv": false,
+    "includeContactData": true,
+    "includeAnalystComments": true,
+    "feedbackGeneralEnabled": false,
+    "feedbackGeneralText": "",
+    "feedbackRatingEnabled": true,
+    "feedbackStageDecisionEnabled": true,
+    "feedbackSpecificChoice": null,
+    "id": "aac1-0002-demo-acceso-activo-ricardo",
+    "createdAt": "2026-05-21T14:30:00.000Z",
+    "confirmationCode": "445566",
+    "status": "active",
+    "lastAccessAt": "2026-05-22T10:45:00.000Z"
+  },
+  {
+    "vacancyId": "v-02",
+    "vacancyTitle": "Desarrollador Frontend React Senior",
+    "recipientEmails": [
+      "lucia.vargas@cliente.co"
+    ],
+    "visibilityScope": "specific",
+    "visibleStageIds": [
+      "etapa-entrevista"
+    ],
+    "visibleStages": [
+      {
+        "id": "etapa-entrevista",
+        "label": "Entrevista jefe directo"
+      }
+    ],
+    "includeSanitizedCv": true,
+    "includeContactData": true,
+    "includeAnalystComments": false,
+    "feedbackGeneralEnabled": true,
+    "feedbackGeneralText": "",
+    "feedbackRatingEnabled": false,
+    "feedbackStageDecisionEnabled": true,
+    "feedbackSpecificChoice": null,
+    "id": "aac1-0005-demo-acceso-activo-lucia",
+    "createdAt": "2026-05-19T11:00:00.000Z",
+    "confirmationCode": "554433",
+    "status": "active",
+    "lastAccessAt": "2026-05-22T07:20:00.000Z"
+  },
+  {
+    "vacancyId": "v-02",
+    "vacancyTitle": "Desarrollador Frontend React Senior",
+    "recipientEmails": [
+      "carlos.diaz@cliente.co"
+    ],
+    "visibilityScope": "global",
+    "visibleStageIds": [],
+    "visibleStages": [],
+    "includeSanitizedCv": false,
+    "includeContactData": false,
+    "includeAnalystComments": false,
+    "feedbackGeneralEnabled": false,
+    "feedbackGeneralText": "",
+    "feedbackRatingEnabled": false,
+    "feedbackStageDecisionEnabled": false,
+    "feedbackSpecificChoice": null,
+    "id": "aac1-0003-demo-acceso-revocado",
+    "createdAt": "2026-05-15T08:00:00.000Z",
+    "confirmationCode": "778899",
+    "status": "revoked",
+    "lastAccessAt": "2026-05-17T16:45:00.000Z",
+    "revokedBy": "Laura Méndez",
+    "revokedAt": "2026-05-19T11:20:00.000Z"
+  },
+  {
+    "vacancyId": "v-04",
+    "vacancyTitle": "Diseñador UX/UI",
+    "recipientEmails": [
+      "ana.torres@cliente.co"
+    ],
+    "visibilityScope": "global",
+    "visibleStageIds": [],
+    "visibleStages": [],
+    "includeSanitizedCv": true,
+    "includeContactData": true,
+    "includeAnalystComments": false,
+    "feedbackGeneralEnabled": true,
+    "feedbackGeneralText": "",
+    "feedbackRatingEnabled": false,
+    "feedbackStageDecisionEnabled": false,
+    "feedbackSpecificChoice": null,
+    "id": "aac1-0004-demo-diseno-activo",
+    "createdAt": "2026-05-18T09:00:00.000Z",
+    "confirmationCode": "321654",
+    "status": "active",
+    "lastAccessAt": "2026-05-22T08:30:00.000Z"
+  },
+  {
+    "vacancyId": "v-01",
+    "vacancyTitle": "Vacante sin anuncio",
+    "recipientEmails": [
+      "ximena@magnetoglobal.com"
+    ],
+    "visibilityScope": "specific",
+    "visibleStageIds": [
+      "entrevista-lider",
+      "postulantes",
+      "videoentrevista"
+    ],
+    "visibleStages": [
+      {
+        "id": "postulantes",
+        "label": "Postulantes"
+      },
+      {
+        "id": "videoentrevista",
+        "label": "Videoentrevista"
+      },
+      {
+        "id": "entrevista-lider",
+        "label": "Entrevista líder c."
+      }
+    ],
+    "includeSanitizedCv": true,
+    "includeContactData": true,
+    "includeAnalystComments": false,
+    "feedbackGeneralEnabled": true,
+    "feedbackGeneralText": "",
+    "feedbackRatingEnabled": true,
+    "feedbackStageDecisionEnabled": true,
+    "feedbackSpecificChoice": null,
+    "id": "aac1-0101-demo-v01-activo-ximena",
+    "createdAt": "2026-05-20T09:15:00.000Z",
+    "confirmationCode": "196746",
+    "status": "active",
+    "lastAccessAt": "2026-05-22T14:30:00.000Z"
+  },
+  {
+    "vacancyId": "v-01",
+    "vacancyTitle": "Vacante sin anuncio",
+    "recipientEmails": [
+      "patricia.gomez@cliente.co"
+    ],
+    "visibilityScope": "specific",
+    "visibleStageIds": [
+      "postulantes",
+      "videoentrevista"
+    ],
+    "visibleStages": [
+      {
+        "id": "postulantes",
+        "label": "Postulantes"
+      },
+      {
+        "id": "videoentrevista",
+        "label": "Videoentrevista"
+      }
+    ],
+    "includeSanitizedCv": false,
+    "includeContactData": true,
+    "includeAnalystComments": true,
+    "feedbackGeneralEnabled": false,
+    "feedbackGeneralText": "",
+    "feedbackRatingEnabled": true,
+    "feedbackStageDecisionEnabled": false,
+    "feedbackSpecificChoice": null,
+    "id": "aac1-0102-demo-v01-activo-patricia",
+    "createdAt": "2026-05-18T16:00:00.000Z",
+    "confirmationCode": "882211",
+    "status": "active",
+    "lastAccessAt": "2026-05-21T11:05:00.000Z"
+  },
+  {
+    "vacancyId": "v-01",
+    "vacancyTitle": "Vacante sin anuncio",
+    "recipientEmails": [
+      "ricardo.mora@cliente.co"
+    ],
+    "visibilityScope": "global",
+    "visibleStageIds": [],
+    "visibleStages": [],
+    "includeSanitizedCv": true,
+    "includeContactData": true,
+    "includeAnalystComments": true,
+    "feedbackGeneralEnabled": true,
+    "feedbackGeneralText": "",
+    "feedbackRatingEnabled": true,
+    "feedbackStageDecisionEnabled": true,
+    "feedbackSpecificChoice": null,
+    "id": "aac1-0103-demo-v01-activo-ricardo",
+    "createdAt": "2026-05-17T08:30:00.000Z",
+    "confirmationCode": "773344",
+    "status": "revoked",
+    "lastAccessAt": "2026-05-22T09:00:00.000Z",
+    "revokedBy": "Analista",
+    "revokedAt": "2026-05-25T15:55:20.954Z"
+  },
+  {
+    "vacancyId": "v-01",
+    "vacancyTitle": "Analista contable",
+    "recipientEmails": [
+      "ximenamarilla11@gmail.com"
+    ],
+    "visibilityScope": "specific",
+    "visibleStageIds": [
+      "videoentrevista",
+      "entrevista-lider",
+      "postulantes"
+    ],
+    "visibleStages": [
+      {
+        "id": "postulantes",
+        "label": "Postulantes"
+      },
+      {
+        "id": "videoentrevista",
+        "label": "Videoentrevista"
+      },
+      {
+        "id": "entrevista-lider",
+        "label": "Entrevista líder c."
+      }
+    ],
+    "includeSanitizedCv": true,
+    "includeContactData": true,
+    "includeAnalystComments": true,
+    "feedbackGeneralEnabled": true,
+    "feedbackGeneralText": "",
+    "feedbackRatingEnabled": true,
+    "feedbackStageDecisionEnabled": true,
+    "feedbackSpecificChoice": null,
+    "id": "96d87335-7580-4fdb-91a5-8b0b082f4615",
+    "createdAt": "2026-05-25T14:48:22.895Z",
+    "confirmationCode": "699827",
+    "status": "pending-otp"
+  },
+  {
+    "vacancyId": "v-01",
+    "vacancyTitle": "Analista contable",
+    "recipientEmails": [
+      "ximenamarilla11@gmail.com"
+    ],
+    "visibilityScope": "specific",
+    "visibleStageIds": [
+      "entrevista-lider",
+      "videoentrevista"
+    ],
+    "visibleStages": [
+      {
+        "id": "videoentrevista",
+        "label": "Videoentrevista"
+      },
+      {
+        "id": "entrevista-lider",
+        "label": "Entrevista líder c."
+      }
+    ],
+    "includeSanitizedCv": true,
+    "includeContactData": true,
+    "includeAnalystComments": false,
+    "feedbackGeneralEnabled": true,
+    "feedbackGeneralText": "",
+    "feedbackRatingEnabled": true,
+    "feedbackStageDecisionEnabled": true,
+    "feedbackSpecificChoice": null,
+    "id": "5e8e8793-b72a-4d83-aa01-53d3aeb78df6",
+    "createdAt": "2026-05-25T16:10:00.338Z",
+    "confirmationCode": "488707",
+    "status": "pending-otp"
+  }
+]

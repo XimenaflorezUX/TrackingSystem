@@ -1,5 +1,5 @@
 import type { SaveVacancyShareRequest, VacancyShareRecord } from './vacancyShares.types';
-import demoSharesSeed from '../../server/data/vacancies.json';
+import demoSharesSeed from '../data/demo-vacancy-shares.json';
 
 /** IDs de vacante equivalentes para la demo (hub usa `preview-v-02`, datos en JSON usan `v-02`). */
 const VACANCY_ID_ALIASES: Record<string, readonly string[]> = {
