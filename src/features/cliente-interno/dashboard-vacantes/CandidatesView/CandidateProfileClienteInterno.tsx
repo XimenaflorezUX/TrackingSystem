@@ -14,6 +14,7 @@ import {
   resolveFeedbackTab,
   type FeedbackTabId,
 } from '../../../../session/vacancyShareSession';
+import { brandingAssetUrl } from '@/utils/brandingAssetUrl';
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
 
@@ -159,8 +160,8 @@ const SidebarRow = ({ icon, children, accent = false }: SidebarRowProps) => (
 
 type InternalTab = FeedbackTabId;
 
-const TAB_VALORACIONES_ICON_SRC = '/branding/tab-valoraciones-icon.png';
-const TAB_COMENTARIOS_ICON_SRC = '/branding/tab-comentarios-icon.png';
+const TAB_VALORACIONES_ICON_SRC = brandingAssetUrl('tab-valoraciones-icon.png');
+const TAB_COMENTARIOS_ICON_SRC = brandingAssetUrl('tab-comentarios-icon.png');
 
 interface InternalTabDef {
   id: InternalTab;

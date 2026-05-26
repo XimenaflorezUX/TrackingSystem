@@ -1,8 +1,9 @@
+import { brandingAssetUrl } from '@/utils/brandingAssetUrl';
 import './NavigationHub.scss';
 
-const MAGNETO365_AI_LOGO_SRC = '/branding/magneto365-ai-wordmark.png';
-const ANALISTA_ICON_SRC = '/branding/analista-icon.png';
-const CLIENTE_INTERNO_ICON_SRC = '/branding/cliente-interno-icon.png';
+const MAGNETO365_AI_LOGO_SRC = brandingAssetUrl('magneto365-ai-wordmark.png');
+const ANALISTA_ICON_SRC = brandingAssetUrl('analista-icon.png');
+const CLIENTE_INTERNO_ICON_SRC = brandingAssetUrl('cliente-interno-icon.png');
 
 export interface NavigationHubProps {
   onNavigateAnalistaDashboard: () => void;

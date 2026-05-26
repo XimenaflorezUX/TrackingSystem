@@ -6,6 +6,7 @@ import type { VacancyShareRecord } from '../../../api/vacancyShares.types';
 import { saveVacancyShare } from '../../../api/vacancyShares';
 import ShareVacancyModal from './ShareVacancyModal/ShareVacancyModal';
 import { ANALISTA_SHARE_PIPELINE_STAGES } from './pipelineStagesForShare';
+import { brandingAssetUrl } from '@/utils/brandingAssetUrl';
 import './VacancyDashboard.scss';
 
 export type { VacancyItem } from './vacancy-item.types';
@@ -86,7 +87,7 @@ const IconChevronRight= () => <svg width="14" height="14" viewBox="0 0 24 24" fi
 
 // ─── Magneto Logo ─────────────────────────────────────────────────────────────
 
-const MAGNETO_WORDMARK_SRC = '/branding/magneto365-ai-wordmark-dashboard.png';
+const MAGNETO_WORDMARK_SRC = brandingAssetUrl('magneto365-ai-wordmark-dashboard.png');
 
 const MagnetoLogo = () => (
   <div className="vd-navbar__logo" aria-label="Magneto">

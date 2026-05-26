@@ -1,4 +1,5 @@
 import { Typography } from 'magneto365.ui';
+import { brandingAssetUrl } from '@/utils/brandingAssetUrl';
 import './DashboardShellHeader.scss';
 
 export interface DashboardShellHeaderProps {
@@ -27,7 +28,7 @@ const IconChevronDown = (): JSX.Element => (
   </svg>
 );
 
-const MAGNETO_WORDMARK_SRC = '/branding/magneto365-ai-wordmark-dashboard.png';
+const MAGNETO_WORDMARK_SRC = brandingAssetUrl('magneto365-ai-wordmark-dashboard.png');
 
 const MagnetoWordmark = (): JSX.Element => (
   <img

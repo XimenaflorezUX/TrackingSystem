@@ -4,6 +4,7 @@ import {
   Field,
   Typography,
 } from 'magneto365.ui';
+import { brandingAssetUrl } from '@/utils/brandingAssetUrl';
 import './OtpLanding.scss';
 import { useOtpTimer } from './hooks/useOtpTimer';
 import { useOtpState } from './hooks/useOtpState';
@@ -62,7 +63,7 @@ const IconAlertCircle = () => (
 
 // ─── Logo (mismo asset que dashboard: `public/branding/magneto-wordmark.png`) ─
 
-const MAGNETO_WORDMARK_SRC = '/branding/magneto-wordmark.png';
+const MAGNETO_WORDMARK_SRC = brandingAssetUrl('magneto-wordmark.png');
 
 const OtpMagnetoLogo = (): JSX.Element => (
   <img

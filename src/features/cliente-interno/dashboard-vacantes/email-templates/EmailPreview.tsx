@@ -1,3 +1,4 @@
+import { brandingAssetUrl } from '@/utils/brandingAssetUrl';
 import './EmailPreview.scss';
 
 // ─── Props ────────────────────────────────────────────────────────────────────
@@ -25,7 +26,7 @@ interface EmailPreviewProps {
 
 // ─── Sample values (replace with dynamic data in production) ──────────────────
 
-const MAGNETO_WORDMARK_SRC = '/branding/magneto-wordmark.png';
+const MAGNETO_WORDMARK_SRC = brandingAssetUrl('magneto-wordmark.png');
 
 const SAMPLE_DATA = {
   recipientFirstName: 'Ximena',

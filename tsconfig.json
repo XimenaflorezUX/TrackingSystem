@@ -16,6 +16,7 @@
     "noUnusedParameters": true,
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "magneto365.ui": ["./node_modules/magneto365.ui"],
       "magneto365.ui/*": ["./node_modules/magneto365.ui/*"]
     }
