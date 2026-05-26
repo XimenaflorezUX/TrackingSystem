@@ -24,12 +24,23 @@ const ERROR_HINTS: Record<string, string> = {
 const DEV_API_HINT =
   'En local, el front reenvía /vacancies al API en el puerto 4000. Ejecute en otra terminal `npm run server:dev` o use `npm run dev:full` para levantar web y API a la vez.';
 
+/** Sin `VITE_API_BASE_URL` en build de producción no hay API en el mismo origen (GitHub Pages). */
+function isStaticDemoHost(): boolean {
+  return apiBase().length === 0 && !import.meta.env.DEV;
+}
+
 function shouldUseDemoShares(res: Response | null): boolean {
   if (res === null) return true;
+  // Pages: GET/POST a /vacancies en github.io devuelve 404 (no existe el API).
+  if (apiBase().length === 0 && res.status === 404) return true;
   return res.status === 500 || res.status === 502 || res.status === 503;
 }
 
 async function fetchVacancySharesFromApi(): Promise<VacancyShareRecord[] | null> {
+  if (isStaticDemoHost()) {
+    return listDemoVacancyShares();
+  }
+
   try {
     const res = await fetch(`${apiBase()}/vacancies`);
     if (!res.ok) {
@@ -83,6 +94,10 @@ async function readErrorMessage(res: Response): Promise<string> {
  * En desarrollo, con `VITE_API_BASE_URL` vacío, Vite reenvía `/vacancies` al API (ver `vite.config.ts`).
  */
 export async function saveVacancyShare(body: SaveVacancyShareRequest): Promise<VacancyShareRecord> {
+  if (isStaticDemoHost()) {
+    return saveDemoVacancyShare(body);
+  }
+
   try {
     const res = await fetch(`${apiBase()}/vacancies`, {
       method: 'POST',
@@ -115,6 +130,10 @@ export async function revokeVacancyShare(
   id: string,
   revokedBy: string,
 ): Promise<VacancyShareRecord> {
+  if (isStaticDemoHost()) {
+    return revokeDemoVacancyShare(id, revokedBy);
+  }
+
   try {
     const res = await fetch(`${apiBase()}/vacancies/${id}/revoke`, {
       method: 'PATCH',
