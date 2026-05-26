@@ -1,8 +1,8 @@
 // Estilos globales mínimos: tokens oficiales + utilidades del paquete (sin duplicar :root local).
 @use "tokens/color" as color;
 @use "tokens/utilities";
-@use "../../.yalc/sistema-de-diseno/src/components/atoms/text" as sd_text;
-@use "../../.yalc/sistema-de-diseno/src/components/atoms/weight" as sd_weight;
+@use "tokens/text" as sd_text;
+@use "tokens/weight" as sd_weight;
 @use "modal-close";
 
 *,
